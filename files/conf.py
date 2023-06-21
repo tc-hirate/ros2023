@@ -29,3 +29,8 @@ html_static_path = ['_static']
 # a list of builtin themes.
 
 html_theme = 'furo'
+
+# -- Style Sheet -------------------------------------------------------------
+
+def setup(app):
+    app.add_css_file('style.css')
