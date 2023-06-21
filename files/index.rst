@@ -1,18 +1,14 @@
-Welcome to Lumache's documentation!
-===================================
+============================================================
+ROSロボットプログラミング
+============================================================
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers that
-creates recipes mixing random ingredients.  It pulls data from the `Open Food
-Facts database <https://world.openfoodfacts.org/>`_ and offers a *simple* and
-*intuitive* API.
+ROSロボットプログラミングに必要な開発環境の構築方法と プログラミング技法について習得することを目指します。
 
-.. note::
+ロボットは `Zumo <https://www.physical-computing.jp/product/1302>`_ を使います。
 
-   This project is under active development.
+.. image:: ./img/zumo.jpg
+   :scale: 50
+   :align: center
 
-Contents
---------
-
-.. toctree::
-
-   usage
+ZumoはRaspberry Pi、Arduino Uno、Zumo Shieldから構成されます。
+Zumo Shieldにはモータやセンサが搭載されていて、 これらを使ってロボットを制御することができます。
