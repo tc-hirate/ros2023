@@ -6,6 +6,8 @@ Linuxはオープンソースのオペレーティングシステム（OS）で�
 
 PCにはUbuntu Desktop 22.04 LTSをインストールします。
 
+|
+
 Linuxのダウンロード
 ============================================================
 
@@ -25,6 +27,8 @@ Ubuntu Desktop 22.04 LTSのディスクイメージを `UbuntuのHP <https://rel
 
 |
 
+|
+
 Rufusのダウンロード
 ============================================================
 
@@ -38,7 +42,9 @@ Rufusを `RufusのHP <http://rufus.ie/ja/>`_ からダウンロードします�
 
 |
 
-Portableをダウンロードしてください。
+下のほうにスクロールしていくと、ダウンロードのリンクがあります。
+
+ここから、Portableをダウンロードしてください。
 
 .. image:: ./img/rufus_download_img_02.png
    :width: 800px
@@ -50,6 +56,8 @@ Portableをダウンロードしてください。
 
 .. image:: ./img/rufus_download_img_03.png
    :align: center
+
+|
 
 |
 
@@ -114,6 +122,8 @@ Ubuntuのイメージディスクファイルを選択します。
 
 |
 
+|
+
 Linuxのインストール
 ============================================================
 
@@ -169,57 +179,104 @@ Welcomeは、「English」が選択されいることを確認し、［Install U
 
 Keyboard layoutは、「Japanese」−「Japanese」を選択し、［Continue］ボタンをクリックしてください。
 
-Linux Install 5
+.. image:: ./img/linux_install_img_07.png
+   :width: 800px
+   :align: center
+
+|
 
 Updates and other softwareは、デフォルトのまま ［Continue］ボタンをクリックする。
 ※有線LANを接続していないと、Wirelessの設定画面が出てくる。
 
-Linux Install 6
+.. image:: ./img/linux_install_img_08.png
+   :width: 800px
+   :align: center
 
-Installation typeは、 ［Erase Ubuntu 20.04.2 LTS and reinstall］を選択し ［Install Now］ボタンをクリックする。
-※違う画面が出てくるかもしれない。 →［Erase disk and install Ubuntu］を選択
+|
 
-Linux Install 7
+Installation typeは、 ［Erase Ubuntu 22.04.2 LTS and reinstall］を選択し ［Install Now］ボタンをクリックする。
+※違う画面が出てくるかもしれない。
+
+.. image:: ./img/linux_install_img_09.png
+   :width: 800px
+   :align: center
+
+|
 
 Write the changes to disks?ウィンドウが表示されたら ［Continue］ボタンをクリックする。
 
-Linux Install 8
+.. image:: ./img/linux_install_img_10.png
+   :width: 800px
+   :align: center
+
+|
 
 Where are you?は、［Tokyo］が選択されていることを確認したら ［Continue］ボタンをクリックする。
 
-Linux Install 9
+.. image:: ./img/linux_install_img_11.png
+   :width: 800px
+   :align: center
+
+|
 
 Who are you?は、次の通り入力する。
 
 Your name: ubuntu
+
 Your computer's name: mbc***
+
 Pick a username: ubuntu
+
 Choose a password: hirate2020
+
 Confirm your password: hirate2020
+
 Require my password to login: Require my password to log in にチェック
 
 入力できたら［Continue］ボタンをクリックする。
 
-Linux Install 10
+.. image:: ./img/linux_install_img_12.png
+   :width: 800px
+   :align: center
+
+|
 
 インストールが始まる。
 
-Linux Install 11
+.. image:: ./img/linux_install_img_13.png
+   :width: 800px
+   :align: center
+
+|
 
 インストールが終了すると、 Installation Completeウィンドウが表示されるので ［Restart Now］ボタンをクリックする。
 
-Linux Install 12
+.. image:: ./img/linux_install_img_14.png
+   :width: 800px
+   :align: center
+
+|
 
 Please remove the installation medium, then press ENTER というメッセージが表示されるので Live DVDを取り出して［Enter］を押す。
 
-Linux Install 13
+.. image:: ./img/linux_install_img_15.png
+   :width: 800px
+   :align: center
+
+|
+
+|
 
 Linuxへのログイン
 ============================================================
 
 ログイン画面が表示されたら、 パスワードを入力してログインする。
 
-Linux Login 1
+.. image:: ./img/linux_login_img_01.png
+   :width: 800px
+   :align: center
+
+|
 
 はじめに、各種設定の画面が表示されるが、 全てデフォルトのままとする。
 Connect Your Online Accountsは、 ［Skip］ボタンをクリック。
@@ -257,6 +314,8 @@ Linux Login 9
 アップデートが終了したら、 ［Restart Now］をクリックして再起動する。
 
 Linux Login 10
+
+|
 
 Linuxの日本語化
 ============================================================
