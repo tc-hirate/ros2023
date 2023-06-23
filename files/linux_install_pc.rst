@@ -66,42 +66,42 @@ Live USBの作成
 
 ダウンロードしたRufusをダブルクリックすると、Rufusが起動します。
 
-［選択］ボタンをクリックしてください。
+［選択］ボタンをクリック。
 
 .. image:: ./img/live_usb_img_01.png
    :align: center
 
 |
 
-Ubuntuのイメージディスクファイルを選択します。
+Ubuntuのイメージディスクファイルを選択。
 
 .. image:: ./img/live_usb_img_02.png
    :align: center
 
 |
 
-［スタート］ボタンをクリックしてください。
+［スタート］ボタンをクリック。
 
 .. image:: ./img/live_usb_img_03.png
    :align: center
 
 |
 
-［OK］ボタンをクリックしてください。
+［OK］ボタンをクリック。
 
 .. image:: ./img/live_usb_img_04.png
    :align: center
 
 |
 
-［はい］ボタンをクリックしてください。
+［はい］ボタンをクリック。
 
 .. image:: ./img/live_usb_img_05.png
    :align: center
 
 |
 
-［OK］ボタンをクリックしてください。
+［OK］ボタンをクリック。
 
 .. image:: ./img/live_usb_img_06.png
    :align: center
@@ -115,7 +115,7 @@ Ubuntuのイメージディスクファイルを選択します。
 
 |
 
-［閉じる］ボタンをクリックしてください。
+［閉じる］ボタンをクリック。
 
 .. image:: ./img/live_usb_img_08.png
    :align: center
@@ -137,7 +137,7 @@ PCの電源ボタンを押したら、［F12］キーを連打し、Boot Options
 
 |
 
-［↑］と［↓］を使ってUSB Storagr Deviceを選択し、［Enter］を押してください。
+［↑］と［↓］を使ってUSB Storagr Deviceを選択し、［Enter］を押す。
 
 .. image:: ./img/linux_install_img_02.png
    :width: 800px
@@ -145,7 +145,7 @@ PCの電源ボタンを押したら、［F12］キーを連打し、Boot Options
 
 |
 
-Try or Install Ubuntuが選択されていることを確認し、［Enter］を押してください。
+Try or Install Ubuntuが選択されていることを確認し、［Enter］を押す。
 
 .. image:: ./img/linux_install_img_03.png
    :width: 800px
@@ -169,7 +169,7 @@ Try or Install Ubuntuが選択されていることを確認し、［Enter］を
 
 |
 
-Welcomeは、「English」が選択されいることを確認し、［Install Ubuntu］ボタンをクリックしてください。
+Welcomeは、「English」が選択されいることを確認し、［Install Ubuntu］ボタンをクリック。
 
 .. image:: ./img/linux_install_img_06.png
    :width: 800px
@@ -177,7 +177,7 @@ Welcomeは、「English」が選択されいることを確認し、［Install U
 
 |
 
-Keyboard layoutは、「Japanese」−「Japanese」を選択し、［Continue］ボタンをクリックしてください。
+Keyboard layoutは、「Japanese」−「Japanese」を選択し、［Continue］ボタンをクリック。
 
 .. image:: ./img/linux_install_img_07.png
    :width: 800px
@@ -186,6 +186,7 @@ Keyboard layoutは、「Japanese」−「Japanese」を選択し、［Continue�
 |
 
 Updates and other softwareは、デフォルトのまま ［Continue］ボタンをクリックする。
+
 ※有線LANを接続していないと、Wirelessの設定画面が出てくる。
 
 .. image:: ./img/linux_install_img_08.png
@@ -194,7 +195,8 @@ Updates and other softwareは、デフォルトのまま ［Continue］ボタン
 
 |
 
-Installation typeは、 ［Erase Ubuntu 22.04.2 LTS and reinstall］を選択し ［Install Now］ボタンをクリックする。
+Installation typeは、 ［Erase Ubuntu 22.04.2 LTS and reinstall］を選択し ［Install Now］ボタンをクリック。
+
 ※違う画面が出てくるかもしれない。
 
 .. image:: ./img/linux_install_img_09.png
@@ -203,7 +205,7 @@ Installation typeは、 ［Erase Ubuntu 22.04.2 LTS and reinstall］を選択し
 
 |
 
-Write the changes to disks?ウィンドウが表示されたら ［Continue］ボタンをクリックする。
+Write the changes to disks?ウィンドウが表示されたら ［Continue］ボタンをクリック。
 
 .. image:: ./img/linux_install_img_10.png
    :width: 800px
@@ -211,7 +213,7 @@ Write the changes to disks?ウィンドウが表示されたら ［Continue］�
 
 |
 
-Where are you?は、［Tokyo］が選択されていることを確認したら ［Continue］ボタンをクリックする。
+Where are you?は、［Tokyo］が選択されていることを確認したら ［Continue］ボタンをクリック。
 
 .. image:: ./img/linux_install_img_11.png
    :width: 800px
@@ -219,7 +221,9 @@ Where are you?は、［Tokyo］が選択されていることを確認したら 
 
 |
 
-Who are you?は、次の通り入力する。
+Who are you?は、次の通り入力してください。
+
+|
 
 Your name: ubuntu
 
@@ -233,7 +237,9 @@ Confirm your password: hirate2020
 
 Require my password to login: Require my password to log in にチェック
 
-入力できたら［Continue］ボタンをクリックする。
+|
+
+入力できたら［Continue］ボタンをクリック。
 
 .. image:: ./img/linux_install_img_12.png
    :width: 800px
@@ -249,7 +255,7 @@ Require my password to login: Require my password to log in にチェック
 
 |
 
-インストールが終了すると、 Installation Completeウィンドウが表示されるので ［Restart Now］ボタンをクリックする。
+インストールが終了すると、 Installation Completeウィンドウが表示されるので ［Restart Now］ボタンをクリック。
 
 .. image:: ./img/linux_install_img_14.png
    :width: 800px
@@ -257,7 +263,7 @@ Require my password to login: Require my password to log in にチェック
 
 |
 
-Please remove the installation medium, then press ENTER というメッセージが表示されるので Live DVDを取り出して［Enter］を押す。
+Please remove the installation medium, then press ENTER というメッセージが表示されるので Live USBを抜いて［Enter］を押す。
 
 .. image:: ./img/linux_install_img_15.png
    :width: 800px
@@ -270,7 +276,7 @@ Please remove the installation medium, then press ENTER というメッセージ
 Linuxへのログイン
 ============================================================
 
-ログイン画面が表示されたら、 パスワードを入力してログインする。
+ログイン画面が表示されたら、 パスワードを入力してログインしてください。
 
 .. image:: ./img/linux_login_img_01.png
    :width: 800px
@@ -278,42 +284,61 @@ Linuxへのログイン
 
 |
 
-はじめに、各種設定の画面が表示されるが、 全てデフォルトのままとする。
+はじめに、各種設定の画面が表示されるが、 全てデフォルトのままとします。
+
 Connect Your Online Accountsは、 ［Skip］ボタンをクリック。
 
-Linux Login 2
+.. image:: ./img/linux_login_img_02.png
+   :align: center
+
+|
 
 Livepatchは、 デフォルトのまま［Next］ボタンをクリック。
 
-Linux Login 3
+.. image:: ./img/linux_login_img_03.png
+   :align: center
+
+|
 
 Help improve Ubuntuは、 デフォルトのまま［Next］ボタンをクリック。
 
-Linux Login 4
+.. image:: ./img/linux_login_img_04.png
+   :align: center
+
+|
 
 Privacyは、 デフォルトのまま［Next］ボタンをクリック。
 
-Linux Login 5
+.. image:: ./img/linux_login_img_05.png
+   :align: center
+
+|
 
 You're ready to go!は、 ［Done］ボタンをクリック。
 
-Linux Login 6
+.. image:: ./img/linux_login_img_06.png
+   :align: center
+
+|
 
 Software Updaterが出てきたら、 ［Install Now］ボタンをクリック。
 
-Linux Login 7
+.. image:: ./img/linux_login_img_07.png
+   :align: center
 
-パスワードを入力する。
-
-Linux Login 8
+|
 
 アップデート中。
 
-Linux Login 9
+.. image:: ./img/linux_login_img_08.png
+   :align: center
+
+|
 
 アップデートが終了したら、 ［Restart Now］をクリックして再起動する。
 
-Linux Login 10
+.. image:: ./img/linux_login_img_09.png
+   :align: center
 
 |
 
