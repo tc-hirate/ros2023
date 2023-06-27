@@ -284,7 +284,7 @@ Linuxへのログイン
 
 |
 
-はじめに、各種設定の画面が表示されるが、 全てデフォルトのままとします。
+はじめに、各種設定の画面が表示されますが、 全てデフォルトのままとします。
 
 Connect Your Online Accountsは、 ［Skip］ボタンをクリック。
 
@@ -345,68 +345,83 @@ Software Updaterが出てきたら、 ［Install Now］ボタンをクリック�
 Linuxの日本語化
 ============================================================
 
-左下のワッフルメニューをクリックして、アプリケーションを表示する。
-[Settings]をクリックする。
+左下のワッフルメニューをクリックして、アプリケーションを表示してください。
 
-Linux Japanese 1
+［Settings］をクリック。
 
-[Settings]が起動する。
+.. image:: ./img/linux_japanese_img_01.png
+   :width: 800px
+   :align: center
 
-Linux Japanese 2
+|
 
-[Region & Language]を選択し、[Manage Installed Languages]をクリックする。
+［Settings］が起動。
 
-Linux Japanese 3
+.. image:: ./img/linux_japanese_img_02.png
+   :align: center
 
-[Install]をクリックする。
-ここでパスワードの入力を求められるので、パスワードを入力する。
+|
 
-Linux Japanese 4
+［Region & Language］を選択し、［Manage Installed Languages］をクリック。
+
+.. image:: ./img/linux_japanese_img_03.png
+   :align: center
+
+|
+
+［Install］をクリック。
+
+ここでパスワードの入力を求められるので、パスワードを入力。
+
+.. image:: ./img/linux_japanese_img_04.png
+   :align: center
+
+|
 
 変更の適用中。
 
-Linux Japanese 6
+.. image:: ./img/linux_japanese_img_05.png
+   :align: center
 
-[Language]に日本語（まだグレー）があることを確認したら、[Close]をクリックする。
+|
 
-Linux Japanese 7
+［Language］に日本語（まだグレー）があることを確認し、［Close］をクリック。
 
-[Language]をクリックする。
+.. image:: ./img/linux_japanese_img_06.png
+   :align: center
 
-Linux Japanese 8
+|
 
-[日本語]を選択して、[Select]をクリックする。
+［Language］をクリックする。
 
-Linux Japanese 9
+.. image:: ./img/linux_japanese_img_07.png
+   :align: center
 
-[Restart]をクリックして、再起動する。
-実際はログアウトするだけなので、再度ログインする。
+|
 
-Linux Japanese 10
+「日本語」を選択して、［Select］をクリック。
 
-再起動すると次のウィンドウが出てくるので、
-[次回から表示しない]にチェックをして、
-[古い名前のままにする]をクリックする。
+.. image:: ./img/linux_japanese_img_08.png
+   :align: center
 
-Linux Japanese 11
+|
 
-表示が日本語化された。
-再度Settingsを起動して、[地域と言語]をクリックする。
-[入力ソース]の下の[+]をクリックする。
+［Restart］をクリックして、再起動。ログアウトするだけなので、再度ログイン。
 
-Linux Japanese 12
+.. image:: ./img/linux_japanese_img_09.png
+   :align: center
 
-[日本語]をクリックする。
+|
 
-Linux Japanese 13
+再起動すると次のウィンドウが出てきます。
 
-[日本語(Mozc)]を選択して、[追加]をクリックする。
+「次回から表示しない」にチェックをして、［古い名前のままにする］をクリック。
 
-Linux Japanese 14
+.. image:: ./img/linux_japanese_img_10.png
+   :align: center
 
-[入力ソース]に[日本語(Mozc)]が追加された。
+|
 
-Linux Japanese 15
+表示が日本語になっていることを確認してください。
 
-これで日本語を入力することができるようになりました。
-日本語と英語の切り替えは、[Windows] + [Space] で行います。
+日本語と英語の切り替えは、［半角／全角］で行います。

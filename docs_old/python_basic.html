@@ -1,0 +1,816 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Linuxのインストール（Raspberry Pi）" href="linux_install_pi.html" /><link rel="prev" title="ROS2のインストール（PC）" href="ros2_install_pc.html" />
+
+    <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
+        <title>Python入門 - ros2023 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">ros2023 1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">ros2023 1.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="linux_install_pc.html">Linuxのインストール（PC）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_basic.html">Linux入門</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_install_pc.html">ROS2のインストール（PC）</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Python入門</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_install_pi.html">Linuxのインストール（Raspberry Pi）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_install_pi.html">ROS2のインストール（Raspberry Pi）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vscode_install_pc.html">VSCodeの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_tutorial.html">ROS2 Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="joystick.html">ジョイスティックの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arduino.html">Arduinoの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opencv.html">OpenCVの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="picam.html">ラズパイカメラの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kadai1.html">課題1「人の顔を検出してその人の方を向く」</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kadai2.html">課題2「白線を検出して自動走行する」</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kadai3.html">課題3「前を走るZumoを追いかける」</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="python">
+<h1>Python入門<a class="headerlink" href="#python" title="Permalink to this heading">#</a></h1>
+<p>Pythonの基本的な構文を学習します。</p>
+<section id="id1">
+<h2>Pythonの実行<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>ターミナルから「python3」と入力するとインタラクティブシェルが起動します。</p>
+<p>文章のなかで <span class="red">赤い文字列</span> だよ。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python3
+<span class="go">Python 3.8.10 (default, Jun 22 2022, 20:18:18)</span>
+<span class="go">[GCC 9.4.0] on linux</span>
+<span class="go">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
+</pre></div>
+</div>
+<p>インタラクティブシェルの実行中は、先頭に「&gt;&gt;&gt;」という記号が表示されます。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>インタラクティブシェルを終了するときは「quit()」と入力します。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>「python」と入力するとエラーになりますので注意してください。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python
+
+<span class="go">コマンド &#39;python&#39; が見つかりません。もしかして:</span>
+
+<span class="go">  command &#39;python3&#39; from deb python3</span>
+<span class="go">  command &#39;python&#39; from deb python-is-python3</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h2>文字列の出力<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>「print」を用いると文字を出力することができます。
+printの後ろの()の中に書いた文字が画面に出力されます。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello ROS&#39;</span><span class="p">)</span>
+<span class="go">Hello ROS</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2>文字列<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>「Hello ROS」という文字は「文字列」と呼ばれます。
+文字列はシングルクォーテーション「’」 またはダブルクォーテーション「”」で囲みます。
+どちらかで囲んでいない場合は、エラーになります。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello ROS&#39;</span><span class="p">)</span>      <span class="c1"># シングルクォーテーションで囲む</span>
+<span class="go">Hello ROS</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello ROS&quot;</span><span class="p">)</span>      <span class="c1"># ダブルクォーテーションで囲む</span>
+<span class="go">Hello ROS</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Hello</span> <span class="n">ROS</span><span class="p">)</span>
+<span class="go">  File &quot;&quot;, line 1</span>
+<span class="go">    print(Hello ROS)</span>
+<span class="go">                ^</span>
+<span class="go">SyntaxError: invalid syntax</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h2>コメント<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>コード内にはコメントを書くことができます。
+行頭に「#」を書くことで、行末までコメントとみなされます。
+コメントはコードが実行されるときにすべて無視されます。</p>
+</section>
+<section id="id5">
+<h2>数値<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>数値は文字列と違ってクォーテーションで囲む必要がありません。
+数学と同じ記号「+」や「-」を使って、 足し算や引き算をすることができます。
+数値や記号はすべて半角で書きます。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">9</span><span class="p">)</span>        <span class="c1"># 足し算</span>
+<span class="go">14</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="mi">7</span><span class="p">)</span>      <span class="c1"># 引き算</span>
+<span class="go">93</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="mi">7</span><span class="p">)</span>        <span class="c1"># 掛け算</span>
+<span class="go">42</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="mi">9</span> <span class="o">/</span> <span class="mi">5</span><span class="p">)</span>        <span class="c1"># 割り算</span>
+<span class="go">1.8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="mi">9</span> <span class="o">//</span> <span class="mi">5</span><span class="p">)</span>       <span class="c1"># 割り算の商</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="mi">9</span> <span class="o">%</span> <span class="mi">5</span><span class="p">)</span>        <span class="c1"># 割り算の余り</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h2>文字列と数値の違い<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>「9 + 5」は計算結果である「14」が出力されます。
+「’9 + 5’」のようにクォーテーションで囲むと、 そのまま「’9 + 5’」が出力されます。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="mi">9</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">14</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;9 + 5&#39;</span><span class="p">)</span>
+<span class="go">9 + 5</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h2>変数<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<p>変数とは、データ（値）を入れておく箱のようなものです。 この変数に名前をつけることで、 その名前を用いて変数に値を入れることや 変数から値を取り出すことができます。</p>
+<p>変数を用いるためには、まず変数を定義する必要があります。 変数は「変数名 = 値」のように定義します。
+プログラミングの「=」は「等しい」ではなく 「右辺を左辺に代入する」という意味になります。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;zumo&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>         <span class="c1"># 変数nameの値</span>
+<span class="go">zumo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>       <span class="c1"># 「name」という文字列</span>
+<span class="go">name</span>
+</pre></div>
+</div>
+<p>変数名には大文字小文字のアルファベット（A-Z、a-z）、 数字（0-9）、アンダースコア（_）が使えます。
+ただし、数字は変数名の1文字目に使うことはできません。</p>
+</section>
+<section id="if">
+<h2>if文<a class="headerlink" href="#if" title="Permalink to this heading">#</a></h2>
+<p>if文を用いると、「もし○○ならば☓☓を行う」という 条件分岐が可能になります。
+if文は、ifの後に条件式を指定し、その条件が成り立つときに 実行する処理を次の行に書きます。</p>
+<p>条件式の中では、2つの値を比較するための記号「比較演算子」 がよく使われます。
+「x == y」は左右の値が等しいときに成立、 「x != y」は左右の値が等しくないときに成立します。</p>
+<p>条件式の部分は「if 条件式:」のように行末にコロンをつけます。</p>
+<p>if文の条件式が成立したときの処理を書くときには、 インデント（字下げ）をします。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; x = 2</span>
+<span class="go">&gt;&gt;&gt; if x == 2:</span>
+<span class="go">...     print(&#39;数値は2です。&#39;)</span>
+<span class="go">...</span>
+<span class="go">数値は2です。</span>
+<span class="go">&gt;&gt;&gt; if x % 2 == 0:</span>
+<span class="go">...     print(&#39;数値は偶数です。&#39;)</span>
+<span class="go">...</span>
+<span class="go">数値は偶数です</span>
+<span class="go">&gt;&gt;&gt; if x % 2 == 1:</span>
+<span class="go">...     print(&#39;数値は奇数です。&#39;)</span>
+<span class="go">...</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>if文の比較演算子を用いた条件式の部分を出力してみると 「True」が出力されます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; print(x == 2)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>出力された「True」は真偽値とよばれるものです。
+真偽値を扱うデータ型「真偽値形」には「True」と「False」 の2つの値があります。 比較演算子を用いた演算子の部分が成り立つときは「True」、 成り立たないときは「False」となります。</p>
+<p>if文では条件式が「True」のときには処理が実行され、 「False」のときには処理は実行されません。</p>
+<p>比較演算子には、「==」、「!=」以外にも値の大小を比較する 「&lt;」、「&lt;=」「&gt;」、「&gt;=」があります。</p>
+<p>if文に「else」を組み合わせることで 「もし○○ならば☓☓を行う、そうでなければ△△を行う」 という条件分岐ができるようになります。 if文の条件がFalseのとき、elseの処理が実行されます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; x = 5</span>
+<span class="go">&gt;&gt;&gt; if x % 2 == 0:</span>
+<span class="go">...     print(&#39;xは偶数です。&#39;)</span>
+<span class="go">... else:</span>
+<span class="go">...     print(&#39;xは奇数です。&#39;)</span>
+<span class="go">...</span>
+<span class="go">xは奇数です。</span>
+</pre></div>
+</div>
+<p>if文で、条件が成り立たなかった場合を複数定義したい場合は、 「elif」を用います。
+「elif」を用いると、「もし○○ならば☓☓を行う、 △△ならば▲▲を行う、そうでなければ□□を行う」 という処理ができるようになります。</p>
+<p>elifはいくつでも書くことができますが、 上から順に条件が成り立つか判断され、 最初に条件に合致した部分の処理だけが行われます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; x = 100</span>
+<span class="go">&gt;&gt;&gt; if x == 10:</span>
+<span class="go">...     print(&#39;10&#39;)</span>
+<span class="go">... elif x == 20:</span>
+<span class="go">...     print(&#39;20&#39;)</span>
+<span class="go">... else:</span>
+<span class="go">...     print(&#39;分かりません&#39;)</span>
+<span class="go">...</span>
+<span class="go">分かりません</span>
+</pre></div>
+</div>
+<p>複数の条件を組み合わせるときは「and」、「or」を用います。
+「条件1も条件2も成り立つ」というような場合の条件式は、 「and」を用いて「条件1 and 条件2」のように書きます。
+「条件1か条件2が成り立つ」というような場合の条件式は、 「or」を用いて「条件1 or 条件2」のように書きます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; time = 15</span>
+<span class="go">&gt;&gt;&gt; if time &gt; 9 and time &lt; 18:</span>
+<span class="go">...     print(&#39;就業時間です。&#39;)</span>
+<span class="go">...</span>
+<span class="go">就業時間です。</span>
+<span class="go">&gt;&gt;&gt; time = 20</span>
+<span class="go">&gt;&gt;&gt; if time &lt; 9 or time &gt; 18:</span>
+<span class="go">...     print(&#39;就業時間ではありません。&#39;)</span>
+<span class="go">...</span>
+<span class="go">就業時間ではありません。</span>
+</pre></div>
+</div>
+<p>「not」を用いると条件の否定をすることができます。
+「not 条件式」のようにすると、 条件式が「True」であれば全体が「False」に、 「False」であれば「True」になります。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; time = 15</span>
+<span class="go">&gt;&gt;&gt; if not time == 18:</span>
+<span class="go">...     print(&#39;退社時刻ではありません。&#39;)</span>
+<span class="go">...</span>
+<span class="go">退社時刻ではありません。</span>
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h2>リスト<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<p>複数のデータをまとめて管理するにはリストというものを用います。
+リストは[要素1, 要素2, …]のように作ります。 リストに入っている値のことを要素と呼びます。
+リストを使うと、複数の文字列や複数の数値を1つのものとして管理することができます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; [&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
+<span class="go">[&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
+<span class="go">&gt;&gt;&gt; [1, 2, 3, 5, 8, 13, 21]</span>
+<span class="go">[1, 2, 3, 5, 8, 13, 21]</span>
+</pre></div>
+</div>
+<p>リストも1つの値なので変数に代入することができます。
+このとき、リストを代入する変数名は慣習上複数形にすることが多いです。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; foods = [&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
+<span class="go">&gt;&gt;&gt; print(foods)</span>
+<span class="go">[&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
+</pre></div>
+</div>
+<p>リストの要素には、前から順番に「0, 1, 2, …」と数字が割り振られています。 これをインデックス番号といいます。 インデックス番号は0から始まる点に注意してください。
+リストの各要素は、リスト[インデックス番号]とすることで取得することができます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; foods = [&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
+<span class="go">&gt;&gt;&gt; print(&#39;好きな食べ物は&#39; + foods[2] + &#39;です&#39;)</span>
+<span class="go">好きな食べ物はsushiです</span>
+</pre></div>
+</div>
+<p>「リスト[インデックス番号] = 値」とすることで、 リストの指定したインデックス番号の要素を更新することができます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; foods = [&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
+<span class="go">&gt;&gt;&gt; foods[1] = &#39;pizza&#39;</span>
+<span class="go">&gt;&gt;&gt; print(foods)</span>
+<span class="go">[&#39;pasta&#39;, &#39;pizza&#39;, &#39;sushi&#39;]</span>
+</pre></div>
+</div>
+<p>「リスト.append(値)」とすることで、 すでに定義されているリストの末尾に新たな要素を追加することができます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; foods = [&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
+<span class="go">&gt;&gt;&gt; foods.append(&#39;pizza&#39;)</span>
+<span class="go">&gt;&gt;&gt; print(foods)</span>
+<span class="go">[&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;, &#39;pizza&#39;]</span>
+</pre></div>
+</div>
+</section>
+<section id="for">
+<h2>for文<a class="headerlink" href="#for" title="Permalink to this heading">#</a></h2>
+<p>for文を使うと、リストの要素を順に取り出して処理を行うことができます。
+「for 変数名 in リスト:」と書くことで、 リストの要素数だけ処理を繰り返すことができます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; foods = [&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
+<span class="go">&gt;&gt;&gt; for food in foods:</span>
+<span class="go">...     print(&#39;好きな食べ物は&#39; + food + &#39;です&#39;)</span>
+<span class="go">...</span>
+<span class="go">好きな食べ物はpastaです</span>
+<span class="go">好きな食べ物はcurryです</span>
+<span class="go">好きな食べ物はsushiです</span>
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h2>辞書<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<p>辞書は、リストと同じように複数のデータをまとめて管理するのに 用いられます。
+リストとの違いは、個々の要素をインデックス番号ではなく キーと呼ばれる名前を付けて管理する点です。
+辞書ではキーと値のペアが1つの要素となります。</p>
+<p>辞書は{キー1:値1, キー2:値2, …}のように作ります。 ほとんどの場合、キーには文字列が使われます。
+リストは要素を[]で囲みましたが、 辞書では{}で囲みます。 キーと値の間はコロン(:)、要素同士の間はコンマ(,)で区切ります。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; fruits = {&#39;apple&#39;:&#39;red&#39;, &#39;banana&#39;:&#39;yellow&#39;, &#39;grape&#39;:&#39;purple&#39;}</span>
+<span class="go">&gt;&gt;&gt; print(fruits)</span>
+<span class="go">{&#39;apple&#39;: &#39;red&#39;, &#39;banana&#39;: &#39;yellow&#39;, &#39;grape&#39;: &#39;purple&#39;}</span>
+</pre></div>
+</div>
+<p>辞書の値を取り出すには、取り出したい値に対応する「キー」を 用いて辞書名[キー]のように書きます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; fruits = {&#39;apple&#39;:&#39;red&#39;, &#39;banana&#39;:&#39;yellow&#39;, &#39;grape&#39;:&#39;purple&#39;}</span>
+<span class="go">&gt;&gt;&gt; print(&#39;appleの色は&#39; + fruits[&#39;apple&#39;] + &#39;です&#39;)</span>
+<span class="go">appleの色はredです</span>
+</pre></div>
+</div>
+</section>
+<section id="while">
+<h2>while文<a class="headerlink" href="#while" title="Permalink to this heading">#</a></h2>
+<p>繰り返し処理にはfor文以外にもwhile文というものがあります。
+while文を用いると、「ある条件に当てはまる間、処理を繰り返す」 といったことが可能になります。</p>
+<p>while文は「while 条件式:」のように書きます。
+条件式の結果がTrueの間、while文内の処理を繰り返します。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; x = 1</span>
+<span class="go">&gt;&gt;&gt; while x &lt;= 10:</span>
+<span class="go">...     print(x)</span>
+<span class="go">...     x += 1</span>
+<span class="go">...</span>
+<span class="go">1</span>
+<span class="go">2</span>
+<span class="go">3</span>
+<span class="go">4</span>
+<span class="go">5</span>
+<span class="go">6</span>
+<span class="go">7</span>
+<span class="go">8</span>
+<span class="go">9</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+</section>
+<section id="break">
+<h2>break<a class="headerlink" href="#break" title="Permalink to this heading">#</a></h2>
+<p>breakを用いると繰り返し処理を終了することができます。
+if文などの条件分岐と組み合わせて使います。 while文でも同じように使うことができます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; numbers = [1, 2, 3, 4, 5, 6]</span>
+<span class="go">&gt;&gt;&gt; for number in numbers:</span>
+<span class="go">...     print(number)</span>
+<span class="go">...     if number == 3:</span>
+<span class="go">...             break</span>
+<span class="go">...</span>
+<span class="go">1</span>
+<span class="go">2</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</section>
+<section id="continue">
+<h2>continue<a class="headerlink" href="#continue" title="Permalink to this heading">#</a></h2>
+<p>繰り返し処理を終了するbreakと違い、 continueはその周の処理だけをスキップすることができます。
+continueもif文などと組み合わせて利用します。 while文でも同じように使うことができます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; numbers = [1, 2, 3, 4, 5, 6]</span>
+<span class="go">&gt;&gt;&gt; for number in numbers:</span>
+<span class="go">...     if number % 2 == 0:</span>
+<span class="go">...             continue</span>
+<span class="go">...     print(number)</span>
+<span class="go">...</span>
+<span class="go">1</span>
+<span class="go">3</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h2>関数<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<p>printの他にもPythonにはいくつかの便利な関数が用意されており、 それらを使うと様々な処理を簡単に行うことができます。
+また、関数は自分で作ることもできます。
+これらの関数を組み合わせることで、プログラムを効率的に作ることができます。</p>
+<p>関数は「def 関数名():」のように定義します。
+関数の処理の内容は、インデントして書いていきます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; def hello():</span>
+<span class="go">...     print(&#39;Hello World&#39;)</span>
+<span class="go">...</span>
+<span class="go">&gt;&gt;&gt; hello()</span>
+<span class="go">Hello World</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h2>引数<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
+<p>関数を呼び出す際に、関数に値を渡すことができます。
+この値のことを引数といい、 引数を渡すと関数の中でその値を利用することができるようになります。
+関数に引数を渡せると、その値によって関数の処理結果を変えることが できるので便利です。</p>
+<p>関数に引数を渡すには、まず引数を受け取れる関数を定義しなければなりません。 そのためには、関数の定義部分で引数を受け取るための箱となる変数 （仮引数）を指定します。</p>
+<p>関数に引数を渡すには、関数名(引数)として関数を呼び出します。 渡された引数は、関数の仮引数に代入され、その値を関数の処理の中で 用いることができます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; def hello(name):</span>
+<span class="go">...     print(&#39;Hello &#39; + name)</span>
+<span class="go">...</span>
+<span class="go">&gt;&gt;&gt; hello(&#39;Hirate&#39;)</span>
+<span class="go">Hello Hirate</span>
+<span class="go">&gt;&gt;&gt; hello(&#39;ROS&#39;)</span>
+<span class="go">Hello ROS</span>
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h2>スコープ<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
+<p>変数には、その変数が使える範囲が存在します。 その範囲のことをスコープと呼びます。
+仮引数や関数の中で定義した変数のスコープは関数の中だけとなります。 よって、その変数を関数の外で使うことはできません。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; def hello(name):</span>
+<span class="go">...     print(name)</span>
+<span class="go">...</span>
+<span class="go">&gt;&gt;&gt; print(name)</span>
+<span class="go">Traceback (most recent call last):</span>
+<span class="go">File &quot;&quot;, line 1, in</span>
+<span class="go">NameError: name &#39;name&#39; is not defined</span>
+</pre></div>
+</div>
+</section>
+<section id="id13">
+<h2>複数の引数を持つ関数<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
+<p>引数は複数渡すこともできます。 関数が複数の引数を受け取るためには、仮引数をコンマ(,)で区切って定義します。
+引数を受け取る順番は自由に決めることができます。 また、引数は左から順番に「第1引数、第2引数、・・・」というように呼びます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; def hello(name, message):</span>
+<span class="go">...     print(name + &#39;さん、&#39; + message)</span>
+<span class="go">...</span>
+<span class="go">&gt;&gt;&gt; hello(&#39;ヒラテ&#39;, &#39;こんにちは&#39;)</span>
+<span class="go">ヒラテさん、こんにちは</span>
+</pre></div>
+</div>
+</section>
+<section id="id14">
+<h2>引数の初期値<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h2>
+<p>引数には初期値を設定することもできます。
+引数が省略されたとき、初期値が与えられていれば 変わりの値として初期値が使われます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; def hello(name, message=&#39;こんにちは&#39;):</span>
+<span class="go">...     print(name + &#39;さん、&#39; + message)</span>
+<span class="go">...</span>
+<span class="go">&gt;&gt;&gt; hello(&#39;ひさ&#39;, &#39;こんばんは&#39;)</span>
+<span class="go">ひささん、こんばんは</span>
+<span class="go">&gt;&gt;&gt; hello(&#39;のり&#39;)</span>
+<span class="go">のりさん、こんにちは</span>
+</pre></div>
+</div>
+</section>
+<section id="id15">
+<h2>戻り値<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h2>
+<p>処理した結果を呼び出し元に返すことができます。 これを戻り値と呼びます。
+「return 戻り値」と書くことで戻り値を呼び出し元に 返すことができます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; def hello(name, message):</span>
+<span class="go">...     return name + &#39;さん、&#39; + message</span>
+<span class="go">...</span>
+<span class="go">&gt;&gt;&gt; my_message = hello(&#39;ヒラテ&#39;, &#39;こんにちは&#39;)</span>
+<span class="go">&gt;&gt;&gt; print(my_message)</span>
+<span class="go">ヒラテさん、こんにちは</span>
+</pre></div>
+</div>
+</section>
+<section id="id16">
+<h2>モジュール<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h2>
+<p>モジュールとは、Pythonのコードが書かれたファイルのことです。
+別ファイルをモジュールとして読み込むことで、 そこに書かれたコードを利用することができます。</p>
+<p>「my_module.py」というファイルを作って、 次のコードを書いてください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;さん、&#39;</span> <span class="o">+</span> <span class="n">message</span>
+</pre></div>
+</div>
+<p>このモジュールを使ってみましょう。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; import my_module</span>
+<span class="go">&gt;&gt;&gt; my_message = my_module.hello(&#39;ヒラテ&#39;, &#39;こんにちは&#39;)</span>
+<span class="go">&gt;&gt;&gt; print(my_message)</span>
+<span class="go">ヒラテさん、こんにちは</span>
+</pre></div>
+</div>
+<p>次のように書くこともできます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; import my_module as mm    # 別名によるモジュールのインポート</span>
+<span class="go">&gt;&gt;&gt; my_message = mm.hello(&#39;ヒラテ&#39;, &#39;こんにちは&#39;)</span>
+<span class="go">&gt;&gt;&gt; print(my_message)</span>
+<span class="go">ヒラテさん、こんにちは</span>
+
+<span class="go">&gt;&gt;&gt; from my_module import hello    # 必要なものだけをインポート</span>
+<span class="go">&gt;&gt;&gt; my_message = hello(&#39;ヒラテ&#39;, &#39;こんにちは&#39;)</span>
+<span class="go">&gt;&gt;&gt; print(my_message)</span>
+<span class="go">ヒラテさん、こんにちは</span>
+</pre></div>
+</div>
+</section>
+<section id="id17">
+<h2>クラスの定義<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h2>
+<p>プログラミングで「もの」を生成するには、 まずその「設計図」を用意する必要があります。
+「設計図」のことをクラス、「もの」のことをインスタンスと呼びます。</p>
+<p>インスタンスは次の流れに沿って生成していきます。
+①クラスを用意する
+②クラスからインスタンスを生成する
+③インスタンスに情報を追加する</p>
+<p>クラスは「class クラス名:」とすることで定義できます。
+また、クラス名は「MenuItem」のように大文字で始まるようにしましょう。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; class MenuItem:</span>
+</pre></div>
+</div>
+<p>クラスの中身（設計図の内容）は「class MenuItem:」より後の行で、 インデントをして書いていきます。
+今回はまだ処理を追加する必要がないので、 「pass」と書きましょう（これは何も処理がないことを表しています）。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; class MenuItem:</span>
+<span class="go">...     pass</span>
+</pre></div>
+</div>
+<p>次のように「クラス名()」とそのクラスを呼び出すことで、 クラス（設計図）を用いて新しくインスタンスを生成することができます。
+また、「変数名 = クラス名()」とすることで、 生成したインスタンスを変数に代入することができます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; menu_item1 = MenuItem()</span>
+</pre></div>
+</div>
+<p>それぞれのインスタンスには、自由に様々な情報を追加することができます。
+次のように「menu_item1.name = ‘○○’」とすることで、 「menu_item1」に「name」が「○○」であるという情報を追加することができます。
+このとき、「name」のことを「インスタンス変数」と呼びます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; menu_item1.name = &quot;Hamburger&quot;</span>
+</pre></div>
+</div>
+<p>また、「インスタンス.インスタンス変数」とすることで、 そのインスタンス変数を用いることができます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; print(menu_item1.name)</span>
+<span class="go">Hamburger</span>
+</pre></div>
+</div>
+</section>
+<section id="id18">
+<h2>メソッド<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h2>
+<p>クラスの中に関数を定義することができます。 クラスの中で定義した関数のことをメソッドと呼びます。
+メソッドの定義の方法は通常の関数と同じですが、 第1引数にselfを追加する必要があります。</p>
+<p>第1引数に指定したselfには、 そのメソッドを呼び出したインスタンス自身が代入されます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; class MenuItem:</span>
+<span class="go">...     def info(self):</span>
+<span class="go">...         print(self.name)</span>
+<span class="go">...</span>
+<span class="go">&gt;&gt;&gt; menu_item1 = MenuItem()</span>
+<span class="go">&gt;&gt;&gt; menu_item1.name = &quot;Hamburger&quot;</span>
+<span class="go">&gt;&gt;&gt; menu_item1.info()</span>
+<span class="go">Hamburger</span>
+</pre></div>
+</div>
+</section>
+<section id="init">
+<h2>__init__メソッド<a class="headerlink" href="#init" title="Permalink to this heading">#</a></h2>
+<p>__init__メソッドは「クラス名()」でインスタンスが生成した直後に 自動で呼ばれます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; class MenuItem:</span>
+<span class="go">...     def __init__(self):</span>
+<span class="go">...         print(&quot;メニューが作られました&quot;)</span>
+<span class="go">...</span>
+<span class="go">&gt;&gt;&gt; menu_item1 = MenuItem()</span>
+<span class="go">メニューが作られました</span>
+</pre></div>
+</div>
+<p>__init__メソッドは引数を受け取ることもできます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; class MenuItem:</span>
+<span class="go">...     def __init__(self, name):</span>
+<span class="go">...         self.name = name</span>
+<span class="go">...</span>
+<span class="go">&gt;&gt;&gt; menu_item1 = MenuItem(&#39;Hamburger&#39;)</span>
+<span class="go">&gt;&gt;&gt; print(menu_item1.name)</span>
+<span class="go">Hamburger</span>
+</pre></div>
+</div>
+<p>詳しくは、 Pythonチュートリアル を参照してください。</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="linux_install_pi.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Linuxのインストール（Raspberry Pi）</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="ros2_install_pc.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">ROS2のインストール（PC）</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Hirate Technical Corporation.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Python入門</a><ul>
+<li><a class="reference internal" href="#id1">Pythonの実行</a></li>
+<li><a class="reference internal" href="#id2">文字列の出力</a></li>
+<li><a class="reference internal" href="#id3">文字列</a></li>
+<li><a class="reference internal" href="#id4">コメント</a></li>
+<li><a class="reference internal" href="#id5">数値</a></li>
+<li><a class="reference internal" href="#id6">文字列と数値の違い</a></li>
+<li><a class="reference internal" href="#id7">変数</a></li>
+<li><a class="reference internal" href="#if">if文</a></li>
+<li><a class="reference internal" href="#id8">リスト</a></li>
+<li><a class="reference internal" href="#for">for文</a></li>
+<li><a class="reference internal" href="#id9">辞書</a></li>
+<li><a class="reference internal" href="#while">while文</a></li>
+<li><a class="reference internal" href="#break">break</a></li>
+<li><a class="reference internal" href="#continue">continue</a></li>
+<li><a class="reference internal" href="#id10">関数</a></li>
+<li><a class="reference internal" href="#id11">引数</a></li>
+<li><a class="reference internal" href="#id12">スコープ</a></li>
+<li><a class="reference internal" href="#id13">複数の引数を持つ関数</a></li>
+<li><a class="reference internal" href="#id14">引数の初期値</a></li>
+<li><a class="reference internal" href="#id15">戻り値</a></li>
+<li><a class="reference internal" href="#id16">モジュール</a></li>
+<li><a class="reference internal" href="#id17">クラスの定義</a></li>
+<li><a class="reference internal" href="#id18">メソッド</a></li>
+<li><a class="reference internal" href="#init">__init__メソッド</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    </body>
+</html>
