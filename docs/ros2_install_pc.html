@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -199,7 +199,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -208,6 +208,109 @@
           <section id="ros2-pc">
 <h1>ROS2のインストール（PC）<a class="headerlink" href="#ros2-pc" title="Permalink to this heading">#</a></h1>
 <p>PCにROS2をインストールします。</p>
+<section id="ros2">
+<h2>ROS2のインストール<a class="headerlink" href="#ros2" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://docs.ros.org/en/iron/Installation.html">ROS2のHP</a> の手順に従ってインストールします。</p>
+<p>Binary packagesのDebian packagesを選択してください。</p>
+<a class="reference internal image-reference" href="_images/ros_install_pc_img_01.png"><img alt="_images/ros_install_pc_img_01.png" class="align-center" src="_images/ros_install_pc_img_01.png" style="width: 800px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ロケールの確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>locale
+<span class="go">LANG=ja_JP.UTF-8</span>
+<span class="go">LANGUAGE=ja:en</span>
+<span class="go">LC_CTYPE=&quot;ja_JP.UTF-8&quot;</span>
+<span class="go">LC_NUMERIC=ja_JP.UTF-8</span>
+<span class="go">LC_TIME=ja_JP.UTF-8</span>
+<span class="go">LC_COLLATE=&quot;ja_JP.UTF-8&quot;</span>
+<span class="go">LC_MONETARY=ja_JP.UTF-8</span>
+<span class="go">LC_MESSAGES=&quot;ja_JP.UTF-8&quot;</span>
+<span class="go">LC_PAPER=ja_JP.UTF-8</span>
+<span class="go">LC_NAME=ja_JP.UTF-8</span>
+<span class="go">LC_ADDRESS=ja_JP.UTF-8</span>
+<span class="go">LC_TELEPHONE=ja_JP.UTF-8</span>
+<span class="go">LC_MEASUREMENT=ja_JP.UTF-8</span>
+<span class="go">LC_IDENTIFICATION=ja_JP.UTF-8</span>
+<span class="go">LC_ALL=</span>
+</pre></div>
+</div>
+<p>Universeレポジトリを追加。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>software-properties-common
+<span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>add-apt-repository<span class="w"> </span>universe
+</pre></div>
+</div>
+<p>ROS2 GPT Keyの追加。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>curl<span class="w"> </span>-y
+<span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>curl<span class="w"> </span>-sSL<span class="w"> </span>https://raw.githubusercontent.com/ros/rosdistro/master/ros.key<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/ros-archive-keyring.gpg
+</pre></div>
+</div>
+<p>レポジトリ情報をsource listに追加。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb [arch=</span><span class="k">$(</span>dpkg<span class="w"> </span>--print-architecture<span class="k">)</span><span class="s2"> signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu </span><span class="k">$(</span>.<span class="w"> </span>/etc/os-release<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$UBUNTU_CODENAME</span><span class="k">)</span><span class="s2"> main&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/ros2.list<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+</pre></div>
+</div>
+<p>ROS2のインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
+<span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-iron-desktop
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h2>サンプルプログラムの実行<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>インストールが正しく行われたか確認するために、サンプルプログラムを実行します。</p>
+<p>講師のPCで次のコマンドを実行します。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">source</span><span class="w"> </span>/opt/ros/iron/setup.bash
+<span class="gp">ubuntu@mbc084:~$ </span>ros2<span class="w"> </span>run<span class="w"> </span>demo_nodes_cpp<span class="w"> </span>talker
+<span class="go">[INFO] [1688105745.373215437] [talker]: Publishing: &#39;Hello World: 1&#39;</span>
+<span class="go">[INFO] [1688105746.373202032] [talker]: Publishing: &#39;Hello World: 2&#39;</span>
+<span class="go">[INFO] [1688105747.373215794] [talker]: Publishing: &#39;Hello World: 3&#39;</span>
+<span class="go">[INFO] [1688105748.373223103] [talker]: Publishing: &#39;Hello World: 4&#39;</span>
+<span class="go">[INFO] [1688105749.373234290] [talker]: Publishing: &#39;Hello World: 5&#39;</span>
+<span class="go">[INFO] [1688105750.373220057] [talker]: Publishing: &#39;Hello World: 6&#39;</span>
+<span class="go">[INFO] [1688105751.373232334] [talker]: Publishing: &#39;Hello World: 7&#39;</span>
+<span class="go">[INFO] [1688105752.373234858] [talker]: Publishing: &#39;Hello World: 8&#39;</span>
+<span class="go">[INFO] [1688105753.373236105] [talker]: Publishing: &#39;Hello World: 9&#39;</span>
+<span class="go">[INFO] [1688105754.373234649] [talker]: Publishing: &#39;Hello World: 10&#39;</span>
+<span class="go">・・・</span>
+</pre></div>
+</div>
+<p>受講生のPCで次のコマンドを実行してください。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">source</span><span class="w"> </span>/opt/ros/iron/setup.bash
+<span class="gp">ubuntu@mbc084:~$ </span>ros2<span class="w"> </span>run<span class="w"> </span>demo_nodes_py<span class="w"> </span>listener
+<span class="go">[INFO] [1688105829.813560450] [listener]: I heard: [Hello World: 1]</span>
+<span class="go">[INFO] [1688105830.777293518] [listener]: I heard: [Hello World: 2]</span>
+<span class="go">[INFO] [1688105831.778708138] [listener]: I heard: [Hello World: 3]</span>
+<span class="go">[INFO] [1688105832.778873189] [listener]: I heard: [Hello World: 4]</span>
+<span class="go">[INFO] [1688105833.778085008] [listener]: I heard: [Hello World: 5]</span>
+<span class="go">[INFO] [1688105834.778792113] [listener]: I heard: [Hello World: 6]</span>
+<span class="go">[INFO] [1688105835.778911132] [listener]: I heard: [Hello World: 7]</span>
+<span class="go">[INFO] [1688105836.778868391] [listener]: I heard: [Hello World: 8]</span>
+<span class="go">[INFO] [1688105837.778892837] [listener]: I heard: [Hello World: 9]</span>
+<span class="go">[INFO] [1688105838.779006018] [listener]: I heard: [Hello World: 10]</span>
+<span class="go">・・・</span>
+</pre></div>
+</div>
+<p>Terminalを起動するたびにsetup fileを実行するのは面倒なので、shellのstartup scriptに書いておきます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;source /opt/ros/iron/setup.bash&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+</pre></div>
+</div>
+</section>
+<section id="ros-domein-id">
+<h2>ROS_DOMEIN_IDの設定<a class="headerlink" href="#ros-domein-id" title="Permalink to this heading">#</a></h2>
+<p>ROS2はネットワーク上のnodeを自動的に発見します。そのため、同一ネットワークであれば複数のPCでnodeを実行させて分散処理することが簡単にできます。</p>
+<p>一方で、複数人が同一ネットワーク上でnodeを実行すると、どのnodeから送られてきたデータか分からなくなることが あります。</p>
+<p>そこで、ROS2ではROS_DOMAIN_IDを設定することで この問題を回避します。ROS_DOMAIN_IDに数値を設定すると、同じ値が設定されたTerminal間でしかnodeが見られなくなります。</p>
+<p>次のコマンドを実行してROS_DOMAIN_IDを設定してください。IDはZumoの番号と同じにします。Zumo-00を使っている場合は0となります。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">ROS_DOMAIN_ID</span><span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+<p>Terminalを起動するたびにIDを設定するのは面倒なので、shellのstartup scriptに書いておきます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export ROS_DOMAIN_ID=0&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+</pre></div>
+</div>
+</section>
 </section>
 
         </article>
@@ -253,8 +356,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">ROS2のインストール（PC）</a><ul>
+<li><a class="reference internal" href="#ros2">ROS2のインストール</a></li>
+<li><a class="reference internal" href="#id1">サンプルプログラムの実行</a></li>
+<li><a class="reference internal" href="#ros-domein-id">ROS_DOMEIN_IDの設定</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
