@@ -211,10 +211,8 @@
 <section id="id1">
 <h2>Pythonの実行<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>ターミナルから「python3」と入力するとインタラクティブシェルが起動します。</p>
-<p>文章のなかで <span class="red">赤い文字列</span> だよ。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python3
-<span class="go">Python 3.8.10 (default, Jun 22 2022, 20:18:18)</span>
-<span class="go">[GCC 9.4.0] on linux</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>python3
+<span class="go">Python 3.10.6 (main, May 29 2023, 11:10:38) [GCC 11.3.0] on linux</span>
 <span class="go">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
 </pre></div>
 </div>
@@ -227,10 +225,8 @@
 </pre></div>
 </div>
 <p>「python」と入力するとエラーになりますので注意してください。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python
-
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>python
 <span class="go">コマンド &#39;python&#39; が見つかりません。もしかして:</span>
-
 <span class="go">  command &#39;python3&#39; from deb python3</span>
 <span class="go">  command &#39;python&#39; from deb python-is-python3</span>
 </pre></div>
@@ -271,7 +267,7 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 <section id="id5">
 <h2>数値<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <p>数値は文字列と違ってクォーテーションで囲む必要がありません。
-数学と同じ記号「+」や「-」を使って、 足し算や引き算をすることができます。
+数学と同じ記号「+」や「-」を使って、足し算や引き算をすることができます。
 数値や記号はすべて半角で書きます。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">3</span>
@@ -293,7 +289,7 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 <section id="id6">
 <h2>文字列と数値の違い<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <p>「9 + 5」は計算結果である「14」が出力されます。
-「’9 + 5’」のようにクォーテーションで囲むと、 そのまま「’9 + 5’」が出力されます。</p>
+「’9 + 5’」のようにクォーテーションで囲むと、そのまま「’9 + 5’」が出力されます。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="mi">9</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">14</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;9 + 5&#39;</span><span class="p">)</span>
@@ -303,9 +299,12 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 </section>
 <section id="id7">
 <h2>変数<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
-<p>変数とは、データ（値）を入れておく箱のようなものです。 この変数に名前をつけることで、 その名前を用いて変数に値を入れることや 変数から値を取り出すことができます。</p>
-<p>変数を用いるためには、まず変数を定義する必要があります。 変数は「変数名 = 値」のように定義します。
-プログラミングの「=」は「等しい」ではなく 「右辺を左辺に代入する」という意味になります。</p>
+<p>変数とは、データ（値）を入れておく箱のようなものです。
+この変数に名前をつけることで、
+その名前を用いて変数に値を入れることや変数から値を取り出すことができます。</p>
+<p>変数を用いるためには、まず変数を定義する必要があります。
+変数は「変数名 = 値」のように定義します。
+プログラミングの「=」は「等しい」ではなく「右辺を左辺に代入する」という意味になります。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;zumo&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>         <span class="c1"># 変数nameの値</span>
 <span class="go">zumo</span>
@@ -313,17 +312,17 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 <span class="go">name</span>
 </pre></div>
 </div>
-<p>変数名には大文字小文字のアルファベット（A-Z、a-z）、 数字（0-9）、アンダースコア（_）が使えます。
+<p>変数名には大文字小文字のアルファベット（A-Z、a-z）、数字（0-9）、アンダースコア（_）が使えます。
 ただし、数字は変数名の1文字目に使うことはできません。</p>
 </section>
 <section id="if">
 <h2>if文<a class="headerlink" href="#if" title="Permalink to this heading">#</a></h2>
-<p>if文を用いると、「もし○○ならば☓☓を行う」という 条件分岐が可能になります。
-if文は、ifの後に条件式を指定し、その条件が成り立つときに 実行する処理を次の行に書きます。</p>
-<p>条件式の中では、2つの値を比較するための記号「比較演算子」 がよく使われます。
-「x == y」は左右の値が等しいときに成立、 「x != y」は左右の値が等しくないときに成立します。</p>
+<p>if文を用いると、「もし○○ならば☓☓を行う」という条件分岐が可能になります。
+if文は、ifの後に条件式を指定し、その条件が成り立つときに実行する処理を次の行に書きます。</p>
+<p>条件式の中では、2つの値を比較するための記号「比較演算子」がよく使われます。
+「x == y」は左右の値が等しいときに成立、「x != y」は左右の値が等しくないときに成立します。</p>
 <p>条件式の部分は「if 条件式:」のように行末にコロンをつけます。</p>
-<p>if文の条件式が成立したときの処理を書くときには、 インデント（字下げ）をします。</p>
+<p>if文の条件式が成立したときの処理を書くときには、インデント（字下げ）をします。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; x = 2</span>
 <span class="go">&gt;&gt;&gt; if x == 2:</span>
 <span class="go">...     print(&#39;数値は2です。&#39;)</span>
@@ -339,16 +338,19 @@ if文は、ifの後に条件式を指定し、その条件が成り立つとき�
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-<p>if文の比較演算子を用いた条件式の部分を出力してみると 「True」が出力されます。</p>
+<p>if文の比較演算子を用いた条件式の部分を出力してみると「True」が出力されます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; print(x == 2)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
 <p>出力された「True」は真偽値とよばれるものです。
-真偽値を扱うデータ型「真偽値形」には「True」と「False」 の2つの値があります。 比較演算子を用いた演算子の部分が成り立つときは「True」、 成り立たないときは「False」となります。</p>
-<p>if文では条件式が「True」のときには処理が実行され、 「False」のときには処理は実行されません。</p>
-<p>比較演算子には、「==」、「!=」以外にも値の大小を比較する 「&lt;」、「&lt;=」「&gt;」、「&gt;=」があります。</p>
-<p>if文に「else」を組み合わせることで 「もし○○ならば☓☓を行う、そうでなければ△△を行う」 という条件分岐ができるようになります。 if文の条件がFalseのとき、elseの処理が実行されます。</p>
+真偽値を扱うデータ型「真偽値形」には「True」と「False」の2つの値があります。
+比較演算子を用いた演算子の部分が成り立つときは「True」、成り立たないときは「False」となります。</p>
+<p>if文では条件式が「True」のときには処理が実行され、「False」のときには処理は実行されません。</p>
+<p>比較演算子には、「==」、「!=」以外にも値の大小を比較する「&lt;」、「&lt;=」、「&gt;」、「&gt;=」があります。</p>
+<p>if文に「else」を組み合わせることで
+「もし○○ならば☓☓を行う、そうでなければ△△を行う」という条件分岐ができるようになります。
+if文の条件がFalseのとき、elseの処理が実行されます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; x = 5</span>
 <span class="go">&gt;&gt;&gt; if x % 2 == 0:</span>
 <span class="go">...     print(&#39;xは偶数です。&#39;)</span>
@@ -358,9 +360,11 @@ if文は、ifの後に条件式を指定し、その条件が成り立つとき�
 <span class="go">xは奇数です。</span>
 </pre></div>
 </div>
-<p>if文で、条件が成り立たなかった場合を複数定義したい場合は、 「elif」を用います。
-「elif」を用いると、「もし○○ならば☓☓を行う、 △△ならば▲▲を行う、そうでなければ□□を行う」 という処理ができるようになります。</p>
-<p>elifはいくつでも書くことができますが、 上から順に条件が成り立つか判断され、 最初に条件に合致した部分の処理だけが行われます。</p>
+<p>if文で、条件が成り立たなかった場合を複数定義したい場合は、「elif」を用います。
+「elif」を用いると、「もし○○ならば☓☓を行う、 △△ならば▲▲を行う、そうでなければ□□を行う」
+という処理ができるようになります。</p>
+<p>elifはいくつでも書くことができますが、上から順に条件が成り立つか判断され、
+最初に条件に合致した部分の処理だけが行われます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; x = 100</span>
 <span class="go">&gt;&gt;&gt; if x == 10:</span>
 <span class="go">...     print(&#39;10&#39;)</span>
@@ -373,8 +377,10 @@ if文は、ifの後に条件式を指定し、その条件が成り立つとき�
 </pre></div>
 </div>
 <p>複数の条件を組み合わせるときは「and」、「or」を用います。
-「条件1も条件2も成り立つ」というような場合の条件式は、 「and」を用いて「条件1 and 条件2」のように書きます。
-「条件1か条件2が成り立つ」というような場合の条件式は、 「or」を用いて「条件1 or 条件2」のように書きます。</p>
+「条件1も条件2も成り立つ」というような場合の条件式は、
+「and」を用いて「条件1 and 条件2」のように書きます。
+「条件1か条件2が成り立つ」というような場合の条件式は、
+「or」を用いて「条件1 or 条件2」のように書きます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; time = 15</span>
 <span class="go">&gt;&gt;&gt; if time &gt; 9 and time &lt; 18:</span>
 <span class="go">...     print(&#39;就業時間です。&#39;)</span>
@@ -388,7 +394,8 @@ if文は、ifの後に条件式を指定し、その条件が成り立つとき�
 </pre></div>
 </div>
 <p>「not」を用いると条件の否定をすることができます。
-「not 条件式」のようにすると、 条件式が「True」であれば全体が「False」に、 「False」であれば「True」になります。</p>
+「not 条件式」のようにすると、 条件式が「True」であれば全体が「False」に、
+「False」であれば「True」になります。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; time = 15</span>
 <span class="go">&gt;&gt;&gt; if not time == 18:</span>
 <span class="go">...     print(&#39;退社時刻ではありません。&#39;)</span>
@@ -400,7 +407,8 @@ if文は、ifの後に条件式を指定し、その条件が成り立つとき�
 <section id="id8">
 <h2>リスト<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
 <p>複数のデータをまとめて管理するにはリストというものを用います。
-リストは[要素1, 要素2, …]のように作ります。 リストに入っている値のことを要素と呼びます。
+リストは[要素1, 要素2, …]のように作ります。
+リストに入っている値のことを要素と呼びます。
 リストを使うと、複数の文字列や複数の数値を1つのものとして管理することができます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; [&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
 <span class="go">[&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
@@ -415,21 +423,25 @@ if文は、ifの後に条件式を指定し、その条件が成り立つとき�
 <span class="go">[&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
 </pre></div>
 </div>
-<p>リストの要素には、前から順番に「0, 1, 2, …」と数字が割り振られています。 これをインデックス番号といいます。 インデックス番号は0から始まる点に注意してください。
+<p>リストの要素には、前から順番に「0, 1, 2, …」と数字が割り振られています。
+これをインデックス番号といいます。
+インデックス番号は0から始まる点に注意してください。
 リストの各要素は、リスト[インデックス番号]とすることで取得することができます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; foods = [&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
 <span class="go">&gt;&gt;&gt; print(&#39;好きな食べ物は&#39; + foods[2] + &#39;です&#39;)</span>
 <span class="go">好きな食べ物はsushiです</span>
 </pre></div>
 </div>
-<p>「リスト[インデックス番号] = 値」とすることで、 リストの指定したインデックス番号の要素を更新することができます。</p>
+<p>「リスト[インデックス番号] = 値」とすることで、
+リストの指定したインデックス番号の要素を更新することができます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; foods = [&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
 <span class="go">&gt;&gt;&gt; foods[1] = &#39;pizza&#39;</span>
 <span class="go">&gt;&gt;&gt; print(foods)</span>
 <span class="go">[&#39;pasta&#39;, &#39;pizza&#39;, &#39;sushi&#39;]</span>
 </pre></div>
 </div>
-<p>「リスト.append(値)」とすることで、 すでに定義されているリストの末尾に新たな要素を追加することができます。</p>
+<p>「リスト.append(値)」とすることで、
+すでに定義されているリストの末尾に新たな要素を追加することができます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; foods = [&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
 <span class="go">&gt;&gt;&gt; foods.append(&#39;pizza&#39;)</span>
 <span class="go">&gt;&gt;&gt; print(foods)</span>
@@ -440,7 +452,7 @@ if文は、ifの後に条件式を指定し、その条件が成り立つとき�
 <section id="for">
 <h2>for文<a class="headerlink" href="#for" title="Permalink to this heading">#</a></h2>
 <p>for文を使うと、リストの要素を順に取り出して処理を行うことができます。
-「for 変数名 in リスト:」と書くことで、 リストの要素数だけ処理を繰り返すことができます。</p>
+「for 変数名 in リスト:」と書くことで、リストの要素数だけ処理を繰り返すことができます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; foods = [&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;]</span>
 <span class="go">&gt;&gt;&gt; for food in foods:</span>
 <span class="go">...     print(&#39;好きな食べ物は&#39; + food + &#39;です&#39;)</span>
@@ -453,17 +465,19 @@ if文は、ifの後に条件式を指定し、その条件が成り立つとき�
 </section>
 <section id="id9">
 <h2>辞書<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
-<p>辞書は、リストと同じように複数のデータをまとめて管理するのに 用いられます。
-リストとの違いは、個々の要素をインデックス番号ではなく キーと呼ばれる名前を付けて管理する点です。
+<p>辞書は、リストと同じように複数のデータをまとめて管理するのに用いられます。
+リストとの違いは、個々の要素をインデックス番号ではなくキーと呼ばれる名前を付けて管理する点です。
 辞書ではキーと値のペアが1つの要素となります。</p>
-<p>辞書は{キー1:値1, キー2:値2, …}のように作ります。 ほとんどの場合、キーには文字列が使われます。
-リストは要素を[]で囲みましたが、 辞書では{}で囲みます。 キーと値の間はコロン(:)、要素同士の間はコンマ(,)で区切ります。</p>
+<p>辞書は{キー1:値1, キー2:値2, …}のように作ります。
+ほとんどの場合、キーには文字列が使われます。
+リストは要素を[]で囲みましたが、 辞書では{}で囲みます。
+キーと値の間はコロン(:)、要素同士の間はコンマ(,)で区切ります。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; fruits = {&#39;apple&#39;:&#39;red&#39;, &#39;banana&#39;:&#39;yellow&#39;, &#39;grape&#39;:&#39;purple&#39;}</span>
 <span class="go">&gt;&gt;&gt; print(fruits)</span>
 <span class="go">{&#39;apple&#39;: &#39;red&#39;, &#39;banana&#39;: &#39;yellow&#39;, &#39;grape&#39;: &#39;purple&#39;}</span>
 </pre></div>
 </div>
-<p>辞書の値を取り出すには、取り出したい値に対応する「キー」を 用いて辞書名[キー]のように書きます。</p>
+<p>辞書の値を取り出すには、取り出したい値に対応する「キー」を用いて辞書名[キー]のように書きます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; fruits = {&#39;apple&#39;:&#39;red&#39;, &#39;banana&#39;:&#39;yellow&#39;, &#39;grape&#39;:&#39;purple&#39;}</span>
 <span class="go">&gt;&gt;&gt; print(&#39;appleの色は&#39; + fruits[&#39;apple&#39;] + &#39;です&#39;)</span>
 <span class="go">appleの色はredです</span>
@@ -473,7 +487,7 @@ if文は、ifの後に条件式を指定し、その条件が成り立つとき�
 <section id="while">
 <h2>while文<a class="headerlink" href="#while" title="Permalink to this heading">#</a></h2>
 <p>繰り返し処理にはfor文以外にもwhile文というものがあります。
-while文を用いると、「ある条件に当てはまる間、処理を繰り返す」 といったことが可能になります。</p>
+while文を用いると、「ある条件に当てはまる間、処理を繰り返す」といったことが可能になります。</p>
 <p>while文は「while 条件式:」のように書きます。
 条件式の結果がTrueの間、while文内の処理を繰り返します。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; x = 1</span>
@@ -497,7 +511,8 @@ while文を用いると、「ある条件に当てはまる間、処理を繰り
 <section id="break">
 <h2>break<a class="headerlink" href="#break" title="Permalink to this heading">#</a></h2>
 <p>breakを用いると繰り返し処理を終了することができます。
-if文などの条件分岐と組み合わせて使います。 while文でも同じように使うことができます。</p>
+if文などの条件分岐と組み合わせて使います。
+while文でも同じように使うことができます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; numbers = [1, 2, 3, 4, 5, 6]</span>
 <span class="go">&gt;&gt;&gt; for number in numbers:</span>
 <span class="go">...     print(number)</span>
@@ -512,8 +527,9 @@ if文などの条件分岐と組み合わせて使います。 while文でも同
 </section>
 <section id="continue">
 <h2>continue<a class="headerlink" href="#continue" title="Permalink to this heading">#</a></h2>
-<p>繰り返し処理を終了するbreakと違い、 continueはその周の処理だけをスキップすることができます。
-continueもif文などと組み合わせて利用します。 while文でも同じように使うことができます。</p>
+<p>繰り返し処理を終了するbreakと違い、continueはその周の処理だけをスキップすることができます。
+continueもif文などと組み合わせて利用します。
+while文でも同じように使うことができます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; numbers = [1, 2, 3, 4, 5, 6]</span>
 <span class="go">&gt;&gt;&gt; for number in numbers:</span>
 <span class="go">...     if number % 2 == 0:</span>
@@ -528,7 +544,8 @@ continueもif文などと組み合わせて利用します。 while文でも同�
 </section>
 <section id="id10">
 <h2>関数<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
-<p>printの他にもPythonにはいくつかの便利な関数が用意されており、 それらを使うと様々な処理を簡単に行うことができます。
+<p>printの他にもPythonにはいくつかの便利な関数が用意されており、
+それらを使うと様々な処理を簡単に行うことができます。
 また、関数は自分で作ることもできます。
 これらの関数を組み合わせることで、プログラムを効率的に作ることができます。</p>
 <p>関数は「def 関数名():」のように定義します。
@@ -544,10 +561,12 @@ continueもif文などと組み合わせて利用します。 while文でも同�
 <section id="id11">
 <h2>引数<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
 <p>関数を呼び出す際に、関数に値を渡すことができます。
-この値のことを引数といい、 引数を渡すと関数の中でその値を利用することができるようになります。
-関数に引数を渡せると、その値によって関数の処理結果を変えることが できるので便利です。</p>
-<p>関数に引数を渡すには、まず引数を受け取れる関数を定義しなければなりません。 そのためには、関数の定義部分で引数を受け取るための箱となる変数 （仮引数）を指定します。</p>
-<p>関数に引数を渡すには、関数名(引数)として関数を呼び出します。 渡された引数は、関数の仮引数に代入され、その値を関数の処理の中で 用いることができます。</p>
+この値のことを引数といい、引数を渡すと関数の中でその値を利用することができるようになります。
+関数に引数を渡せると、その値によって関数の処理結果を変えることができるので便利です。</p>
+<p>関数に引数を渡すには、まず引数を受け取れる関数を定義しなければなりません。
+そのためには、関数の定義部分で引数を受け取るための箱となる変数（仮引数）を指定します。</p>
+<p>関数に引数を渡すには、関数名(引数)として関数を呼び出します。
+渡された引数は、関数の仮引数に代入され、その値を関数の処理の中で用いることができます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; def hello(name):</span>
 <span class="go">...     print(&#39;Hello &#39; + name)</span>
 <span class="go">...</span>
@@ -560,8 +579,10 @@ continueもif文などと組み合わせて利用します。 while文でも同�
 </section>
 <section id="id12">
 <h2>スコープ<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
-<p>変数には、その変数が使える範囲が存在します。 その範囲のことをスコープと呼びます。
-仮引数や関数の中で定義した変数のスコープは関数の中だけとなります。 よって、その変数を関数の外で使うことはできません。</p>
+<p>変数には、その変数が使える範囲が存在します。
+その範囲のことをスコープと呼びます。
+仮引数や関数の中で定義した変数のスコープは関数の中だけとなります。
+よって、その変数を関数の外で使うことはできません。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; def hello(name):</span>
 <span class="go">...     print(name)</span>
 <span class="go">...</span>
@@ -574,8 +595,10 @@ continueもif文などと組み合わせて利用します。 while文でも同�
 </section>
 <section id="id13">
 <h2>複数の引数を持つ関数<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
-<p>引数は複数渡すこともできます。 関数が複数の引数を受け取るためには、仮引数をコンマ(,)で区切って定義します。
-引数を受け取る順番は自由に決めることができます。 また、引数は左から順番に「第1引数、第2引数、・・・」というように呼びます。</p>
+<p>引数は複数渡すこともできます。
+関数が複数の引数を受け取るためには、仮引数をコンマ(,)で区切って定義します。
+引数を受け取る順番は自由に決めることができます。
+また、引数は左から順番に「第1引数、第2引数、・・・」というように呼びます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; def hello(name, message):</span>
 <span class="go">...     print(name + &#39;さん、&#39; + message)</span>
 <span class="go">...</span>
@@ -587,7 +610,7 @@ continueもif文などと組み合わせて利用します。 while文でも同�
 <section id="id14">
 <h2>引数の初期値<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h2>
 <p>引数には初期値を設定することもできます。
-引数が省略されたとき、初期値が与えられていれば 変わりの値として初期値が使われます。</p>
+引数が省略されたとき、初期値が与えられていれば変わりの値として初期値が使われます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; def hello(name, message=&#39;こんにちは&#39;):</span>
 <span class="go">...     print(name + &#39;さん、&#39; + message)</span>
 <span class="go">...</span>
@@ -600,8 +623,9 @@ continueもif文などと組み合わせて利用します。 while文でも同�
 </section>
 <section id="id15">
 <h2>戻り値<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h2>
-<p>処理した結果を呼び出し元に返すことができます。 これを戻り値と呼びます。
-「return 戻り値」と書くことで戻り値を呼び出し元に 返すことができます。</p>
+<p>処理した結果を呼び出し元に返すことができます。
+これを戻り値と呼びます。
+「return 戻り値」と書くことで戻り値を呼び出し元に返すことができます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; def hello(name, message):</span>
 <span class="go">...     return name + &#39;さん、&#39; + message</span>
 <span class="go">...</span>
@@ -614,7 +638,7 @@ continueもif文などと組み合わせて利用します。 while文でも同�
 <section id="id16">
 <h2>モジュール<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h2>
 <p>モジュールとは、Pythonのコードが書かれたファイルのことです。
-別ファイルをモジュールとして読み込むことで、 そこに書かれたコードを利用することができます。</p>
+別ファイルをモジュールとして読み込むことで、そこに書かれたコードを利用することができます。</p>
 <p>「my_module.py」というファイルを作って、 次のコードを書いてください。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;さん、&#39;</span> <span class="o">+</span> <span class="n">message</span>
@@ -642,7 +666,7 @@ continueもif文などと組み合わせて利用します。 while文でも同�
 </section>
 <section id="id17">
 <h2>クラスの定義<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h2>
-<p>プログラミングで「もの」を生成するには、 まずその「設計図」を用意する必要があります。
+<p>プログラミングで「もの」を生成するには、まずその「設計図」を用意する必要があります。
 「設計図」のことをクラス、「もの」のことをインスタンスと呼びます。</p>
 <p>インスタンスは次の流れに沿って生成していきます。
 ①クラスを用意する
@@ -653,24 +677,28 @@ continueもif文などと組み合わせて利用します。 while文でも同�
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; class MenuItem:</span>
 </pre></div>
 </div>
-<p>クラスの中身（設計図の内容）は「class MenuItem:」より後の行で、 インデントをして書いていきます。
-今回はまだ処理を追加する必要がないので、 「pass」と書きましょう（これは何も処理がないことを表しています）。</p>
+<p>クラスの中身（設計図の内容）は「class MenuItem:」より後の行で、インデントをして書いていきます。
+今回はまだ処理を追加する必要がないので、
+「pass」と書きましょう（これは何も処理がないことを表しています）。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; class MenuItem:</span>
 <span class="go">...     pass</span>
 </pre></div>
 </div>
-<p>次のように「クラス名()」とそのクラスを呼び出すことで、 クラス（設計図）を用いて新しくインスタンスを生成することができます。
-また、「変数名 = クラス名()」とすることで、 生成したインスタンスを変数に代入することができます。</p>
+<p>次のように「クラス名()」とそのクラスを呼び出すことで、
+クラス（設計図）を用いて新しくインスタンスを生成することができます。
+また、「変数名 = クラス名()」とすることで、生成したインスタンスを変数に代入することができます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; menu_item1 = MenuItem()</span>
 </pre></div>
 </div>
 <p>それぞれのインスタンスには、自由に様々な情報を追加することができます。
-次のように「menu_item1.name = ‘○○’」とすることで、 「menu_item1」に「name」が「○○」であるという情報を追加することができます。
+次のように「menu_item1.name = ‘○○’」とすることで、
+「menu_item1」に「name」が「○○」であるという情報を追加することができます。
 このとき、「name」のことを「インスタンス変数」と呼びます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; menu_item1.name = &quot;Hamburger&quot;</span>
 </pre></div>
 </div>
-<p>また、「インスタンス.インスタンス変数」とすることで、 そのインスタンス変数を用いることができます。</p>
+<p>また、「インスタンス.インスタンス変数」とすることで、
+そのインスタンス変数を用いることができます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; print(menu_item1.name)</span>
 <span class="go">Hamburger</span>
 </pre></div>
@@ -678,9 +706,10 @@ continueもif文などと組み合わせて利用します。 while文でも同�
 </section>
 <section id="id18">
 <h2>メソッド<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h2>
-<p>クラスの中に関数を定義することができます。 クラスの中で定義した関数のことをメソッドと呼びます。
-メソッドの定義の方法は通常の関数と同じですが、 第1引数にselfを追加する必要があります。</p>
-<p>第1引数に指定したselfには、 そのメソッドを呼び出したインスタンス自身が代入されます。</p>
+<p>クラスの中に関数を定義することができます。
+クラスの中で定義した関数のことをメソッドと呼びます。
+メソッドの定義の方法は通常の関数と同じですが、第1引数にselfを追加する必要があります。</p>
+<p>第1引数に指定したselfには、そのメソッドを呼び出したインスタンス自身が代入されます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; class MenuItem:</span>
 <span class="go">...     def info(self):</span>
 <span class="go">...         print(self.name)</span>
@@ -694,7 +723,7 @@ continueもif文などと組み合わせて利用します。 while文でも同�
 </section>
 <section id="init">
 <h2>__init__メソッド<a class="headerlink" href="#init" title="Permalink to this heading">#</a></h2>
-<p>__init__メソッドは「クラス名()」でインスタンスが生成した直後に 自動で呼ばれます。</p>
+<p>__init__メソッドは「クラス名()」でインスタンスが生成した直後に自動で呼ばれます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; class MenuItem:</span>
 <span class="go">...     def __init__(self):</span>
 <span class="go">...         print(&quot;メニューが作られました&quot;)</span>
@@ -713,7 +742,7 @@ continueもif文などと組み合わせて利用します。 while文でも同�
 <span class="go">Hamburger</span>
 </pre></div>
 </div>
-<p>詳しくは、 Pythonチュートリアル を参照してください。</p>
+<p>詳しくは、 <a class="reference external" href="https://docs.python.org/3/tutorial/">Pythonチュートリアル</a> を参照してください。</p>
 </section>
 </section>
 
