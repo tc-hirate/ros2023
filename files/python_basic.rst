@@ -63,10 +63,10 @@ printの後ろの()の中に書いた文字が画面に出力されます。
     >>> print("Hello ROS")      # ダブルクォーテーションで囲む
     Hello ROS
     >>> print(Hello ROS)
-      File "", line 1
+      File "<stdin>", line 1
         print(Hello ROS)
-                    ^
-    SyntaxError: invalid syntax
+              ^^^^^^^^^
+    SyntaxError: invalid syntax. Perhaps you forgot a comma?
 
 コメント
 ============================================================

@@ -251,10 +251,10 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello ROS&quot;</span><span class="p">)</span>      <span class="c1"># ダブルクォーテーションで囲む</span>
 <span class="go">Hello ROS</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Hello</span> <span class="n">ROS</span><span class="p">)</span>
-<span class="go">  File &quot;&quot;, line 1</span>
-<span class="go">    print(Hello ROS)</span>
-<span class="go">                ^</span>
-<span class="go">SyntaxError: invalid syntax</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="n">Hello</span> <span class="n">ROS</span><span class="p">)</span>
+<span class="w">          </span><span class="pm">^^^^^^^^^</span>
+<span class="gr">SyntaxError</span>: <span class="n">invalid syntax. Perhaps you forgot a comma?</span>
 </pre></div>
 </div>
 </section>

@@ -235,26 +235,45 @@
 <span class="go">LC_ALL=</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>Universeレポジトリを追加。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>software-properties-common
 <span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>add-apt-repository<span class="w"> </span>universe
 </pre></div>
 </div>
-<p>ROS2 GPT Keyの追加。</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ROS 2 GPG(GNU Privacy Guard) keyの追加。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
 <span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>curl<span class="w"> </span>-y
 <span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>curl<span class="w"> </span>-sSL<span class="w"> </span>https://raw.githubusercontent.com/ros/rosdistro/master/ros.key<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/ros-archive-keyring.gpg
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>レポジトリ情報をsource listに追加。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb [arch=</span><span class="k">$(</span>dpkg<span class="w"> </span>--print-architecture<span class="k">)</span><span class="s2"> signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu </span><span class="k">$(</span>.<span class="w"> </span>/etc/os-release<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$UBUNTU_CODENAME</span><span class="k">)</span><span class="s2"> main&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/ros2.list<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 <p>ROS2のインストール。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
 <span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
 <span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-iron-desktop
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>PCにはGUIツールやデモが含まれるDesktopをインストールします。</p>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="id1">
@@ -276,6 +295,9 @@
 <span class="go">・・・</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>受講生のPCで次のコマンドを実行してください。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">source</span><span class="w"> </span>/opt/ros/iron/setup.bash
 <span class="gp">ubuntu@mbc084:~$ </span>ros2<span class="w"> </span>run<span class="w"> </span>demo_nodes_py<span class="w"> </span>listener
@@ -292,19 +314,28 @@
 <span class="go">・・・</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>Terminalを起動するたびにsetup fileを実行するのは面倒なので、shellのstartup scriptに書いておきます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;source /opt/ros/iron/setup.bash&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="ros-domein-id">
 <h2>ROS_DOMEIN_IDの設定<a class="headerlink" href="#ros-domein-id" title="Permalink to this heading">#</a></h2>
 <p>ROS2はネットワーク上のnodeを自動的に発見します。そのため、同一ネットワークであれば複数のPCでnodeを実行させて分散処理することが簡単にできます。</p>
-<p>一方で、複数人が同一ネットワーク上でnodeを実行すると、どのnodeから送られてきたデータか分からなくなることが あります。</p>
-<p>そこで、ROS2ではROS_DOMAIN_IDを設定することで この問題を回避します。ROS_DOMAIN_IDに数値を設定すると、同じ値が設定されたTerminal間でしかnodeが見られなくなります。</p>
-<p>次のコマンドを実行してROS_DOMAIN_IDを設定してください。IDはZumoの番号と同じにします。Zumo-00を使っている場合は0となります。</p>
+<p>一方で、複数人が同一ネットワーク上でnodeを実行すると、どのnodeから送られてきたデータか分からなくなることがあります。</p>
+<p>そのため、ROS2ではROS_DOMAIN_IDを設定することでこの問題を回避します。ROS_DOMAIN_IDに数値を設定すると、同じ値が設定されたTerminal間でしかnodeが見られなくなります。</p>
+<p>次のコマンドを実行してROS_DOMAIN_IDを設定してください。IDはZumoの番号と同じにします。Zumo-00を使っている場合は0とします。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">ROS_DOMAIN_ID</span><span class="o">=</span><span class="m">0</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 <p>Terminalを起動するたびにIDを設定するのは面倒なので、shellのstartup scriptに書いておきます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export ROS_DOMAIN_ID=0&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc

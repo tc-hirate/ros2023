@@ -38,6 +38,8 @@ Binary packagesのDebian packagesを選択してください。
     LC_IDENTIFICATION=ja_JP.UTF-8
     LC_ALL=
 
+|
+
 Universeレポジトリを追加。
 
 .. code-block:: console
@@ -45,7 +47,9 @@ Universeレポジトリを追加。
     ubuntu@mbc084:~$ sudo apt install software-properties-common
     ubuntu@mbc084:~$ sudo add-apt-repository universe
 
-ROS2 GPT Keyの追加。
+|
+
+ROS 2 GPG(GNU Privacy Guard) keyの追加。
 
 .. code-block:: console
 
@@ -53,11 +57,15 @@ ROS2 GPT Keyの追加。
     ubuntu@mbc084:~$ sudo apt install curl -y
     ubuntu@mbc084:~$ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 
+|
+
 レポジトリ情報をsource listに追加。
 
 .. code-block:: console
 
     ubuntu@mbc084:~$ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+
+|
 
 ROS2のインストール。
 
@@ -66,6 +74,12 @@ ROS2のインストール。
     ubuntu@mbc084:~$ sudo apt update
     ubuntu@mbc084:~$ sudo apt upgrade
     ubuntu@mbc084:~$ sudo apt install ros-iron-desktop
+
+.. note::
+
+   PCにはGUIツールやデモが含まれるDesktopをインストールします。
+
+|
 
 サンプルプログラムの実行
 ============================================================
@@ -90,6 +104,8 @@ ROS2のインストール。
     [INFO] [1688105754.373234649] [talker]: Publishing: 'Hello World: 10'
     ・・・
 
+|
+
 受講生のPCで次のコマンドを実行してください。
 
 .. code-block:: console
@@ -108,26 +124,32 @@ ROS2のインストール。
     [INFO] [1688105838.779006018] [listener]: I heard: [Hello World: 10]
     ・・・
 
+|
+
 Terminalを起動するたびにsetup fileを実行するのは面倒なので、shellのstartup scriptに書いておきます。
 
 .. code-block:: console
 
     ubuntu@mbc084:~$ echo "source /opt/ros/iron/setup.bash" >> ~/.bashrc
 
+|
+
 ROS_DOMEIN_IDの設定
 ============================================================
 
 ROS2はネットワーク上のnodeを自動的に発見します。そのため、同一ネットワークであれば複数のPCでnodeを実行させて分散処理することが簡単にできます。
 
-一方で、複数人が同一ネットワーク上でnodeを実行すると、どのnodeから送られてきたデータか分からなくなることが あります。
+一方で、複数人が同一ネットワーク上でnodeを実行すると、どのnodeから送られてきたデータか分からなくなることがあります。
 
-そこで、ROS2ではROS_DOMAIN_IDを設定することで この問題を回避します。ROS_DOMAIN_IDに数値を設定すると、同じ値が設定されたTerminal間でしかnodeが見られなくなります。
+そのため、ROS2ではROS_DOMAIN_IDを設定することでこの問題を回避します。ROS_DOMAIN_IDに数値を設定すると、同じ値が設定されたTerminal間でしかnodeが見られなくなります。
 
-次のコマンドを実行してROS_DOMAIN_IDを設定してください。IDはZumoの番号と同じにします。Zumo-00を使っている場合は0となります。
+次のコマンドを実行してROS_DOMAIN_IDを設定してください。IDはZumoの番号と同じにします。Zumo-00を使っている場合は0とします。
 
 .. code-block:: console
 
     ubuntu@mbc084:~$ export ROS_DOMAIN_ID=0
+
+|
 
 Terminalを起動するたびにIDを設定するのは面倒なので、shellのstartup scriptに書いておきます。
 
