@@ -15,7 +15,7 @@ ROSロボットプログラミングに必要な開発環境の構築方法と �
 ZumoはRaspberry Pi、Arduino Uno、Zumo Shieldから構成されます。
 Zumo Shieldにはモータやセンサが搭載されていて、 これらを使ってロボットを制御することができます。
 
-文章のなかで :red:`赤い文字列` だよ。
+文章のなかで :red:`赤い文字列` 。
 
 |
 
@@ -86,8 +86,8 @@ Zumo Shieldにはモータやセンサが搭載されていて、 これらを�
    python_basic
    linux_install_pi
    ros2_install_pi
-   vscode_install_pc
    ros2_tutorial
+   vscode_install_pc
    joystick
    arduino
    opencv

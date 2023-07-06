@@ -35,13 +35,14 @@ Zumo Shieldにはモータやセンサが搭載されていて、 これらを�
 
 - Linuxのインストール（Raspberry Pi）
 - ROS2のインストール（Raspberry Pi）
-- VSCodeの使い方
+- ROS2 Tutorial
 
 |
 
 8月31日(木)
 
-- ROS2 Tutorial
+- ROS2 Tutorial（つづき）
+- VSCodeの使い方
 
 |
 

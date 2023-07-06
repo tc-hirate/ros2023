@@ -73,7 +73,7 @@ Live USBの作成
 
 |
 
-Ubuntuのイメージディスクファイルを選択。
+Ubuntuのイメージディスクファイルを選択して、［開く］ボタンをクリック。
 
 .. image:: ./img/live_usb_img_02.png
    :align: center
@@ -87,7 +87,7 @@ Ubuntuのイメージディスクファイルを選択。
 
 |
 
-［OK］ボタンをクリック。
+「ISOイメージモードで書き込む」が選択されていることを確認して、［OK］ボタンをクリック。
 
 .. image:: ./img/live_usb_img_04.png
    :align: center
@@ -115,7 +115,7 @@ Ubuntuのイメージディスクファイルを選択。
 
 |
 
-［閉じる］ボタンをクリック。
+「準備完了」と表示されたら、［閉じる］ボタンをクリック。
 
 .. image:: ./img/live_usb_img_08.png
    :align: center
@@ -129,7 +129,7 @@ Linuxのインストール
 
 Live USBをPCに挿入してください。
 
-PCの電源ボタンを押したら、［F12］キーを連打し、Boot Optionsの画面を表示させてください。
+PCの電源ボタンを押したら、［F12］キーを連打し、Boot Optionsの画面を表示させる。
 
 .. image:: ./img/linux_install_img_01.png
    :width: 800px
@@ -137,7 +137,7 @@ PCの電源ボタンを押したら、［F12］キーを連打し、Boot Options
 
 |
 
-［↑］と［↓］を使ってUSB Storagr Deviceを選択し、［Enter］を押す。
+［↑］キーと［↓］キーを使って「USB Storagr Device」を選択し、［Enter］キーを押す。
 
 .. image:: ./img/linux_install_img_02.png
    :width: 800px
@@ -145,7 +145,7 @@ PCの電源ボタンを押したら、［F12］キーを連打し、Boot Options
 
 |
 
-Try or Install Ubuntuが選択されていることを確認し、［Enter］を押す。
+「Try or Install Ubuntu」が選択されていることを確認し、［Enter］キーを押す。
 
 .. image:: ./img/linux_install_img_03.png
    :width: 800px
@@ -195,7 +195,7 @@ Updates and other softwareは、デフォルトのまま ［Continue］ボタン
 
 |
 
-Installation typeは、 ［Erase Ubuntu 22.04.2 LTS and reinstall］を選択し ［Install Now］ボタンをクリック。
+Installation typeは、「Erase Ubuntu 22.04.2 LTS and reinstall」を選択し ［Install Now］ボタンをクリック。
 
 ※違う画面が出てくるかもしれない。
 
@@ -213,7 +213,7 @@ Write the changes to disks?ウィンドウが表示されたら ［Continue］�
 
 |
 
-Where are you?は、［Tokyo］が選択されていることを確認したら ［Continue］ボタンをクリック。
+Where are you?は、「Tokyo」が選択されていることを確認したら ［Continue］ボタンをクリック。
 
 .. image:: ./img/linux_install_img_11.png
    :width: 800px
@@ -263,7 +263,7 @@ Require my password to login: Require my password to log in にチェック
 
 |
 
-Please remove the installation medium, then press ENTER というメッセージが表示されるので Live USBを抜いて［Enter］を押す。
+「Please remove the installation medium, then press ENTER」というメッセージが表示されるので Live USBを抜いて［Enter］を押す。
 
 .. image:: ./img/linux_install_img_15.png
    :width: 800px
@@ -286,42 +286,42 @@ Linuxへのログイン
 
 はじめに、各種設定の画面が表示されますが、 全てデフォルトのままとします。
 
-Connect Your Online Accountsは、 ［Skip］ボタンをクリック。
+［Skip］ボタンをクリック。
 
 .. image:: ./img/linux_login_img_02.png
    :align: center
 
 |
 
-Livepatchは、 デフォルトのまま［Next］ボタンをクリック。
+［Next］ボタンをクリック。
 
 .. image:: ./img/linux_login_img_03.png
    :align: center
 
 |
 
-Help improve Ubuntuは、 デフォルトのまま［Next］ボタンをクリック。
+［Next］ボタンをクリック。
 
 .. image:: ./img/linux_login_img_04.png
    :align: center
 
 |
 
-Privacyは、 デフォルトのまま［Next］ボタンをクリック。
+［Next］ボタンをクリック。
 
 .. image:: ./img/linux_login_img_05.png
    :align: center
 
 |
 
-You're ready to go!は、 ［Done］ボタンをクリック。
+［Done］ボタンをクリック。
 
 .. image:: ./img/linux_login_img_06.png
    :align: center
 
 |
 
-Software Updaterが出てきたら、 ［Install Now］ボタンをクリック。
+Software Updaterが出てきたら、［Install Now］ボタンをクリック。
 
 .. image:: ./img/linux_login_img_07.png
    :align: center
@@ -335,7 +335,7 @@ Software Updaterが出てきたら、 ［Install Now］ボタンをクリック�
 
 |
 
-アップデートが終了したら、 ［Restart Now］をクリックして再起動する。
+アップデートが終了したら、［Restart Now］をクリックして再起動する。
 
 .. image:: ./img/linux_login_img_09.png
    :align: center
@@ -362,7 +362,7 @@ Linuxの日本語化
 
 |
 
-［Region & Language］を選択し、［Manage Installed Languages］をクリック。
+「Region & Language」を選択し、［Manage Installed Languages］をクリック。
 
 .. image:: ./img/linux_japanese_img_03.png
    :align: center
