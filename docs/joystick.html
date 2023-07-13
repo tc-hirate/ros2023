@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -199,7 +199,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -208,6 +208,447 @@
           <section id="id1">
 <h1>ジョイスティックの使い方<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <p>PCでジョイスティックが使えるように設定します。</p>
+<section id="id2">
+<h2>必要なパッケージのインストール<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>ジョイスティックを使うために必要なパッケージをインストールします。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-iron-joy
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-iron-teleop-tools
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="id3">
+<h2>ジョイスティックの動作確認<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>PCにジョイスティックを接続し、次のコマンドを実行してください。</p>
+<p>接続したジョイスティックが確認できます。（名前はF310かF150のどちらか）</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>lsusb
+<span class="go">...</span>
+<span class="go">Bus 002 Device 005: ID 046d:c21e Logitech, Inc. F510 Gamepad [XInput Mode]</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>続いて、次のコマンドを実行してください。</p>
+<p>js0があればジョイスティックは認識されています。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ls<span class="w"> </span>/dev/input/
+<span class="go">by-id    event0  event10  event12  event2  event4  event6  event8  js0   mouse0</span>
+<span class="go">by-path  event1  event11  event13  event3  event5  event7  event9  mice  mouse1</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>joyパッケージのjoy-nodeの実行。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2<span class="w"> </span>run<span class="w"> </span>joy<span class="w"> </span>joy_node
+<span class="go">[INFO] [1689135140.406199333] [joy_node]: Opened joystick: Logitech Gamepad F510.  deadzone: 0.050000</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Topicの確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2<span class="w"> </span>topic<span class="w"> </span>list
+<span class="go">/joy</span>
+<span class="go">/joy/set_feedback</span>
+<span class="go">/parameter_events</span>
+<span class="go">/rosout</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>/joyの表示。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/joy
+<span class="go">header:</span>
+<span class="go">  stamp:</span>
+<span class="go">    sec: 1689135223</span>
+<span class="go">    nanosec: 171012534</span>
+<span class="go">  frame_id: joy</span>
+<span class="go">axes:</span>
+<span class="go">- -0.0</span>
+<span class="go">- -0.0</span>
+<span class="go">- 1.0</span>
+<span class="go">- -0.0</span>
+<span class="go">- -0.0</span>
+<span class="go">- 1.0</span>
+<span class="go">- 0.0</span>
+<span class="go">- 0.0</span>
+<span class="go">buttons:</span>
+<span class="go">- 0</span>
+<span class="go">- 0</span>
+<span class="go">- 0</span>
+<span class="go">- 0</span>
+<span class="go">- 0</span>
+<span class="go">- 0</span>
+<span class="go">- 0</span>
+<span class="go">- 0</span>
+<span class="go">- 0</span>
+<span class="go">- 0</span>
+<span class="go">- 0</span>
+<span class="go">---</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>teleop_twist_joyパッケージのteleop-nodeの実行。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2<span class="w"> </span>run<span class="w"> </span>teleop_twist_joy<span class="w"> </span>teleop_node
+<span class="go">[INFO] [1689135379.152090618] [TeleopTwistJoy]: Teleop enable button 5.</span>
+<span class="go">[INFO] [1689135379.152189267] [TeleopTwistJoy]: Linear axis x on 5 at scale 0.500000.</span>
+<span class="go">[INFO] [1689135379.152221882] [TeleopTwistJoy]: Angular axis yaw on 2 at scale 0.500000.</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Topicの確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2<span class="w"> </span>topic<span class="w"> </span>list
+<span class="go">/cmd_vel</span>
+<span class="go">/joy</span>
+<span class="go">/joy/set_feedback</span>
+<span class="go">/parameter_events</span>
+<span class="go">/rosout</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>/cmd_velの表示。</p>
+<p>RBを押しながらRTを操作するとxの値が-0.5〜0.5で変化し、LTを操作するとzの値が-0.5〜0.5で変化します。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/cmd_vel
+<span class="go">linear:</span>
+<span class="go">  x: 0.5</span>
+<span class="go">  y: 0.0</span>
+<span class="go">  z: 0.0</span>
+<span class="go">angular:</span>
+<span class="go">  x: 0.0</span>
+<span class="go">  y: 0.0</span>
+<span class="go">  z: 0.5</span>
+<span class="go">---</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="id4">
+<h2>パッケージの作成<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>joy_testという名前のパッケージを作ります。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">cd</span><span class="w"> </span>ros2_ws/src/
+<span class="gp">ubuntu@mbc084:~/ros2_ws/src$ </span>ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </span>--build-type<span class="w"> </span>ament_python<span class="w"> </span>joy_test
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>launchファイル用のディレクトリを作ります。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws/src$ </span><span class="nb">cd</span><span class="w"> </span>joy_test/
+<span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test$ </span>mkdir<span class="w"> </span>launch
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="turtlesim">
+<h2>演習1「ジョイスティックを使ってturtlesimを動かす」<a class="headerlink" href="#turtlesim" title="Permalink to this heading">#</a></h2>
+<p>（１）joy-nodeとteleop-nodeを使ってturtlesimを 動かす。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtlesim_node
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>joy<span class="w"> </span>joy_node
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>teleop_twist_joy<span class="w"> </span>teleop_node<span class="w"> </span>--ros-args<span class="w"> </span>--remap<span class="w"> </span>/cmd_vel:<span class="o">=</span>/turtle1/cmd_vel
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>（２）joy-nodeとteleop-nodeを使ってturtlesimを 動かすためのlaunchファイルを作成する。</p>
+<p>ファイル名は「turtle_teleop_joy_launch.py」。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test$ </span><span class="nb">cd</span><span class="w"> </span>launch/
+<span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test/launch$ </span>nano<span class="w"> </span>turtle_teleop_joy_launch.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>turtle_teleop_joy_launch.pyの編集。</p>
+<p><span class="dir">~/ros2_ws/src/joy_test/launch/turtle_teleop_joy_launch.py</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">launch</span> <span class="kn">import</span> <span class="n">LaunchDescription</span>
+<span class="kn">from</span> <span class="nn">launch_ros.actions</span> <span class="kn">import</span> <span class="n">Node</span>
+
+<span class="k">def</span> <span class="nf">generate_launch_description</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">LaunchDescription</span><span class="p">([</span>
+        <span class="n">Node</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sim&quot;</span><span class="p">,</span>
+            <span class="n">package</span><span class="o">=</span><span class="s2">&quot;turtlesim&quot;</span><span class="p">,</span>
+            <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;turtlesim_node&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">Node</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;joy&quot;</span><span class="p">,</span>
+            <span class="n">package</span><span class="o">=</span><span class="s2">&quot;joy&quot;</span><span class="p">,</span>
+            <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;joy_node&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">Node</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;teleop&quot;</span><span class="p">,</span>
+            <span class="n">package</span><span class="o">=</span><span class="s2">&quot;teleop_twist_joy&quot;</span><span class="p">,</span>
+            <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;teleop_node&quot;</span><span class="p">,</span>
+            <span class="n">remappings</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">(</span><span class="s1">&#39;/cmd_vel&#39;</span><span class="p">,</span> <span class="s1">&#39;/turtle1/cmd_vel&#39;</span><span class="p">),</span>
+            <span class="p">],</span>
+        <span class="p">),</span>
+    <span class="p">])</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>setup.pyの編集。</p>
+<p><span class="dir">~/ros2_ws/src/joy_test/setup.py</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="kn">import</span> <span class="nn">os</span>
+</span><span class="hll"><span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+</span>
+<span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">find_packages</span><span class="p">,</span> <span class="n">setup</span>
+
+<span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;joy_test&#39;</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">package_name</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.0.0&#39;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]),</span>
+    <span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;share/ament_index/resource_index/packages&#39;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;resource/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s1">&#39;share/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;package.xml&#39;</span><span class="p">]),</span>
+<span class="hll">        <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;share&#39;</span><span class="p">,</span> <span class="n">package_name</span><span class="p">),</span> <span class="n">glob</span><span class="p">(</span><span class="s1">&#39;launch/*_launch.py&#39;</span><span class="p">)),</span>
+</span>    <span class="p">],</span>
+    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;setuptools&#39;</span><span class="p">],</span>
+    <span class="n">zip_safe</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">maintainer</span><span class="o">=</span><span class="s1">&#39;ubuntu&#39;</span><span class="p">,</span>
+    <span class="n">maintainer_email</span><span class="o">=</span><span class="s1">&#39;ubuntu@todo.todo&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;TODO: Package description&#39;</span><span class="p">,</span>
+    <span class="n">license</span><span class="o">=</span><span class="s1">&#39;TODO: License declaration&#39;</span><span class="p">,</span>
+    <span class="n">tests_require</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pytest&#39;</span><span class="p">],</span>
+    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ワークスペースに移動。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test$ </span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ビルド。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>joy_test
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>setupファイルの反映。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>launchファイルの実行。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2<span class="w"> </span>launch<span class="w"> </span>joy_test<span class="w"> </span>turtle_teleop_joy_launch.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ノードの確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2<span class="w"> </span>node<span class="w"> </span>list
+<span class="go">/joy</span>
+<span class="go">/sim</span>
+<span class="go">/teleop</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>rqt_graphでノードの確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>rqt_graph
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<img alt="_images/joystick_img_01.png" class="align-center" src="_images/joystick_img_01.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>（３）ジョイスティックの方向キーでturtlesimを動かす プログラムを作ってください。</p>
+<p>ファイル名は「turtle_joy.py」、 仕様はturtle_teleop_keyと同じとします。</p>
+<p>turtle_joy.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
+<span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+
+<span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
+<span class="kn">from</span> <span class="nn">geometry_msgs.msg</span> <span class="kn">import</span> <span class="n">Twist</span>
+<span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Joy</span>
+
+<span class="k">class</span> <span class="nc">JoyTwist</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;joy_twist&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">Twist</span><span class="p">,</span> <span class="s1">&#39;/turtle1/cmd_vel&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subscription</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_subscription</span><span class="p">(</span>
+            <span class="n">Joy</span><span class="p">,</span>
+            <span class="s1">&#39;joy&#39;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">joy_callback</span><span class="p">,</span>
+            <span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subscription</span>
+
+    <span class="k">def</span> <span class="nf">joy_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">joy_msg</span><span class="p">):</span>
+        <span class="n">twist</span> <span class="o">=</span> <span class="n">Twist</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">joy_msg</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">twist</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">2.0</span>
+        <span class="k">elif</span> <span class="n">joy_msg</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">twist</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span>
+        <span class="k">elif</span> <span class="n">joy_msg</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">twist</span><span class="o">.</span><span class="n">angular</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">2.0</span>
+        <span class="k">elif</span> <span class="n">joy_msg</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">twist</span><span class="o">.</span><span class="n">angular</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">twist</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">twist</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="n">joy_twist</span> <span class="o">=</span> <span class="n">JoyTwist</span><span class="p">()</span>
+
+        <span class="n">rclpy</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="n">joy_twist</span><span class="p">)</span>
+
+        <span class="c1"># Destroy the node explicitly</span>
+        <span class="c1"># (optional - otherwise it will be done automatically</span>
+        <span class="c1"># when the garbage collector destroys the node object)</span>
+        <span class="n">joy_twist</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+        <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+
+
+    <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+        <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>package.xml</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;?xml-model href=&quot;http://download.ros.org/schema/package_format3.xsd&quot; schematyp&gt;
+&lt;package format=&quot;3&quot;&gt;
+  &lt;name&gt;joy_test&lt;/name&gt;
+  &lt;version&gt;0.0.0&lt;/version&gt;
+  &lt;description&gt;TODO: Package description&lt;/description&gt;
+  &lt;maintainer email=&quot;ubuntu@todo.todo&quot;&gt;ubuntu&lt;/maintainer&gt;
+  &lt;license&gt;TODO: License declaration&lt;/license&gt;
+
+  &lt;exec_depend&gt;rclpy&lt;/exec_depend&gt;
+  &lt;exec_depend&gt;std_msgs&lt;/exec_depend&gt;
+  &lt;exec_depend&gt;geometry_msgs&lt;/exec_depend&gt;
+  &lt;exec_depend&gt;sensor_msgs&lt;/exec_depend&gt;
+
+  &lt;test_depend&gt;ament_copyright&lt;/test_depend&gt;
+  &lt;test_depend&gt;ament_flake8&lt;/test_depend&gt;
+  &lt;test_depend&gt;ament_pep257&lt;/test_depend&gt;
+  &lt;test_depend&gt;python3-pytest&lt;/test_depend&gt;
+
+  &lt;export&gt;
+    &lt;build_type&gt;ament_python&lt;/build_type&gt;
+  &lt;/export&gt;
+&lt;/package&gt;
+</pre></div>
+</div>
+<p>setup.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+
+<span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
+
+<span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;joy_test&#39;</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">package_name</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.0.0&#39;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="n">package_name</span><span class="p">],</span>
+    <span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;share/ament_index/resource_index/packages&#39;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;resource/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s1">&#39;share/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;package.xml&#39;</span><span class="p">]),</span>
+        <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;share&#39;</span><span class="p">,</span> <span class="n">package_name</span><span class="p">),</span> <span class="n">glob</span><span class="p">(</span><span class="s1">&#39;launch/*_launch.py&#39;</span><span class="p">)),</span>
+    <span class="p">],</span>
+    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;setuptools&#39;</span><span class="p">],</span>
+    <span class="n">zip_safe</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">maintainer</span><span class="o">=</span><span class="s1">&#39;ubuntu&#39;</span><span class="p">,</span>
+    <span class="n">maintainer_email</span><span class="o">=</span><span class="s1">&#39;ubuntu@todo.todo&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;TODO: Package description&#39;</span><span class="p">,</span>
+    <span class="n">license</span><span class="o">=</span><span class="s1">&#39;TODO: License declaration&#39;</span><span class="p">,</span>
+    <span class="n">tests_require</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pytest&#39;</span><span class="p">],</span>
+    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;joy_twist = joy_test.turtle_joy:main&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>joy_testパッケージのjoy_twistノードを実行する。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtlesim_node
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>joy<span class="w"> </span>joy_node
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>run<span class="w"> </span>joy_test<span class="w"> </span>joy_twist
+</pre></div>
+</div>
+<p>「turtle_joy.py」を実行するlaunchファイルを作ってください。 ファイル名は「turtle_joy_launch.py」とします。</p>
+<p>turtle_joy_launch.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">launch</span> <span class="kn">import</span> <span class="n">LaunchDescription</span>
+<span class="kn">from</span> <span class="nn">launch_ros.actions</span> <span class="kn">import</span> <span class="n">Node</span>
+
+<span class="k">def</span> <span class="nf">generate_launch_description</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">LaunchDescription</span><span class="p">([</span>
+        <span class="n">Node</span><span class="p">(</span>
+            <span class="n">package</span><span class="o">=</span><span class="s1">&#39;turtlesim&#39;</span><span class="p">,</span>
+            <span class="n">executable</span><span class="o">=</span><span class="s1">&#39;turtlesim_node&#39;</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sim&#39;</span>
+        <span class="p">),</span>
+        <span class="n">Node</span><span class="p">(</span>
+            <span class="n">package</span><span class="o">=</span><span class="s1">&#39;joy&#39;</span><span class="p">,</span>
+            <span class="n">executable</span><span class="o">=</span><span class="s1">&#39;joy_node&#39;</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;joy&#39;</span>
+            <span class="p">),</span>
+        <span class="n">Node</span><span class="p">(</span>
+            <span class="n">package</span><span class="o">=</span><span class="s1">&#39;joy_test&#39;</span><span class="p">,</span>
+            <span class="n">executable</span><span class="o">=</span><span class="s1">&#39;joy_twist&#39;</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;test&#39;</span>
+           <span class="p">),</span>
+    <span class="p">])</span>
+</pre></div>
+</div>
+<p>launchファイルを実行する。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ros2<span class="w"> </span>launch<span class="w"> </span>joy_test<span class="w"> </span>turtle_joy_launch.py
+</pre></div>
+</div>
+</section>
 </section>
 
         </article>
@@ -253,8 +694,30 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">ジョイスティックの使い方</a><ul>
+<li><a class="reference internal" href="#id2">必要なパッケージのインストール</a></li>
+<li><a class="reference internal" href="#id3">ジョイスティックの動作確認</a></li>
+<li><a class="reference internal" href="#id4">パッケージの作成</a></li>
+<li><a class="reference internal" href="#turtlesim">演習1「ジョイスティックを使ってturtlesimを動かす」</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
