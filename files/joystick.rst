@@ -172,34 +172,50 @@ launchファイル用のディレクトリを作ります。
 演習1「ジョイスティックを使ってturtlesimを動かす」
 ============================================================
 
-（１）joy-nodeとteleop-nodeを使ってturtlesimを 動かす。
+|
+
+（１）joy-nodeとteleop-nodeを使ってturtlesimを動かす
+------------------------------------------------------------
+
+turtlesimパッケージのturtlesim_nodeの実行。
 
 .. code-block:: console
 
-    $ ros2 run turtlesim turtlesim_node
-
-.. code-block:: console
-
-    $ ros2 run joy joy_node
-
-.. code-block:: console
-
-    $ ros2 run teleop_twist_joy teleop_node --ros-args --remap /cmd_vel:=/turtle1/cmd_vel
+    ubuntu@mbc084:~/ros2_ws/src/joy_test$ ros2 run turtlesim turtlesim_node
 
 |
 
-（２）joy-nodeとteleop-nodeを使ってturtlesimを 動かすためのlaunchファイルを作成する。
+joyパッケージのjoy-nodeの実行。
 
-ファイル名は「turtle_teleop_joy_launch.py」。
+.. code-block:: console
+
+    ubuntu@mbc084:~/ros2_ws/src/joy_test$ ros2 run joy joy_node
+
+|
+
+teleop_twist_joyパッケージのteleop_nodeの実行。
+
+.. code-block:: console
+
+    ubuntu@mbc084:~/ros2_ws/src/joy_test$ ros2 run teleop_twist_joy teleop_node --ros-args --remap /cmd_vel:=/turtle1/cmd_vel
+
+|
+
+（２）launchファイルの作成
+------------------------------------------------------------
+
+joy-nodeとteleop-nodeを使ってturtlesimを動かすためのlaunchファイルを作成してください。
+
+ファイル名は「turtle_teleop_joy_launch.py」とします。
+
+|
+
+turtle_teleop_joy_launch.pyの編集。
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws/src/joy_test$ cd launch/
     ubuntu@mbc084:~/ros2_ws/src/joy_test/launch$ nano turtle_teleop_joy_launch.py
-
-|
-
-turtle_teleop_joy_launch.pyの編集。
 
 :dir:`~/ros2_ws/src/joy_test/launch/turtle_teleop_joy_launch.py`
 
@@ -233,6 +249,11 @@ turtle_teleop_joy_launch.pyの編集。
 |
 
 setup.pyの編集。
+
+.. code-block:: console
+
+    ubuntu@mbc084:~/ros2_ws/src/joy_test/launch$ cd ..
+    ubuntu@mbc084:~/ros2_ws/src/joy_test$ nano setup.py
 
 :dir:`~/ros2_ws/src/joy_test/setup.py`
 
@@ -327,11 +348,26 @@ rqt_graphでノードの確認。
 
 |
 
-（３）ジョイスティックの方向キーでturtlesimを動かす プログラムを作ってください。
+（３）ジョイスティックの方向キーでturtlesimを動かす
+------------------------------------------------------------
 
-ファイル名は「turtle_joy.py」、 仕様はturtle_teleop_keyと同じとします。
+ジョイスティックの方向キーでturtlesimを動かすプログラムを作ってください。
 
-turtle_joy.py
+ファイル名は「turtle_joy.py」、仕様はturtle_teleop_keyと同じとします。
+
+.. note::
+
+   ここからはディレクトリを移動しないで「ros2_ws」からコマンドを実行します。
+
+|
+
+turtle_joy.pyの編集。
+
+.. code-block:: console
+
+    ubuntu@mbc084:~/ros2_ws$ nano src/joy_test/joy_test/turtle_joy.py
+
+:dir:`~/ros2_ws/src/joy_test/joy_test/turtle_joy.py`
 
 .. code-block:: python
 
@@ -368,27 +404,35 @@ turtle_joy.py
                 twist.linear.x = 0.0
             self.publisher_.publish(twist)
 
-        def main(args=None):
-            rclpy.init(args=args)
+    def main(args=None):
+        rclpy.init(args=args)
 
-            joy_twist = JoyTwist()
+        joy_twist = JoyTwist()
 
-            rclpy.spin(joy_twist)
+        rclpy.spin(joy_twist)
 
-            # Destroy the node explicitly
-            # (optional - otherwise it will be done automatically
-            # when the garbage collector destroys the node object)
-            joy_twist.destroy_node()
-            rclpy.shutdown()
-
-
-        if __name__ == '__main__':
-            main()
+        # Destroy the node explicitly
+        # (optional - otherwise it will be done automatically
+        # when the garbage collector destroys the node object)
+        joy_twist.destroy_node()
+        rclpy.shutdown()
 
 
-package.xml
+    if __name__ == '__main__':
+        main()
+
+|
+
+package.xmlの編集。
+
+.. code-block:: console
+
+    ubuntu@mbc084:~/ros2_ws$ nano src/joy_test/package.xml
+
+:dir:`~/ros2_ws/src/joy_test/package.xml`
 
 .. code-block:: none
+    :emphasize-lines: 12, 13
 
     <?xml version="1.0"?>
     <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematyp>
@@ -414,22 +458,30 @@ package.xml
       </export>
     </package>
 
+|
 
-setup.py
+setup.pyの編集。
+
+.. code-block:: console
+
+    ubuntu@mbc084:~/ros2_ws$ nano src/joy_test/setup.py
+
+:dir:`~/ros2_ws/src/joy_test/setup.py`
 
 .. code-block:: python
+    :emphasize-lines: 27
 
     import os
     from glob import glob
 
-    from setuptools import setup
+    from setuptools import find_packages, setup
 
     package_name = 'joy_test'
 
     setup(
         name=package_name,
         version='0.0.0',
-        packages=[package_name],
+        packages=find_packages(exclude=['test']),
         data_files=[
             ('share/ament_index/resource_index/packages',
                 ['resource/' + package_name]),
@@ -450,25 +502,64 @@ setup.py
         },
     )
 
+|
 
-joy_testパッケージのjoy_twistノードを実行する。
-
-.. code-block:: console
-
-    $ ros2 run turtlesim turtlesim_node
+ビルド。
 
 .. code-block:: console
 
-    $ ros2 run joy joy_node
+    ubuntu@mbc084:~/ros2_ws$ colcon build --packages-select joy_test
+
+|
+
+setupファイルの反映。
 
 .. code-block:: console
 
-    $ ros2 run joy_test joy_twist
+    ubuntu@mbc084:~/ros2_ws$ source install/setup.bash
 
+|
 
-「turtle_joy.py」を実行するlaunchファイルを作ってください。 ファイル名は「turtle_joy_launch.py」とします。
+turtlesimパッケージのturtlesim_nodeの実行。
 
-turtle_joy_launch.py
+.. code-block:: console
+
+    ubuntu@mbc084:~/ros2_ws$ ros2 run turtlesim turtlesim_node
+
+|
+
+joyパッケージのjoy-nodeの実行。
+
+.. code-block:: console
+
+    ubuntu@mbc084:~/ros2_ws$ ros2 run joy joy_node
+
+|
+
+joy_testパッケージのjoy_twistノードの実行。
+
+.. code-block:: console
+
+    ubuntu@mbc084:~/ros2_ws$ ros2 run joy_test joy_twist
+
+|
+
+（４）launchファイルの作成
+------------------------------------------------------------
+
+「turtle_joy.py」を実行するlaunchファイルを作成してください。
+
+ファイル名は「turtle_joy_launch.py」とします。
+
+|
+
+turtle_joy_launch.pyの編集。
+
+.. code-block:: console
+
+    ubuntu@mbc084:~/ros2_ws$ nano src/joy_test/launch/turtle_joy_launch.py
+
+:dir:`~/ros2_ws/src/joy_test/launch/turtle_joy_launch.py`
 
 .. code-block:: python
 
@@ -494,10 +585,28 @@ turtle_joy_launch.py
                ),
         ])
 
+|
 
-launchファイルを実行する。
+ビルド。
 
 .. code-block:: console
 
-    $ ros2 launch joy_test turtle_joy_launch.py
+    ubuntu@mbc084:~/ros2_ws$ colcon build --packages-select joy_test
 
+|
+
+setupファイルの反映。
+
+.. code-block:: console
+
+    ubuntu@mbc084:~/ros2_ws$ source install/setup.bash
+
+|
+
+launchファイルの実行。
+
+.. code-block:: console
+
+    ubuntu@mbc084:~/ros2_ws$ ros2 launch joy_test turtle_teleop_joy_launch.py
+
+|
