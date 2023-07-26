@@ -88,7 +88,6 @@ Zumo Shieldにはモータやセンサが搭載されていて、 これらを�
    linux_install_pi
    ros2_install_pi
    ros2_tutorial
-   vscode_install_pc
    joystick
    arduino
    opencv
@@ -96,3 +95,6 @@ Zumo Shieldにはモータやセンサが搭載されていて、 これらを�
    kadai1
    kadai2
    kadai3
+   vscode_install_pc
+   wifi_pc
+   wifi_pi

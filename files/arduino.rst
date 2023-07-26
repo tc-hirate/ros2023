@@ -1,3 +1,5 @@
+.. role:: dir
+
 ============================================================
 Arduinoの使い方
 ============================================================
@@ -775,123 +777,263 @@ Pythonのプログラムは、zm_testパッケージの「serial_led.py」とし
 
 また、スケッチの名前は「SerialLed」とします。
 
-    serial_led.py
+|
 
-        import rclpy
-        from rclpy.node import Node
-                  
-        from std_msgs.msg import String
-        from geometry_msgs.msg import Twist
-        from sensor_msgs.msg import Joy
-                  
-        import serial
-                  
-        class JoyLed(Node):
-                  
-            def __init__(self):
-                super().__init__('joy_led')
-                self.publisher_ = self.create_publisher(Twist, '/turtle1/cmd_vel', 10)
-                self.subscription = self.create_subscription(
-                    Joy,
-                    'joy',
-                    self.joy_callback,
-                    10)
-                self.subscription
-          
-                self.get_logger().info('Open Port')
-                self.ser = serial.Serial()
-                self.ser.port = "/dev/ttyACM0"
-                self.ser.baudrate = 9600
-                self.ser.open()
-                  
-            def joy_callback(self, joy_msg):
-                twist = Twist()
-                if joy_msg.buttons[0] == 1:
-                    self.get_logger().info('LED ON')
-                    self.ser.write(b"1")
-                elif joy_msg.buttons[0] == 0:
-                    self.get_logger().info('LED OFF')
-                    self.ser.write(b"0")
-                else:
-                    pass
-                self.publisher_.publish(twist)
-                  
-        def main(args=None):
-            rclpy.init(args=args)
-                  
-            joy_led = JoyLed()
-                  
-            rclpy.spin(joy_led)
-                  
-            # Destroy the node explicitly
-            # (optional - otherwise it will be done automatically
-            # when the garbage collector destroys the node object)
-            joy_led.destroy_node()
-            rclpy.shutdown()
-                  
-        if __name__ == '__main__':
-            main()
+ワークスペースの作成
 
+.. code-block:: console
 
-    package.xml
+    pi@zumo00:~$ mkdir -p ~/ros2_ws/src
 
-        <?xml version="1.0"?>
-        <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematyp>
-        <package format="3">
-          <name>zm_test</name>
-          <version>0.0.0</version>
-          <description>TODO: Package description</description>
-          <maintainer email="pi@todo.todo">pi</maintainer>
-          <license>TODO: License declaration</license>
-                  
-          <exec_depend>rclpy</exec_depend>
-          <exec_depend>std_msgs</exec_depend>
-          <exec_depend>geometry_msgs</exec_depend>
-          <exec_depend>sensor_msgs</exec_depend>
-                  
-          <test_depend>ament_copyright</test_depend>
-          <test_depend>ament_flake8</test_depend>
-          <test_depend>ament_pep257</test_depend>
-          <test_depend>python3-pytest</test_depend>
-                  
-          <export>
-            <build_type>ament_python</build_type>
-          </export>
-        </package>
+|
 
+パッケージの作成
 
-    setup.py
+.. code-block:: console
 
-        import os
-        from glob import glob
-                  
-        from setuptools import setup
-                  
-        package_name = 'zm_test'
-                  
-        setup(
-            name=package_name,
-            version='0.0.0',
-            packages=[package_name],
-            data_files=[
-                ('share/ament_index/resource_index/packages',
-                    ['resource/' + package_name]),
-                ('share/' + package_name, ['package.xml']),
-                (os.path.join('share', package_name), glob('launch/*_la>
+    pi@zumo00:~$ cd ~/ros2_ws/src/
+    pi@zumo00:~/ros2_ws/src$ ros2 pkg create --build-type ament_python zm_test
+    going to create a new package
+    package name: zm_test
+    destination directory: /home/pi/ros2_ws/src
+    package format: 3
+    version: 0.0.0
+    description: TODO: Package description
+    maintainer: ['pi <pi@todo.todo>']
+    licenses: ['TODO: License declaration']
+    build type: ament_python
+    dependencies: []
+    creating folder ./zm_test
+    creating ./zm_test/package.xml
+    creating source folder
+    creating folder ./zm_test/zm_test
+    creating ./zm_test/setup.py
+    creating ./zm_test/setup.cfg
+    creating folder ./zm_test/resource
+    creating ./zm_test/resource/zm_test
+    creating ./zm_test/zm_test/__init__.py
+    creating folder ./zm_test/test
+    creating ./zm_test/test/test_copyright.py
+    creating ./zm_test/test/test_flake8.py
+    creating ./zm_test/test/test_pep257.py
+
+    [WARNING]: Unknown license 'TODO: License declaration'.  This has been set in the package.xml, but no LICENSE file has been created.
+    It is recommended to use one of the ament license identifiers:
+    Apache-2.0
+    BSL-1.0
+    BSD-2.0
+    BSD-2-Clause
+    BSD-3-Clause
+    GPL-3.0-only
+    LGPL-3.0-only
+    MIT
+    MIT-0
+
+|
+
+ワークスペースに移動
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws/src$ cd ~/ros2_ws/
+
+|
+
+serial_led.pyの作成。
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ nano src/zm_test/zm_test/serial_led.py
+
+|
+
+編集。
+
+.. code-block:: python
+
+    import rclpy
+    from rclpy.node import Node
+
+    from std_msgs.msg import String
+    from geometry_msgs.msg import Twistpa
+    from sensor_msgs.msg import Joy
+
+    import serial
+
+    class JoyLed(Node):
+
+        def __init__(self):
+            super().__init__('joy_led')
+            self.publisher_ = self.create_publisher(Twist, '/turtle1/cmd_vel', 10)
+            self.subscription = self.create_subscription(
+                Joy,
+                'joy',
+                self.joy_callback,
+                10)
+            self.subscription
+
+            self.get_logger().info('Open Port')
+            self.ser = serial.Serial()
+            self.ser.port = "/dev/ttyACM0"
+            self.ser.baudrate = 9600
+            self.ser.open()
+
+        def joy_callback(self, joy_msg):
+            twist = Twist()
+            if joy_msg.buttons[0] == 1:
+                self.get_logger().info('LED ON')
+                self.ser.write(b"1")
+            elif joy_msg.buttons[0] == 0:
+                self.get_logger().info('LED OFF')
+                self.ser.write(b"0")
+            else:
+                pass
+            self.publisher_.publish(twist)
+
+    def main(args=None):
+        rclpy.init(args=args)
+
+        joy_led = JoyLed()
+
+        rclpy.spin(joy_led)
+
+        # Destroy the node explicitly
+        # (optional - otherwise it will be done automatically
+        # when the garbage collector destroys the node object)
+        joy_led.destroy_node()
+        rclpy.shutdown()
+
+    if __name__ == '__main__':
+        main()
+
+|
+
+package.xmlを開く。
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ nano src/zm_test/package.xml
+
+|
+
+編集。
+
+.. code-block:: none
+    :emphasize-lines: 10-13
+
+    <?xml version="1.0"?>
+    <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematyp>
+    <package format="3">
+    <name>zm_test</name>
+    <version>0.0.0</version>
+    <description>TODO: Package description</description>
+    <maintainer email="ubuntu@todo.todo">ubuntu</maintainer>
+    <license>TODO: License declaration</license>
+
+      <exec_depend>rclpy</exec_depend>
+      <exec_depend>std_msgs</exec_depend>
+      <exec_depend>geometry_msgs</exec_depend>
+      <exec_depend>sensor_msgs</exec_depend>
+
+    <test_depend>ament_copyright</test_depend>
+    <test_depend>ament_flake8</test_depend>
+    <test_depend>ament_pep257</test_depend>
+    <test_depend>python3-pytest</test_depend>
+
+    <export>
+        <build_type>ament_python</build_type>
+    </export>
+    </package>
+
+|
+
+setup.pyを開く。
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ nano src/zm_test/setup.py
+
+|
+
+編集。
+
+.. code-block:: python
+    :emphasize-lines: 1, 2, 16, 27
+
+    import os
+    from glob import glob
+
+    from setuptools import find_packages, setup
+
+    package_name = 'zm_test'
+
+    setup(
+        name=package_name,
+        version='0.0.0',
+        packages=find_packages(exclude=['test']),
+        data_files=[
+            ('share/ament_index/resource_index/packages',
+                ['resource/' + package_name]),
+            ('share/' + package_name, ['package.xml']),
+            (os.path.join('share', package_name), glob('launch/*_launch.py')),
+        ],
+        install_requires=['setuptools'],
+        zip_safe=True,
+        maintainer='ubuntu',
+        maintainer_email='ubuntu@todo.todo',
+        description='TODO: Package description',
+        license='TODO: License declaration',
+        tests_require=['pytest'],
+        entry_points={
+            'console_scripts': [
+                'joy_led = zm_test.serial_led:main',
             ],
-            install_requires=['setuptools'],
-            zip_safe=True,
-            maintainer='pi',
-            maintainer_email='pi@todo.todo',
-            description='TODO: Package description',
-            license='TODO: License declaration',
-            tests_require=['pytest'],
-            entry_points={
-                'console_scripts': [
-                    'joy_led = zm_test.serial_led:main',
-                ],
-            },
-        )
+        },
+    )
+
+|
+
+ビルド。
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ sudo apt install python3-colcon-common-extensions
+    pi@zumo00:~/ros2_ws$ colcon build --packages-select zm_test
+    Starting >>> zm_test 
+    --- stderr: zm_test                    
+    /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+    warnings.warn(
+    ---
+    Finished <<< zm_test [9.60s]
+
+    Summary: 1 package finished [11.6s]
+    1 package had stderr output: zm_test
+
+|
+
+セットアップファイルの反映。
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ source install/local_setup.bash
+
+|
+
+zm_testパッケージのjoy_ledノードの実行
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ ros2 run zm_test joy_led
+
+|
+
+joyパッケージのjoy_nodeの実行
+
+.. code-block:: console
+
+    ubuntu@mbc084:~$ ros2 run joy joy_node
+
+|
 
 （２）ジョイスティックの方向キーでzumoを動かす
 ------------------------------------------------------------
@@ -902,170 +1044,278 @@ Pythonのプログラムは、zm_testパッケージの「serial_motor.py」と�
 
 また、スケッチの名前は「SerialMotor」とします。
 
-    SerialMotor.ino
+|
 
-        const int DIRECTION_R = 7;
-        const int DIRECTION_L = 8;
-        const int PWM_R = 9;
-        const int PWM_L = 10;
-                  
-        const int LED = 13;
-        const int BUTTON = 12;
-                  
-        byte val = 0;
-                  
-        void setup() {
-            Serial.begin(9600);
-            pinMode(LED, OUTPUT);
-            digitalWrite(LED, LOW);
+スケッチの作成。
+
+.. code-block:: console
+
+    pi@zumo00:~$ cd
+    pi@zumo00:~$ arduino-cli sketch new Arduino/SerialMotor
+    Sketch created in: /home/pi/Arduino/SerialMotor
+
+|
+
+ソースファイルを開く。
+
+.. code-block:: console
+
+    pi@zumo00:~$ nano Arduino/SerialMotor/SerialMotor.ino
+
+|
+
+編集。
+
+.. code-block:: c
+
+    const int DIRECTION_R = 7;
+    const int DIRECTION_L = 8;
+    const int PWM_R = 9;
+    const int PWM_L = 10;
+            
+    const int LED = 13;
+    const int BUTTON = 12;
+            
+    byte val = 0;
+            
+    void setup() {
+        Serial.begin(9600);
+        pinMode(LED, OUTPUT);
+        digitalWrite(LED, LOW);
+    }
+            
+    void loop() {
+        val = Serial.read();
+        switch(val) {
+            case '0':  // Stop
+                digitalWrite(LED, LOW);
+                analogWrite(PWM_R, 0);
+                analogWrite(PWM_L, 0);
+                break;
+            case '1':  // Forward
+                digitalWrite(LED, HIGH);
+                digitalWrite(DIRECTION_R, LOW);
+                digitalWrite(DIRECTION_L, LOW);
+                analogWrite(PWM_R, 100);
+                analogWrite(PWM_L, 100);
+                break;
+            case '2':  // Backward
+                digitalWrite(LED, HIGH);
+                digitalWrite(DIRECTION_R, HIGH);
+                digitalWrite(DIRECTION_L, HIGH);
+                analogWrite(PWM_R, 100);
+                analogWrite(PWM_L, 100);
+                break;
+            case '3':  // Left
+                digitalWrite(LED, HIGH);
+                digitalWrite(DIRECTION_R, LOW);
+                digitalWrite(DIRECTION_L, LOW);
+                analogWrite(PWM_R, 100);
+                analogWrite(PWM_L, 0);
+                break;
+            case '4':  // Right
+                digitalWrite(LED, HIGH);
+                digitalWrite(DIRECTION_R, LOW);
+                digitalWrite(DIRECTION_L, LOW);
+                analogWrite(PWM_R, 0);
+                analogWrite(PWM_L, 100);
+                break;
+            default:
+                break;
         }
-                  
-        void loop() {
-            val = Serial.read();
-            switch(val) {
-                case '0':  // Stop
-                    digitalWrite(LED, LOW);
-                    analogWrite(PWM_R, 0);
-                    analogWrite(PWM_L, 0);
-                    break;
-                case '1':  // Forward
-                    digitalWrite(LED, HIGH);
-                    digitalWrite(DIRECTION_R, LOW);
-                    digitalWrite(DIRECTION_L, LOW);
-                    analogWrite(PWM_R, 100);
-                    analogWrite(PWM_L, 100);
-                    break;
-                case '2':  // Backward
-                    digitalWrite(LED, HIGH);
-                    digitalWrite(DIRECTION_R, HIGH);
-                    digitalWrite(DIRECTION_L, HIGH);
-                    analogWrite(PWM_R, 100);
-                    analogWrite(PWM_L, 100);
-                    break;
-                case '3':  // Left
-                    digitalWrite(LED, HIGH);
-                    digitalWrite(DIRECTION_R, LOW);
-                    digitalWrite(DIRECTION_L, LOW);
-                    analogWrite(PWM_R, 100);
-                    analogWrite(PWM_L, 0);
-                    break;
-                case '4':  // Right
-                    digitalWrite(LED, HIGH);
-                    digitalWrite(DIRECTION_R, LOW);
-                    digitalWrite(DIRECTION_L, LOW);
-                    analogWrite(PWM_R, 0);
-                    analogWrite(PWM_L, 100);
-                    break;
-                default:
-                    break;
-            }
-        }
+    }
 
+|
 
-    serial_motor.py
+コンパイル。
 
-        import rclpy
-        from rclpy.node import Node
-                  
-        from std_msgs.msg import String
-        from geometry_msgs.msg import Twist
-        from sensor_msgs.msg import Joy
-                  
-        import serial
-                  
-        class JoyMotor(Node):
-                  
-            def __init__(self):
-                super().__init__('joy_motor')
-                self.publisher_ = self.create_publisher(Twist, '/turtle1/cmd_vel', 10)
-                self.subscription = self.create_subscription(
-                    Joy,
-                    'joy',
-                    self.joy_callback,
-                    10)
-                self.subscription
-                  
-                self.get_logger().info('Open Port')
-                self.ser = serial.Serial()
-                self.ser.port = "/dev/ttyACM0"
-                self.ser.baudrate = 9600
-                self.ser.open()
-                  
-            def __del__(self):
-                self.get_logger().info('Close Port')
-                  
-            def joy_callback(self, joy_msg):
-                twist = Twist()
-                if joy_msg.axes[7] == 1:  # 上が押されたら前進
-                    self.get_logger().info('Forward')
-                    self.ser.write(b"1")
-                elif joy_msg.axes[7] == -1:  # 下が押されたら後進
-                    self.get_logger().info('Backward')
-                    self.ser.write(b"2")
-                elif joy_msg.axes[6] == 1:  # 左が押されたら左に曲がる
-                    self.get_logger().info('Left')
-                    self.ser.write(b"3")
-                elif joy_msg.axes[6] == -1:  # 右が押されたら右に曲がる
-                    self.get_logger().info('Right')
-                    self.ser.write(b"4")
-                else:  # それ以外のときは停止
-                    self.get_logger().info('Stop')
-                    self.ser.write(b"0")
-                self.publisher_.publish(twist)
-                  
-        def main(args=None):
-            rclpy.init(args=args)
-                  
-            joy_motor = JoyMotor()
-                  
-            rclpy.spin(joy_motor)
-                  
-            # Destroy the node explicitly
-            # (optional - otherwise it will be done automatically
-            # when the garbage collector destroys the node object)
+.. code-block:: console
+
+    pi@zumo00:~$ arduino-cli compile --fqbn arduino:avr:uno Arduino/SerialMotor/SerialMotor.ino
+    Sketch uses 2094 bytes (6%) of program storage space. Maximum is 32256 bytes.
+    Global variables use 184 bytes (8%) of dynamic memory, leaving 1864 bytes for local variables. Maximum is 2048 bytes.
+
+    Used platform Version Path                                                   
+    arduino:avr   1.8.6   /home/pi/.arduino15/packages/arduino/hardware/avr/1.8.6
+
+|
+
+アップロード。
+
+.. code-block:: console
+
+    pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/SerialMotor/SerialMotor.ino
+
+|
+
+serial_motor.pyの作成
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ nano src/zm_test/zm_test/serial_motor.py
+
+|
+
+編集。
+
+.. code-block:: python
+
+    import rclpy
+    from rclpy.node import Node
+
+    from std_msgs.msg import String
+    from geometry_msgs.msg import Twist
+    from sensor_msgs.msg import Joy
+
+    import serial
+
+    class JoyMotor(Node):
+
+        def __init__(self):
+            super().__init__('joy_motor')
+            self.publisher_ = self.create_publisher(Twist, '/turtle1/cmd_vel', 10)
+            self.subscription = self.create_subscription(
+                Joy,
+                'joy',
+                self.joy_callback,
+                10)
+            self.subscription
+
+            self.get_logger().info('Open Port')
+            self.ser = serial.Serial()
+            self.ser.port = "/dev/ttyACM0"
+            self.ser.baudrate = 9600
+            self.ser.open()
+
+        def __del__(self):
             self.get_logger().info('Close Port')
-            joy_motor.destroy_node()
-            rclpy.shutdown()
-                  
-                  
-        if __name__ == '__main__':
-            main()
+
+        def joy_callback(self, joy_msg):
+            twist = Twist()
+            if joy_msg.axes[7] == 1:  # 上が押されたら前進
+                self.get_logger().info('Forward')
+                self.ser.write(b"1")
+            elif joy_msg.axes[7] == -1:  # 下が押されたら後進
+                self.get_logger().info('Backward')
+                self.ser.write(b"2")
+            elif joy_msg.axes[6] == 1:  # 左が押されたら左に曲がる
+                self.get_logger().info('Left')
+                self.ser.write(b"3")
+            elif joy_msg.axes[6] == -1:  # 右が押されたら右に曲がる
+                self.get_logger().info('Right')
+                self.ser.write(b"4")
+            else:  # それ以外のときは停止
+                self.get_logger().info('Stop')
+                self.ser.write(b"0")
+            self.publisher_.publish(twist)
+
+    def main(args=None):
+        rclpy.init(args=args)
+
+        joy_motor = JoyMotor()
+
+        rclpy.spin(joy_motor)
+
+        # Destroy the node explicitly
+        # (optional - otherwise it will be done automatically
+        # when the garbage collector destroys the node object)
+        self.get_logger().info('Close Port')
+        joy_motor.destroy_node()
+        rclpy.shutdown()
 
 
-    setup.py
+    if __name__ == '__main__':
+        main()
 
-        import os
-        from glob import glob
-                  
-        from setuptools import setup
-                  
-        package_name = 'zm_test'
-                  
-        setup(
-            name=package_name,
-            version='0.0.0',
-            packages=[package_name],
-            data_files=[
-                ('share/ament_index/resource_index/packages',
-                    ['resource/' + package_name]),
-                ('share/' + package_name, ['package.xml']),
-                (os.path.join('share', package_name), glob('launch/*_launch.py')),
+|
+
+setup.pyを開く。
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ nano src/zm_test/setup.py
+
+|
+
+編集。
+
+.. code-block:: python
+    :emphasize-lines: 28
+
+    import os
+    from glob import glob
+
+    from setuptools import find_packages, setup
+
+    package_name = 'zm_test'
+
+    setup(
+        name=package_name,
+        version='0.0.0',
+        packages=find_packages(exclude=['test']),
+        data_files=[
+            ('share/ament_index/resource_index/packages',
+                ['resource/' + package_name]),
+            ('share/' + package_name, ['package.xml']),
+            (os.path.join('share', package_name), glob('launch/*_launch.py')),
+        ],
+        install_requires=['setuptools'],
+        zip_safe=True,
+        maintainer='ubuntu',
+        maintainer_email='ubuntu@todo.todo',
+        description='TODO: Package description',
+        license='TODO: License declaration',
+        tests_require=['pytest'],
+        entry_points={
+            'console_scripts': [
+                'joy_led = zm_test.serial_led:main',
+                'joy_motor = zm_test.serial_motor:main',
             ],
-            install_requires=['setuptools'],
-            zip_safe=True,
-            maintainer='pi',
-            maintainer_email='pi@todo.todo',
-            description='TODO: Package description',
-            license='TODO: License declaration',
-            tests_require=['pytest'],
-            entry_points={
-                'console_scripts': [
-                    'joy_led = zm_test.serial_led:main',
-                    'joy_motor = zm_test.serial_motor:main',
-                ],
-            },
-        )
+        },
+    )
 
+|
+
+ビルド。
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ colcon build --packages-select zm_test
+    Starting >>> zm_test 
+    --- stderr: zm_test                    
+    /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+    warnings.warn(
+    ---
+    Finished <<< zm_test [8.76s]
+
+    Summary: 1 package finished [10.3s]
+    1 package had stderr output: zm_test
+
+|
+
+セットアップファイルの反映。
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ source install/local_setup.bash
+
+|
+
+zm_testパッケージのjoy_motorノードの実行
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ ros2 run zm_test joy_motor
+
+|
+
+joyパッケージのjoy_nodeの実行
+
+.. code-block:: console
+
+    ubuntu@mbc084:~$ ros2 run joy joy_node
+
+|
 
 （３）ジョイスティックのアナログスイッチでzumoを動かす
 ------------------------------------------------------------
@@ -1075,3 +1325,155 @@ Pythonのプログラムは、zm_testパッケージの「serial_motor.py」と�
 Pythonのプログラムは、zm_testパッケージの「analog_motor.py」とします。
 
 また、スケッチの名前は「AnalogMotor」とします。
+
+|
+
+スケッチの作成。
+
+.. code-block:: console
+
+    pi@zumo00:~$ arduino-cli sketch new Arduino/AnalogMotor
+    Sketch created in: /home/pi/Arduino/AnalogMotor
+
+|
+
+ソースファイルを開く。
+
+.. code-block:: console
+
+    pi@zumo00:~$ nano Arduino/AnalogMotor/AnalogMotor.ino
+
+|
+
+編集。
+
+.. code-block:: c
+
+    T.B.A.
+
+|
+
+コンパイル。
+
+.. code-block:: console
+
+    pi@zumo00:~$ arduino-cli compile --fqbn arduino:avr:uno Arduino/AnalogMotor/AnalogMotor.ino
+    Sketch uses 2094 bytes (6%) of program storage space. Maximum is 32256 bytes.
+    Global variables use 184 bytes (8%) of dynamic memory, leaving 1864 bytes for local variables. Maximum is 2048 bytes.
+
+    Used platform Version Path                                                   
+    arduino:avr   1.8.6   /home/pi/.arduino15/packages/arduino/hardware/avr/1.8.6
+
+|
+
+アップロード。
+
+.. code-block:: console
+
+    pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/AnalogMotor/AnalogMotor.ino
+
+|
+
+serial_motor.pyの作成
+
+.. code-block:: console
+
+    pi@zumo00:~$ cd ros2_ws/
+    pi@zumo00:~/ros2_ws$ nano src/zm_test/zm_test/analog_motor.py
+
+|
+
+編集。
+
+.. code-block:: python
+
+    T.B.A.
+
+|
+
+setup.pyを開く。
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ nano src/zm_test/setup.py
+
+|
+
+編集。
+
+.. code-block:: python
+    :emphasize-lines: 29
+
+    import os
+    from glob import glob
+
+    from setuptools import find_packages, setup
+
+    package_name = 'zm_test'
+
+    setup(
+        name=package_name,
+        version='0.0.0',
+        packages=find_packages(exclude=['test']),
+        data_files=[
+            ('share/ament_index/resource_index/packages',
+                ['resource/' + package_name]),
+            ('share/' + package_name, ['package.xml']),
+            (os.path.join('share', package_name), glob('launch/*_launch.py')),
+        ],
+        install_requires=['setuptools'],
+        zip_safe=True,
+        maintainer='ubuntu',
+        maintainer_email='ubuntu@todo.todo',
+        description='TODO: Package description',
+        license='TODO: License declaration',
+        tests_require=['pytest'],
+        entry_points={
+            'console_scripts': [
+                'joy_led = zm_test.serial_led:main',
+                'joy_motor = zm_test.serial_motor:main',
+                'joy_analog_motor = zm_test.analog_motor:main',
+            ],
+        },
+    )
+
+|
+
+ビルド。
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ colcon build --packages-select zm_test
+    Starting >>> zm_test 
+    --- stderr: zm_test                    
+    /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+    warnings.warn(
+    ---
+    Finished <<< zm_test [8.60s]
+
+    Summary: 1 package finished [10.1s]
+    1 package had stderr output: zm_test
+
+|
+
+セットアップファイルの反映。
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ source install/local_setup.bash
+
+|
+
+zm_testパッケージのjoy_motorノードの実行
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ ros2 run zm_test joy_analog_motor
+
+|
+
+joyパッケージのjoy_nodeの実行
+
+.. code-block:: console
+
+    ubuntu@mbc084:~$ ros2 run joy joy_node

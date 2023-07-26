@@ -930,319 +930,660 @@
 <p>ジョイスティックのAボタンを押すとLEDが点灯するプログラムを作ってください。</p>
 <p>Pythonのプログラムは、zm_testパッケージの「serial_led.py」とします。</p>
 <p>また、スケッチの名前は「SerialLed」とします。</p>
-<blockquote>
-<div><p>serial_led.py</p>
-<blockquote>
-<div><p>import rclpy
-from rclpy.node import Node</p>
-<p>from std_msgs.msg import String
-from geometry_msgs.msg import Twist
-from sensor_msgs.msg import Joy</p>
-<p>import serial</p>
-<p>class JoyLed(Node):</p>
-<blockquote>
-<div><dl>
-<dt>def __init__(self):</dt><dd><p>super().__init__(‘joy_led’)
-<a href="#id12"><span class="problematic" id="id13">self.publisher_</span></a> = self.create_publisher(Twist, ‘/turtle1/cmd_vel’, 10)
-self.subscription = self.create_subscription(</p>
-<blockquote>
-<div><p>Joy,
-‘joy’,
-self.joy_callback,
-10)</p>
-</div></blockquote>
-<p>self.subscription</p>
-<p>self.get_logger().info(‘Open Port’)
-self.ser = serial.Serial()
-self.ser.port = “/dev/ttyACM0”
-self.ser.baudrate = 9600
-self.ser.open()</p>
-</dd>
-<dt>def joy_callback(self, joy_msg):</dt><dd><p>twist = Twist()
-if joy_msg.buttons[0] == 1:</p>
-<blockquote>
-<div><p>self.get_logger().info(‘LED ON’)
-self.ser.write(b”1”)</p>
-</div></blockquote>
-<dl class="simple">
-<dt>elif joy_msg.buttons[0] == 0:</dt><dd><p>self.get_logger().info(‘LED OFF’)
-self.ser.write(b”0”)</p>
-</dd>
-<dt>else:</dt><dd><p>pass</p>
-</dd>
-</dl>
-<p><a href="#id14"><span class="problematic" id="id15">self.publisher_</span></a>.publish(twist)</p>
-</dd>
-</dl>
-</div></blockquote>
-<dl>
-<dt>def main(args=None):</dt><dd><p>rclpy.init(args=args)</p>
-<p>joy_led = JoyLed()</p>
-<p>rclpy.spin(joy_led)</p>
-<p># Destroy the node explicitly
-# (optional - otherwise it will be done automatically
-# when the garbage collector destroys the node object)
-joy_led.destroy_node()
-rclpy.shutdown()</p>
-</dd>
-<dt>if __name__ == ‘__main__’:</dt><dd><p>main()</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>package.xml</p>
-<blockquote>
-<div><p>&lt;?xml version=”1.0”?&gt;
-&lt;?xml-model href=”<a class="reference external" href="http://download.ros.org/schema/package_format3.xsd">http://download.ros.org/schema/package_format3.xsd</a>” schematyp&gt;
-&lt;package format=”3”&gt;</p>
-<blockquote>
-<div><p>&lt;name&gt;zm_test&lt;/name&gt;
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ワークスペースの作成</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>パッケージの作成</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws/src/
+<span class="gp">pi@zumo00:~/ros2_ws/src$ </span>ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </span>--build-type<span class="w"> </span>ament_python<span class="w"> </span>zm_test
+<span class="go">going to create a new package</span>
+<span class="go">package name: zm_test</span>
+<span class="go">destination directory: /home/pi/ros2_ws/src</span>
+<span class="go">package format: 3</span>
+<span class="go">version: 0.0.0</span>
+<span class="go">description: TODO: Package description</span>
+<span class="go">maintainer: [&#39;pi &lt;pi@todo.todo&gt;&#39;]</span>
+<span class="go">licenses: [&#39;TODO: License declaration&#39;]</span>
+<span class="go">build type: ament_python</span>
+<span class="go">dependencies: []</span>
+<span class="go">creating folder ./zm_test</span>
+<span class="go">creating ./zm_test/package.xml</span>
+<span class="go">creating source folder</span>
+<span class="go">creating folder ./zm_test/zm_test</span>
+<span class="go">creating ./zm_test/setup.py</span>
+<span class="go">creating ./zm_test/setup.cfg</span>
+<span class="go">creating folder ./zm_test/resource</span>
+<span class="go">creating ./zm_test/resource/zm_test</span>
+<span class="go">creating ./zm_test/zm_test/__init__.py</span>
+<span class="go">creating folder ./zm_test/test</span>
+<span class="go">creating ./zm_test/test/test_copyright.py</span>
+<span class="go">creating ./zm_test/test/test_flake8.py</span>
+<span class="go">creating ./zm_test/test/test_pep257.py</span>
+
+<span class="go">[WARNING]: Unknown license &#39;TODO: License declaration&#39;.  This has been set in the package.xml, but no LICENSE file has been created.</span>
+<span class="go">It is recommended to use one of the ament license identifiers:</span>
+<span class="go">Apache-2.0</span>
+<span class="go">BSL-1.0</span>
+<span class="go">BSD-2.0</span>
+<span class="go">BSD-2-Clause</span>
+<span class="go">BSD-3-Clause</span>
+<span class="go">GPL-3.0-only</span>
+<span class="go">LGPL-3.0-only</span>
+<span class="go">MIT</span>
+<span class="go">MIT-0</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ワークスペースに移動</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws/src$ </span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>serial_led.pyの作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span>nano<span class="w"> </span>src/zm_test/zm_test/serial_led.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
+<span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+
+<span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
+<span class="kn">from</span> <span class="nn">geometry_msgs.msg</span> <span class="kn">import</span> <span class="n">Twistpa</span>
+<span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Joy</span>
+
+<span class="kn">import</span> <span class="nn">serial</span>
+
+<span class="k">class</span> <span class="nc">JoyLed</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;joy_led&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">Twist</span><span class="p">,</span> <span class="s1">&#39;/turtle1/cmd_vel&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subscription</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_subscription</span><span class="p">(</span>
+            <span class="n">Joy</span><span class="p">,</span>
+            <span class="s1">&#39;joy&#39;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">joy_callback</span><span class="p">,</span>
+            <span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subscription</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Open Port&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="s2">&quot;/dev/ttyACM0&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">baudrate</span> <span class="o">=</span> <span class="mi">9600</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">joy_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">joy_msg</span><span class="p">):</span>
+        <span class="n">twist</span> <span class="o">=</span> <span class="n">Twist</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">joy_msg</span><span class="o">.</span><span class="n">buttons</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;LED ON&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">joy_msg</span><span class="o">.</span><span class="n">buttons</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;LED OFF&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">twist</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="n">joy_led</span> <span class="o">=</span> <span class="n">JoyLed</span><span class="p">()</span>
+
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="n">joy_led</span><span class="p">)</span>
+
+    <span class="c1"># Destroy the node explicitly</span>
+    <span class="c1"># (optional - otherwise it will be done automatically</span>
+    <span class="c1"># when the garbage collector destroys the node object)</span>
+    <span class="n">joy_led</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>package.xmlを開く。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span>nano<span class="w"> </span>src/zm_test/package.xml
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;?xml-model href=&quot;http://download.ros.org/schema/package_format3.xsd&quot; schematyp&gt;
+&lt;package format=&quot;3&quot;&gt;
+&lt;name&gt;zm_test&lt;/name&gt;
 &lt;version&gt;0.0.0&lt;/version&gt;
 &lt;description&gt;TODO: Package description&lt;/description&gt;
-&lt;maintainer email=”<a class="reference external" href="mailto:pi&#37;&#52;&#48;todo&#46;todo">pi<span>&#64;</span>todo<span>&#46;</span>todo</a>”&gt;pi&lt;/maintainer&gt;
-&lt;license&gt;TODO: License declaration&lt;/license&gt;</p>
-<p>&lt;exec_depend&gt;rclpy&lt;/exec_depend&gt;
-&lt;exec_depend&gt;std_msgs&lt;/exec_depend&gt;
-&lt;exec_depend&gt;geometry_msgs&lt;/exec_depend&gt;
-&lt;exec_depend&gt;sensor_msgs&lt;/exec_depend&gt;</p>
-<p>&lt;test_depend&gt;ament_copyright&lt;/test_depend&gt;
+&lt;maintainer email=&quot;ubuntu@todo.todo&quot;&gt;ubuntu&lt;/maintainer&gt;
+&lt;license&gt;TODO: License declaration&lt;/license&gt;
+
+<span class="hll">  &lt;exec_depend&gt;rclpy&lt;/exec_depend&gt;
+</span><span class="hll">  &lt;exec_depend&gt;std_msgs&lt;/exec_depend&gt;
+</span><span class="hll">  &lt;exec_depend&gt;geometry_msgs&lt;/exec_depend&gt;
+</span><span class="hll">  &lt;exec_depend&gt;sensor_msgs&lt;/exec_depend&gt;
+</span>
+&lt;test_depend&gt;ament_copyright&lt;/test_depend&gt;
 &lt;test_depend&gt;ament_flake8&lt;/test_depend&gt;
 &lt;test_depend&gt;ament_pep257&lt;/test_depend&gt;
-&lt;test_depend&gt;python3-pytest&lt;/test_depend&gt;</p>
-<dl class="simple">
-<dt>&lt;export&gt;</dt><dd><p>&lt;build_type&gt;ament_python&lt;/build_type&gt;</p>
-</dd>
-</dl>
-<p>&lt;/export&gt;</p>
-</div></blockquote>
-<p>&lt;/package&gt;</p>
-</div></blockquote>
-<p>setup.py</p>
-<blockquote>
-<div><p>import os
-from glob import glob</p>
-<p>from setuptools import setup</p>
-<p>package_name = ‘zm_test’</p>
-<dl>
-<dt>setup(</dt><dd><p>name=package_name,
-version=’0.0.0’,
-packages=[package_name],
-data_files=[</p>
-<blockquote>
-<div><dl class="simple">
-<dt>(‘share/ament_index/resource_index/packages’,</dt><dd><p>[‘resource/’ + package_name]),</p>
-</dd>
-</dl>
-<p>(‘share/’ + package_name, [‘package.xml’]),
-(os.path.join(‘share’, package_name), glob(‘launch/<a href="#id6"><span class="problematic" id="id7">*</span></a>_la&gt;</p>
-</div></blockquote>
-<p>],
-install_requires=[‘setuptools’],
-zip_safe=True,
-maintainer=’pi’,
-<a class="reference external" href="mailto:maintainer_email='pi&#37;&#52;&#48;todo&#46;todo">maintainer_email=’pi<span>&#64;</span>todo<span>&#46;</span>todo</a>’,
-description=’TODO: Package description’,
-license=’TODO: License declaration’,
-tests_require=[‘pytest’],
-entry_points={</p>
-<blockquote>
-<div><dl class="simple">
-<dt>‘console_scripts’: [</dt><dd><p>‘joy_led = zm_test.serial_led:main’,</p>
-</dd>
-</dl>
-<p>],</p>
-</div></blockquote>
-<p>},</p>
-</dd>
-</dl>
-<p>)</p>
-</div></blockquote>
-</div></blockquote>
+&lt;test_depend&gt;python3-pytest&lt;/test_depend&gt;
+
+&lt;export&gt;
+    &lt;build_type&gt;ament_python&lt;/build_type&gt;
+&lt;/export&gt;
+&lt;/package&gt;
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>setup.pyを開く。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span>nano<span class="w"> </span>src/zm_test/setup.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="kn">import</span> <span class="nn">os</span>
+</span><span class="hll"><span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+</span>
+<span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">find_packages</span><span class="p">,</span> <span class="n">setup</span>
+
+<span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;zm_test&#39;</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">package_name</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.0.0&#39;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]),</span>
+    <span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;share/ament_index/resource_index/packages&#39;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;resource/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s1">&#39;share/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;package.xml&#39;</span><span class="p">]),</span>
+<span class="hll">        <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;share&#39;</span><span class="p">,</span> <span class="n">package_name</span><span class="p">),</span> <span class="n">glob</span><span class="p">(</span><span class="s1">&#39;launch/*_launch.py&#39;</span><span class="p">)),</span>
+</span>    <span class="p">],</span>
+    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;setuptools&#39;</span><span class="p">],</span>
+    <span class="n">zip_safe</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">maintainer</span><span class="o">=</span><span class="s1">&#39;ubuntu&#39;</span><span class="p">,</span>
+    <span class="n">maintainer_email</span><span class="o">=</span><span class="s1">&#39;ubuntu@todo.todo&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;TODO: Package description&#39;</span><span class="p">,</span>
+    <span class="n">license</span><span class="o">=</span><span class="s1">&#39;TODO: License declaration&#39;</span><span class="p">,</span>
+    <span class="n">tests_require</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pytest&#39;</span><span class="p">],</span>
+    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
+<span class="hll">            <span class="s1">&#39;joy_led = zm_test.serial_led:main&#39;</span><span class="p">,</span>
+</span>        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ビルド。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-colcon-common-extensions
+<span class="gp">pi@zumo00:~/ros2_ws$ </span>colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>zm_test
+<span class="go">Starting &gt;&gt;&gt; zm_test</span>
+<span class="go">--- stderr: zm_test</span>
+<span class="go">/usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.</span>
+<span class="go">warnings.warn(</span>
+<span class="go">---</span>
+<span class="go">Finished &lt;&lt;&lt; zm_test [9.60s]</span>
+
+<span class="go">Summary: 1 package finished [11.6s]</span>
+<span class="go">1 package had stderr output: zm_test</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>セットアップファイルの反映。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span><span class="nb">source</span><span class="w"> </span>install/local_setup.bash
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>zm_testパッケージのjoy_ledノードの実行</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span>ros2<span class="w"> </span>run<span class="w"> </span>zm_test<span class="w"> </span>joy_led
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>joyパッケージのjoy_nodeの実行</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2<span class="w"> </span>run<span class="w"> </span>joy<span class="w"> </span>joy_node
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
-<section id="id8">
-<h3>（２）ジョイスティックの方向キーでzumoを動かす<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<section id="id6">
+<h3>（２）ジョイスティックの方向キーでzumoを動かす<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
 <p>ジョイスティックの方向キーでZumoを操縦するプログラムを作ってください。</p>
 <p>Pythonのプログラムは、zm_testパッケージの「serial_motor.py」とします。</p>
 <p>また、スケッチの名前は「SerialMotor」とします。</p>
-<blockquote>
-<div><p>SerialMotor.ino</p>
-<blockquote>
-<div><p>const int DIRECTION_R = 7;
-const int DIRECTION_L = 8;
-const int PWM_R = 9;
-const int PWM_L = 10;</p>
-<p>const int LED = 13;
-const int BUTTON = 12;</p>
-<p>byte val = 0;</p>
-<dl class="simple">
-<dt>void setup() {</dt><dd><p>Serial.begin(9600);
-pinMode(LED, OUTPUT);
-digitalWrite(LED, LOW);</p>
-</dd>
-</dl>
-<p>}</p>
-<dl>
-<dt>void loop() {</dt><dd><p>val = Serial.read();
-switch(val) {</p>
-<blockquote>
-<div><dl class="simple">
-<dt>case ‘0’:  // Stop</dt><dd><p>digitalWrite(LED, LOW);
-analogWrite(PWM_R, 0);
-analogWrite(PWM_L, 0);
-break;</p>
-</dd>
-<dt>case ‘1’:  // Forward</dt><dd><p>digitalWrite(LED, HIGH);
-digitalWrite(DIRECTION_R, LOW);
-digitalWrite(DIRECTION_L, LOW);
-analogWrite(PWM_R, 100);
-analogWrite(PWM_L, 100);
-break;</p>
-</dd>
-<dt>case ‘2’:  // Backward</dt><dd><p>digitalWrite(LED, HIGH);
-digitalWrite(DIRECTION_R, HIGH);
-digitalWrite(DIRECTION_L, HIGH);
-analogWrite(PWM_R, 100);
-analogWrite(PWM_L, 100);
-break;</p>
-</dd>
-<dt>case ‘3’:  // Left</dt><dd><p>digitalWrite(LED, HIGH);
-digitalWrite(DIRECTION_R, LOW);
-digitalWrite(DIRECTION_L, LOW);
-analogWrite(PWM_R, 100);
-analogWrite(PWM_L, 0);
-break;</p>
-</dd>
-<dt>case ‘4’:  // Right</dt><dd><p>digitalWrite(LED, HIGH);
-digitalWrite(DIRECTION_R, LOW);
-digitalWrite(DIRECTION_L, LOW);
-analogWrite(PWM_R, 0);
-analogWrite(PWM_L, 100);
-break;</p>
-</dd>
-<dt>default:</dt><dd><p>break;</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>}</p>
-</dd>
-</dl>
-<p>}</p>
-</div></blockquote>
-<p>serial_motor.py</p>
-<blockquote>
-<div><p>import rclpy
-from rclpy.node import Node</p>
-<p>from std_msgs.msg import String
-from geometry_msgs.msg import Twist
-from sensor_msgs.msg import Joy</p>
-<p>import serial</p>
-<p>class JoyMotor(Node):</p>
-<blockquote>
-<div><dl>
-<dt>def __init__(self):</dt><dd><p>super().__init__(‘joy_motor’)
-<a href="#id16"><span class="problematic" id="id17">self.publisher_</span></a> = self.create_publisher(Twist, ‘/turtle1/cmd_vel’, 10)
-self.subscription = self.create_subscription(</p>
-<blockquote>
-<div><p>Joy,
-‘joy’,
-self.joy_callback,
-10)</p>
-</div></blockquote>
-<p>self.subscription</p>
-<p>self.get_logger().info(‘Open Port’)
-self.ser = serial.Serial()
-self.ser.port = “/dev/ttyACM0”
-self.ser.baudrate = 9600
-self.ser.open()</p>
-</dd>
-<dt>def __del__(self):</dt><dd><p>self.get_logger().info(‘Close Port’)</p>
-</dd>
-<dt>def joy_callback(self, joy_msg):</dt><dd><p>twist = Twist()
-if joy_msg.axes[7] == 1:  # 上が押されたら前進</p>
-<blockquote>
-<div><p>self.get_logger().info(‘Forward’)
-self.ser.write(b”1”)</p>
-</div></blockquote>
-<dl class="simple">
-<dt>elif joy_msg.axes[7] == -1:  # 下が押されたら後進</dt><dd><p>self.get_logger().info(‘Backward’)
-self.ser.write(b”2”)</p>
-</dd>
-<dt>elif joy_msg.axes[6] == 1:  # 左が押されたら左に曲がる</dt><dd><p>self.get_logger().info(‘Left’)
-self.ser.write(b”3”)</p>
-</dd>
-<dt>elif joy_msg.axes[6] == -1:  # 右が押されたら右に曲がる</dt><dd><p>self.get_logger().info(‘Right’)
-self.ser.write(b”4”)</p>
-</dd>
-<dt>else:  # それ以外のときは停止</dt><dd><p>self.get_logger().info(‘Stop’)
-self.ser.write(b”0”)</p>
-</dd>
-</dl>
-<p><a href="#id18"><span class="problematic" id="id19">self.publisher_</span></a>.publish(twist)</p>
-</dd>
-</dl>
-</div></blockquote>
-<dl>
-<dt>def main(args=None):</dt><dd><p>rclpy.init(args=args)</p>
-<p>joy_motor = JoyMotor()</p>
-<p>rclpy.spin(joy_motor)</p>
-<p># Destroy the node explicitly
-# (optional - otherwise it will be done automatically
-# when the garbage collector destroys the node object)
-self.get_logger().info(‘Close Port’)
-joy_motor.destroy_node()
-rclpy.shutdown()</p>
-</dd>
-<dt>if __name__ == ‘__main__’:</dt><dd><p>main()</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>setup.py</p>
-<blockquote>
-<div><p>import os
-from glob import glob</p>
-<p>from setuptools import setup</p>
-<p>package_name = ‘zm_test’</p>
-<dl>
-<dt>setup(</dt><dd><p>name=package_name,
-version=’0.0.0’,
-packages=[package_name],
-data_files=[</p>
-<blockquote>
-<div><dl class="simple">
-<dt>(‘share/ament_index/resource_index/packages’,</dt><dd><p>[‘resource/’ + package_name]),</p>
-</dd>
-</dl>
-<p>(‘share/’ + package_name, [‘package.xml’]),
-(os.path.join(‘share’, package_name), glob(‘launch/<a href="#id9"><span class="problematic" id="id10">*</span></a>_launch.py’)),</p>
-</div></blockquote>
-<p>],
-install_requires=[‘setuptools’],
-zip_safe=True,
-maintainer=’pi’,
-<a class="reference external" href="mailto:maintainer_email='pi&#37;&#52;&#48;todo&#46;todo">maintainer_email=’pi<span>&#64;</span>todo<span>&#46;</span>todo</a>’,
-description=’TODO: Package description’,
-license=’TODO: License declaration’,
-tests_require=[‘pytest’],
-entry_points={</p>
-<blockquote>
-<div><dl class="simple">
-<dt>‘console_scripts’: [</dt><dd><p>‘joy_led = zm_test.serial_led:main’,
-‘joy_motor = zm_test.serial_motor:main’,</p>
-</dd>
-</dl>
-<p>],</p>
-</div></blockquote>
-<p>},</p>
-</dd>
-</dl>
-<p>)</p>
-</div></blockquote>
-</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>スケッチの作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span><span class="nb">cd</span>
+<span class="gp">pi@zumo00:~$ </span>arduino-cli<span class="w"> </span>sketch<span class="w"> </span>new<span class="w"> </span>Arduino/SerialMotor
+<span class="go">Sketch created in: /home/pi/Arduino/SerialMotor</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ソースファイルを開く。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>nano<span class="w"> </span>Arduino/SerialMotor/SerialMotor.ino
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">DIRECTION_R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">DIRECTION_L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">PWM_R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">PWM_L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">LED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">BUTTON</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+
+<span class="n">byte</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pinMode</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span>
+<span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Serial</span><span class="p">.</span><span class="n">read</span><span class="p">();</span>
+<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">:</span><span class="w">  </span><span class="c1">// Stop</span>
+<span class="w">            </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+<span class="w">            </span><span class="n">analogWrite</span><span class="p">(</span><span class="n">PWM_R</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">            </span><span class="n">analogWrite</span><span class="p">(</span><span class="n">PWM_L</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">:</span><span class="w">  </span><span class="c1">// Forward</span>
+<span class="w">            </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+<span class="w">            </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">DIRECTION_R</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+<span class="w">            </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">DIRECTION_L</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+<span class="w">            </span><span class="n">analogWrite</span><span class="p">(</span><span class="n">PWM_R</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+<span class="w">            </span><span class="n">analogWrite</span><span class="p">(</span><span class="n">PWM_L</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;2&#39;</span><span class="p">:</span><span class="w">  </span><span class="c1">// Backward</span>
+<span class="w">            </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+<span class="w">            </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">DIRECTION_R</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+<span class="w">            </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">DIRECTION_L</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+<span class="w">            </span><span class="n">analogWrite</span><span class="p">(</span><span class="n">PWM_R</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+<span class="w">            </span><span class="n">analogWrite</span><span class="p">(</span><span class="n">PWM_L</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">:</span><span class="w">  </span><span class="c1">// Left</span>
+<span class="w">            </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+<span class="w">            </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">DIRECTION_R</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+<span class="w">            </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">DIRECTION_L</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+<span class="w">            </span><span class="n">analogWrite</span><span class="p">(</span><span class="n">PWM_R</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+<span class="w">            </span><span class="n">analogWrite</span><span class="p">(</span><span class="n">PWM_L</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;4&#39;</span><span class="p">:</span><span class="w">  </span><span class="c1">// Right</span>
+<span class="w">            </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+<span class="w">            </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">DIRECTION_R</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+<span class="w">            </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">DIRECTION_L</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+<span class="w">            </span><span class="n">analogWrite</span><span class="p">(</span><span class="n">PWM_R</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">            </span><span class="n">analogWrite</span><span class="p">(</span><span class="n">PWM_L</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">default</span><span class="o">:</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>コンパイル。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>arduino-cli<span class="w"> </span>compile<span class="w"> </span>--fqbn<span class="w"> </span>arduino:avr:uno<span class="w"> </span>Arduino/SerialMotor/SerialMotor.ino
+<span class="go">Sketch uses 2094 bytes (6%) of program storage space. Maximum is 32256 bytes.</span>
+<span class="go">Global variables use 184 bytes (8%) of dynamic memory, leaving 1864 bytes for local variables. Maximum is 2048 bytes.</span>
+
+<span class="go">Used platform Version Path</span>
+<span class="go">arduino:avr   1.8.6   /home/pi/.arduino15/packages/arduino/hardware/avr/1.8.6</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>アップロード。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>arduino-cli<span class="w"> </span>upload<span class="w"> </span>-p<span class="w"> </span>/dev/ttyACM0<span class="w"> </span>--fqbn<span class="w"> </span>arduino:avr:uno<span class="w"> </span>Arduino/SerialMotor/SerialMotor.ino
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>serial_motor.pyの作成</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span>nano<span class="w"> </span>src/zm_test/zm_test/serial_motor.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
+<span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+
+<span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
+<span class="kn">from</span> <span class="nn">geometry_msgs.msg</span> <span class="kn">import</span> <span class="n">Twist</span>
+<span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Joy</span>
+
+<span class="kn">import</span> <span class="nn">serial</span>
+
+<span class="k">class</span> <span class="nc">JoyMotor</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;joy_motor&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">Twist</span><span class="p">,</span> <span class="s1">&#39;/turtle1/cmd_vel&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subscription</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_subscription</span><span class="p">(</span>
+            <span class="n">Joy</span><span class="p">,</span>
+            <span class="s1">&#39;joy&#39;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">joy_callback</span><span class="p">,</span>
+            <span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subscription</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Open Port&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="s2">&quot;/dev/ttyACM0&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">baudrate</span> <span class="o">=</span> <span class="mi">9600</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Close Port&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">joy_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">joy_msg</span><span class="p">):</span>
+        <span class="n">twist</span> <span class="o">=</span> <span class="n">Twist</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">joy_msg</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># 上が押されたら前進</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Forward&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">joy_msg</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>  <span class="c1"># 下が押されたら後進</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Backward&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">joy_msg</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># 左が押されたら左に曲がる</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Left&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;3&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">joy_msg</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>  <span class="c1"># 右が押されたら右に曲がる</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Right&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;4&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># それ以外のときは停止</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Stop&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">twist</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="n">joy_motor</span> <span class="o">=</span> <span class="n">JoyMotor</span><span class="p">()</span>
+
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="n">joy_motor</span><span class="p">)</span>
+
+    <span class="c1"># Destroy the node explicitly</span>
+    <span class="c1"># (optional - otherwise it will be done automatically</span>
+    <span class="c1"># when the garbage collector destroys the node object)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Close Port&#39;</span><span class="p">)</span>
+    <span class="n">joy_motor</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>setup.pyを開く。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span>nano<span class="w"> </span>src/zm_test/setup.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+
+<span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">find_packages</span><span class="p">,</span> <span class="n">setup</span>
+
+<span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;zm_test&#39;</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">package_name</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.0.0&#39;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]),</span>
+    <span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;share/ament_index/resource_index/packages&#39;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;resource/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s1">&#39;share/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;package.xml&#39;</span><span class="p">]),</span>
+        <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;share&#39;</span><span class="p">,</span> <span class="n">package_name</span><span class="p">),</span> <span class="n">glob</span><span class="p">(</span><span class="s1">&#39;launch/*_launch.py&#39;</span><span class="p">)),</span>
+    <span class="p">],</span>
+    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;setuptools&#39;</span><span class="p">],</span>
+    <span class="n">zip_safe</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">maintainer</span><span class="o">=</span><span class="s1">&#39;ubuntu&#39;</span><span class="p">,</span>
+    <span class="n">maintainer_email</span><span class="o">=</span><span class="s1">&#39;ubuntu@todo.todo&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;TODO: Package description&#39;</span><span class="p">,</span>
+    <span class="n">license</span><span class="o">=</span><span class="s1">&#39;TODO: License declaration&#39;</span><span class="p">,</span>
+    <span class="n">tests_require</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pytest&#39;</span><span class="p">],</span>
+    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;joy_led = zm_test.serial_led:main&#39;</span><span class="p">,</span>
+<span class="hll">            <span class="s1">&#39;joy_motor = zm_test.serial_motor:main&#39;</span><span class="p">,</span>
+</span>        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ビルド。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span>colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>zm_test
+<span class="go">Starting &gt;&gt;&gt; zm_test</span>
+<span class="go">--- stderr: zm_test</span>
+<span class="go">/usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.</span>
+<span class="go">warnings.warn(</span>
+<span class="go">---</span>
+<span class="go">Finished &lt;&lt;&lt; zm_test [8.76s]</span>
+
+<span class="go">Summary: 1 package finished [10.3s]</span>
+<span class="go">1 package had stderr output: zm_test</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>セットアップファイルの反映。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span><span class="nb">source</span><span class="w"> </span>install/local_setup.bash
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>zm_testパッケージのjoy_motorノードの実行</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span>ros2<span class="w"> </span>run<span class="w"> </span>zm_test<span class="w"> </span>joy_motor
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>joyパッケージのjoy_nodeの実行</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2<span class="w"> </span>run<span class="w"> </span>joy<span class="w"> </span>joy_node
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
-<section id="id11">
-<h3>（３）ジョイスティックのアナログスイッチでzumoを動かす<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<section id="id7">
+<h3>（３）ジョイスティックのアナログスイッチでzumoを動かす<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
 <p>ジョイスティックの左アナログスイッチでZumoを操縦するプログラムを作ってください。</p>
 <p>Pythonのプログラムは、zm_testパッケージの「analog_motor.py」とします。</p>
 <p>また、スケッチの名前は「AnalogMotor」とします。</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>スケッチの作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>arduino-cli<span class="w"> </span>sketch<span class="w"> </span>new<span class="w"> </span>Arduino/AnalogMotor
+<span class="go">Sketch created in: /home/pi/Arduino/AnalogMotor</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ソースファイルを開く。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>nano<span class="w"> </span>Arduino/AnalogMotor/AnalogMotor.ino
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="p">.</span><span class="n">B</span><span class="p">.</span><span class="n">A</span><span class="p">.</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>コンパイル。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>arduino-cli<span class="w"> </span>compile<span class="w"> </span>--fqbn<span class="w"> </span>arduino:avr:uno<span class="w"> </span>Arduino/AnalogMotor/AnalogMotor.ino
+<span class="go">Sketch uses 2094 bytes (6%) of program storage space. Maximum is 32256 bytes.</span>
+<span class="go">Global variables use 184 bytes (8%) of dynamic memory, leaving 1864 bytes for local variables. Maximum is 2048 bytes.</span>
+
+<span class="go">Used platform Version Path</span>
+<span class="go">arduino:avr   1.8.6   /home/pi/.arduino15/packages/arduino/hardware/avr/1.8.6</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>アップロード。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>arduino-cli<span class="w"> </span>upload<span class="w"> </span>-p<span class="w"> </span>/dev/ttyACM0<span class="w"> </span>--fqbn<span class="w"> </span>arduino:avr:uno<span class="w"> </span>Arduino/AnalogMotor/AnalogMotor.ino
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>serial_motor.pyの作成</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span><span class="nb">cd</span><span class="w"> </span>ros2_ws/
+<span class="gp">pi@zumo00:~/ros2_ws$ </span>nano<span class="w"> </span>src/zm_test/zm_test/analog_motor.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">A</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>setup.pyを開く。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span>nano<span class="w"> </span>src/zm_test/setup.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+
+<span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">find_packages</span><span class="p">,</span> <span class="n">setup</span>
+
+<span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;zm_test&#39;</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">package_name</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.0.0&#39;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]),</span>
+    <span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;share/ament_index/resource_index/packages&#39;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;resource/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s1">&#39;share/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;package.xml&#39;</span><span class="p">]),</span>
+        <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;share&#39;</span><span class="p">,</span> <span class="n">package_name</span><span class="p">),</span> <span class="n">glob</span><span class="p">(</span><span class="s1">&#39;launch/*_launch.py&#39;</span><span class="p">)),</span>
+    <span class="p">],</span>
+    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;setuptools&#39;</span><span class="p">],</span>
+    <span class="n">zip_safe</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">maintainer</span><span class="o">=</span><span class="s1">&#39;ubuntu&#39;</span><span class="p">,</span>
+    <span class="n">maintainer_email</span><span class="o">=</span><span class="s1">&#39;ubuntu@todo.todo&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;TODO: Package description&#39;</span><span class="p">,</span>
+    <span class="n">license</span><span class="o">=</span><span class="s1">&#39;TODO: License declaration&#39;</span><span class="p">,</span>
+    <span class="n">tests_require</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pytest&#39;</span><span class="p">],</span>
+    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;joy_led = zm_test.serial_led:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;joy_motor = zm_test.serial_motor:main&#39;</span><span class="p">,</span>
+<span class="hll">            <span class="s1">&#39;joy_analog_motor = zm_test.analog_motor:main&#39;</span><span class="p">,</span>
+</span>        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ビルド。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span>colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>zm_test
+<span class="go">Starting &gt;&gt;&gt; zm_test</span>
+<span class="go">--- stderr: zm_test</span>
+<span class="go">/usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.</span>
+<span class="go">warnings.warn(</span>
+<span class="go">---</span>
+<span class="go">Finished &lt;&lt;&lt; zm_test [8.60s]</span>
+
+<span class="go">Summary: 1 package finished [10.1s]</span>
+<span class="go">1 package had stderr output: zm_test</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>セットアップファイルの反映。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span><span class="nb">source</span><span class="w"> </span>install/local_setup.bash
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>zm_testパッケージのjoy_motorノードの実行</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/ros2_ws$ </span>ros2<span class="w"> </span>run<span class="w"> </span>zm_test<span class="w"> </span>joy_analog_motor
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>joyパッケージのjoy_nodeの実行</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2<span class="w"> </span>run<span class="w"> </span>joy<span class="w"> </span>joy_node
+</pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -1310,8 +1651,8 @@ entry_points={</p>
 <li><a class="reference internal" href="#id4">Arduinoと通信する</a></li>
 <li><a class="reference internal" href="#zumo">演習2「ジョイスティックを使ってZumoを動かす」</a><ul>
 <li><a class="reference internal" href="#id5">（１）LEDの点灯</a></li>
-<li><a class="reference internal" href="#id8">（２）ジョイスティックの方向キーでzumoを動かす</a></li>
-<li><a class="reference internal" href="#id11">（３）ジョイスティックのアナログスイッチでzumoを動かす</a></li>
+<li><a class="reference internal" href="#id6">（２）ジョイスティックの方向キーでzumoを動かす</a></li>
+<li><a class="reference internal" href="#id7">（３）ジョイスティックのアナログスイッチでzumoを動かす</a></li>
 </ul>
 </li>
 </ul>
