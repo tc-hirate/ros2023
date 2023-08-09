@@ -26,30 +26,42 @@ raspi-configの起動。
 
 |
 
+.. image:: ./img/picam_img_01.png
+   :align: center
+
+|
+
 [3 Interface Options]を選択。
 
-.. image:: ./img/picam_img_01.png
+.. image:: ./img/picam_img_02.png
    :align: center
 
 |
 
 [I1 Legacy Camera]を選択。
 
-.. image:: ./img/picam_img_01.png
+.. image:: ./img/picam_img_03.png
    :align: center
 
 |
 
 Enableに設定。
 
-.. image:: ./img/picam_img_01.png
+.. image:: ./img/picam_img_04.png
+   :align: center
+
+|
+
+OK。
+
+.. image:: ./img/picam_img_05.png
    :align: center
 
 |
 
 終了。
 
-.. image:: ./img/picam_img_01.png
+.. image:: ./img/picam_img_06.png
    :align: center
 
 |
@@ -78,6 +90,7 @@ Enableに設定。
 .. code-block:: console
 
     pi@zumo00:~$ v4l2-ctl --list-devices
+    Failed to open /dev/video0: Permission denied
 
 |
 
@@ -113,6 +126,32 @@ Enableに設定。
 .. code-block:: console
 
     pi@zumo00:~$ v4l2-ctl --list-devices
+    mmal service 16.1 (platform:bcm2835-v4l2-0):
+    	/dev/video0
+
+|
+
+config.txtの編集。
+
+.. code-block:: console
+
+    pi@zumo00:~$ sudo nano /boot/firmware/config.txt
+
+|
+
+最後に1行追加する。
+
+.. code-block:: console
+
+    gpu_mem_1024=256
+
+|
+
+再起動。
+
+.. code-block:: console
+
+    pi@zumo00:~$ sudo shutdown -r now
 
 |
 
@@ -244,7 +283,7 @@ rqt_image_viewで表示。
 
 |
 
-.. image:: ./img/picam_img_01.png
+.. image:: ./img/picam_img_07.png
    :align: center
 
 |

@@ -230,23 +230,32 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>[3 Interface Options]を選択。</p>
 <img alt="_images/picam_img_01.png" class="align-center" src="_images/picam_img_01.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>[3 Interface Options]を選択。</p>
+<img alt="_images/picam_img_02.png" class="align-center" src="_images/picam_img_02.png" />
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>[I1 Legacy Camera]を選択。</p>
-<img alt="_images/picam_img_01.png" class="align-center" src="_images/picam_img_01.png" />
+<img alt="_images/picam_img_03.png" class="align-center" src="_images/picam_img_03.png" />
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>Enableに設定。</p>
-<img alt="_images/picam_img_01.png" class="align-center" src="_images/picam_img_01.png" />
+<img alt="_images/picam_img_04.png" class="align-center" src="_images/picam_img_04.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>OK。</p>
+<img alt="_images/picam_img_05.png" class="align-center" src="_images/picam_img_05.png" />
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>終了。</p>
-<img alt="_images/picam_img_01.png" class="align-center" src="_images/picam_img_01.png" />
+<img alt="_images/picam_img_06.png" class="align-center" src="_images/picam_img_06.png" />
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -269,6 +278,7 @@
 </div>
 <p>カメラが認識されているか確認。エラーが出る。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>v4l2-ctl<span class="w"> </span>--list-devices
+<span class="go">Failed to open /dev/video0: Permission denied</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -300,6 +310,29 @@
 <p>再度、カメラが認識されているか確認。
 /dev/video0が表示されていて、mmal serviceと出ていればOK。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>v4l2-ctl<span class="w"> </span>--list-devices
+<span class="go">mmal service 16.1 (platform:bcm2835-v4l2-0):</span>
+<span class="go">    /dev/video0</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>config.txtの編集。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo<span class="w"> </span>nano<span class="w"> </span>/boot/firmware/config.txt
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>最後に1行追加する。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">gpu_mem_1024=256</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>再起動。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo<span class="w"> </span>shutdown<span class="w"> </span>-r<span class="w"> </span>now
 </pre></div>
 </div>
 <div class="line-block">
@@ -428,7 +461,7 @@ ERRORやWARNが出るが気にしない。</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<img alt="_images/picam_img_01.png" class="align-center" src="_images/picam_img_01.png" />
+<img alt="_images/picam_img_07.png" class="align-center" src="_images/picam_img_07.png" />
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
