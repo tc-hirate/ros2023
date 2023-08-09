@@ -195,9 +195,7 @@ Updates and other softwareは、デフォルトのまま ［Continue］ボタン
 
 |
 
-Installation typeは、「Erase Ubuntu 22.04.2 LTS and reinstall」を選択し ［Install Now］ボタンをクリック。
-
-※違う画面が出てくるかもしれない。
+Installation typeは、「Erase disc and install Ubuntu」を選択し ［Install Now］ボタンをクリック。
 
 .. image:: ./img/linux_install_img_09.png
    :width: 800px

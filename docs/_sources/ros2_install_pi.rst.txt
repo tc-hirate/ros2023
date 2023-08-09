@@ -69,7 +69,7 @@ ROS2のインストール。
 
     pi@zumo00:~$ sudo apt update
     pi@zumo00:~$ sudo apt upgrade
-    pi@zumo00:~$ sudo apt install ros-iron-base
+    pi@zumo00:~$ sudo apt install ros-iron-ros-base
 
 .. note::
 

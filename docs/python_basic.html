@@ -163,7 +163,6 @@
 <li class="toctree-l1"><a class="reference internal" href="linux_install_pi.html">Linuxのインストール（Raspberry Pi）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ros2_install_pi.html">ROS2のインストール（Raspberry Pi）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ros2_tutorial.html">ROS2 Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vscode_install_pc.html">VSCodeの使い方</a></li>
 <li class="toctree-l1"><a class="reference internal" href="joystick.html">ジョイスティックの使い方</a></li>
 <li class="toctree-l1"><a class="reference internal" href="arduino.html">Arduinoの使い方</a></li>
 <li class="toctree-l1"><a class="reference internal" href="opencv.html">OpenCVの使い方</a></li>
@@ -171,6 +170,9 @@
 <li class="toctree-l1"><a class="reference internal" href="kadai1.html">課題1「人の顔を検出してその人の方を向く」</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kadai2.html">課題2「白線を検出して自動走行する」</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kadai3.html">課題3「前を走るZumoを追いかける」</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vscode_install_pc.html">VSCodeの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wifi_pc.html">WiFi子機の使い方（PC）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wifi_pi.html">WiFi子機の使い方（Raspberry Pi）</a></li>
 </ul>
 
 </div>
@@ -208,6 +210,9 @@
           <section id="python">
 <h1>Python入門<a class="headerlink" href="#python" title="Permalink to this heading">#</a></h1>
 <p>Pythonの基本的な構文を学習します。</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <section id="id1">
 <h2>Pythonの実行<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>ターミナルから「python3」と入力するとインタラクティブシェルが起動します。</p>
@@ -231,6 +236,9 @@
 <span class="go">  command &#39;python&#39; from deb python-is-python3</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="id2">
 <h2>文字列の出力<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
@@ -239,6 +247,9 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello ROS&#39;</span><span class="p">)</span>
 <span class="go">Hello ROS</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="id3">
@@ -257,12 +268,18 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 <span class="gr">SyntaxError</span>: <span class="n">invalid syntax. Perhaps you forgot a comma?</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="id4">
 <h2>コメント<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <p>コード内にはコメントを書くことができます。
 行頭に「#」を書くことで、行末までコメントとみなされます。
 コメントはコードが実行されるときにすべて無視されます。</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="id5">
 <h2>数値<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
@@ -285,6 +302,9 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 <span class="go">4</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="id6">
 <h2>文字列と数値の違い<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
@@ -295,6 +315,9 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;9 + 5&#39;</span><span class="p">)</span>
 <span class="go">9 + 5</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="id7">
@@ -314,6 +337,9 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 </div>
 <p>変数名には大文字小文字のアルファベット（A-Z、a-z）、数字（0-9）、アンダースコア（_）が使えます。
 ただし、数字は変数名の1文字目に使うことはできません。</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="if">
 <h2>if文<a class="headerlink" href="#if" title="Permalink to this heading">#</a></h2>
@@ -403,6 +429,9 @@ if文の条件がFalseのとき、elseの処理が実行されます。</p>
 <span class="go">退社時刻ではありません。</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="id8">
 <h2>リスト<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
@@ -448,6 +477,9 @@ if文の条件がFalseのとき、elseの処理が実行されます。</p>
 <span class="go">[&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;, &#39;pizza&#39;]</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="for">
 <h2>for文<a class="headerlink" href="#for" title="Permalink to this heading">#</a></h2>
@@ -461,6 +493,9 @@ if文の条件がFalseのとき、elseの処理が実行されます。</p>
 <span class="go">好きな食べ物はcurryです</span>
 <span class="go">好きな食べ物はsushiです</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="id9">
@@ -482,6 +517,9 @@ if文の条件がFalseのとき、elseの処理が実行されます。</p>
 <span class="go">&gt;&gt;&gt; print(&#39;appleの色は&#39; + fruits[&#39;apple&#39;] + &#39;です&#39;)</span>
 <span class="go">appleの色はredです</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="while">
@@ -507,6 +545,9 @@ while文を用いると、「ある条件に当てはまる間、処理を繰り
 <span class="go">10</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="break">
 <h2>break<a class="headerlink" href="#break" title="Permalink to this heading">#</a></h2>
@@ -523,6 +564,9 @@ while文でも同じように使うことができます。</p>
 <span class="go">2</span>
 <span class="go">3</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="continue">
@@ -541,6 +585,9 @@ while文でも同じように使うことができます。</p>
 <span class="go">5</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="id10">
 <h2>関数<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
@@ -556,6 +603,9 @@ while文でも同じように使うことができます。</p>
 <span class="go">&gt;&gt;&gt; hello()</span>
 <span class="go">Hello World</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="id11">
@@ -576,6 +626,9 @@ while文でも同じように使うことができます。</p>
 <span class="go">Hello ROS</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="id12">
 <h2>スコープ<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
@@ -592,6 +645,9 @@ while文でも同じように使うことができます。</p>
 <span class="go">NameError: name &#39;name&#39; is not defined</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="id13">
 <h2>複数の引数を持つ関数<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
@@ -605,6 +661,9 @@ while文でも同じように使うことができます。</p>
 <span class="go">&gt;&gt;&gt; hello(&#39;ヒラテ&#39;, &#39;こんにちは&#39;)</span>
 <span class="go">ヒラテさん、こんにちは</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="id14">
@@ -620,6 +679,9 @@ while文でも同じように使うことができます。</p>
 <span class="go">のりさん、こんにちは</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="id15">
 <h2>戻り値<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h2>
@@ -633,6 +695,9 @@ while文でも同じように使うことができます。</p>
 <span class="go">&gt;&gt;&gt; print(my_message)</span>
 <span class="go">ヒラテさん、こんにちは</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="id16">
@@ -662,6 +727,9 @@ while文でも同じように使うことができます。</p>
 <span class="go">&gt;&gt;&gt; print(my_message)</span>
 <span class="go">ヒラテさん、こんにちは</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="id17">
@@ -703,6 +771,9 @@ while文でも同じように使うことができます。</p>
 <span class="go">Hamburger</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="id18">
 <h2>メソッド<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h2>
@@ -719,6 +790,9 @@ while文でも同じように使うことができます。</p>
 <span class="go">&gt;&gt;&gt; menu_item1.info()</span>
 <span class="go">Hamburger</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="init">
