@@ -68,8 +68,11 @@ ROS2のインストール。
 .. code-block:: console
 
     pi@zumo00:~$ sudo apt update
-    pi@zumo00:~$ sudo apt upgrade
     pi@zumo00:~$ sudo apt install ros-iron-ros-base
+
+.. warning::
+
+   upgradeすると「Unable to locate package ros-iron-ros-base」というエラーが出る。
 
 .. note::
 
@@ -77,9 +80,16 @@ ROS2のインストール。
 
 |
 
-インストールの途中で次のようなウィンドウが出てきたら、インストールを中断して再起動してください。
+インストールの途中で次のようなウィンドウが出てきたら、
 
 .. image:: ./img/ros_install_pi_img_01.png
+   :align: center
+
+|
+
+［OK］を選択。
+
+.. image:: ./img/ros_install_pi_img_02.png
    :align: center
 
 |
@@ -93,7 +103,7 @@ ROS2のインストール。
 
 .. code-block:: console
 
-    pi@zumo00:~$ echo "source /opt/ros/galactic/setup.bash" >> ~/.bashrc
+    pi@zumo00:~$ echo "source /opt/ros/iron/setup.bash" >> ~/.bashrc
 
 |
 
@@ -103,7 +113,7 @@ IDはZumoの番号と同じにし、Zumo-00を使っている場合は0となり
 
 .. code-block:: console
 
-    pi@zumo00:~$ echo "export ROS_DOMAIN_ID=8" >> ~/.bashrc
+    pi@zumo00:~$ echo "export ROS_DOMAIN_ID=0" >> ~/.bashrc
 
 |
 

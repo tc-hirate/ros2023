@@ -288,183 +288,86 @@ rqt_image_viewで表示。
 
 |
 
-カメラの動作確認
+フレームレートを確認・変更する方法
 ============================================================
 
-Raspberry Piにカメラを接続し、次のコマンドを実行してください。
-
-/dev/video0のように表示されれば認識されています。
+ユーティリティのインストール。
 
 .. code-block:: console
 
-    pi@zumo00:~$ ls /dev/video*
-    /dev/video0   /dev/video13  /dev/video18  /dev/video23
-    /dev/video10  /dev/video14  /dev/video20  /dev/video31
-    /dev/video11  /dev/video15  /dev/video21
-    /dev/video12  /dev/video16  /dev/video22
+    pi@zumo00:~$ sudo apt install v4l-utils
 
 |
 
-ここで、v4l2-cameraを実行するとPermission deniedというエラーが出てしまいます。
+カメラのフォーマットを確認。
 
 .. code-block:: console
 
-    pi@zumo00:~$ ros2 run v4l2_camera v4l2_camera_node
-    [ERROR] [1690932786.378712318] [v4l2_camera]: Failed opening device /dev/video0: Permission denied (13)
+    pi@zumo00:~$ v4l2-ctl --list-formats-ext
+    ioctl: VIDIOC_ENUM_FMT
+        Type: Video Capture
+
+        [0]: 'YU12' (Planar YUV 4:2:0)
+            Size: Stepwise 32x32 - 3280x2464 with step 2/2
+        [1]: 'YUYV' (YUYV 4:2:2)
+            Size: Stepwise 32x32 - 3280x2464 with step 2/2
+        [2]: 'RGB3' (24-bit RGB 8-8-8)
+            Size: Stepwise 32x32 - 3280x2464 with step 2/2
+        [3]: 'JPEG' (JFIF JPEG, compressed)
+            Size: Stepwise 32x32 - 3280x2464 with step 2/2
+        [4]: 'H264' (H.264, compressed)
+            Size: Stepwise 32x32 - 3280x2464 with step 2/2
+        [5]: 'MJPG' (Motion-JPEG, compressed)
+            Size: Stepwise 32x32 - 3280x2464 with step 2/2
+        [6]: 'YVYU' (YVYU 4:2:2)
+            Size: Stepwise 32x32 - 3280x2464 with step 2/2
+        [7]: 'VYUY' (VYUY 4:2:2)
+            Size: Stepwise 32x32 - 3280x2464 with step 2/2
+        [8]: 'UYVY' (UYVY 4:2:2)
+            Size: Stepwise 32x32 - 3280x2464 with step 2/2
+        [9]: 'NV12' (Y/CbCr 4:2:0)
+            Size: Stepwise 32x32 - 3280x2464 with step 2/2
+        [10]: 'BGR3' (24-bit BGR 8-8-8)
+            Size: Stepwise 32x32 - 3280x2464 with step 2/2
+        [11]: 'YV12' (Planar YVU 4:2:0)
+            Size: Stepwise 32x32 - 3280x2464 with step 2/2
+        [12]: 'NV21' (Y/CrCb 4:2:0)
+            Size: Stepwise 32x32 - 3280x2464 with step 2/2
+        [13]: 'RX24' (32-bit XBGR 8-8-8-8)
+            Size: Stepwise 32x32 - 3280x2464 with step 2/2
 
 |
 
-そこで、/dev/video0の権限を確認します。
+カメラのフレームレートを確認。
 
 .. code-block:: console
 
-    pi@zumo00:~$ ls /dev/video0 -l
-    crw-rw---- 1 root video 81, 12 Mar 20 14:32 /dev/video0
+    pi@zumo00:~$ v4l2-ctl -P
+    Streaming Parameters Video Capture:
+        Capabilities     : timeperframe
+        Frames per second: 30.000 (30000/1000)
+        Read buffers     : 1
 
 |
 
-/dev/video0の権限を変更します。
+カメラのフレームレートを変更。
 
 .. code-block:: console
 
-    pi@zumo00:~$ sudo chmod 777 /dev/video0
+    pi@zumo00:~$ v4l2-ctl -p 5
+    Frame rate set to 5.000 fps
 
 |
 
-/dev/video0の権限が変更されているか確認します。
+変更したカメラのフレームレートを確認。
 
 .. code-block:: console
 
-    pi@zumo00:~$ ls /dev/video0 -l
-    crwxrwxrwx 1 root video 81, 12 Mar 20 14:32 /dev/video0
-
-|
-
-もう一度、v4l2-cameraを実行します。
-
-ERRORやWARNが出ますが、気にしないでください。
-
-.. code-block:: console
-
-    pi@zumo00:~$ ros2 run v4l2_camera v4l2_camera_node
-    [INFO] [1690932868.971591124] [v4l2_camera]: Driver: bm2835 mmal
-    [INFO] [1690932868.972720620] [v4l2_camera]: Version: 331619
-    [INFO] [1690932868.972842439] [v4l2_camera]: Device: mmal service 16.1
-    [INFO] [1690932868.972927488] [v4l2_camera]: Location: platform:bcm2835-v4l2-0
-    [INFO] [1690932868.973019777] [v4l2_camera]: Capabilities:
-    [INFO] [1690932868.973087327] [v4l2_camera]:   Read/write: YES
-    [INFO] [1690932868.973155658] [v4l2_camera]:   Streaming: YES
-    [INFO] [1690932868.973260134] [v4l2_camera]: Current pixel format: JPEG @ 1024x768
-    [INFO] [1690932868.975125961] [v4l2_camera]: Available pixel formats: 
-    [INFO] [1690932868.975221479] [v4l2_camera]:   YU12 - Planar YUV 4:2:0
-    [INFO] [1690932868.975325538] [v4l2_camera]:   YUYV - YUYV 4:2:2
-    [INFO] [1690932868.975395328] [v4l2_camera]:   RGB3 - 24-bit RGB 8-8-8
-    [INFO] [1690932868.975464961] [v4l2_camera]:   JPEG - JFIF JPEG
-    [INFO] [1690932868.975548031] [v4l2_camera]:   H264 - H.264
-    [INFO] [1690932868.975616831] [v4l2_camera]:   MJPG - Motion-JPEG
-    [INFO] [1690932868.975685527] [v4l2_camera]:   YVYU - YVYU 4:2:2
-    [INFO] [1690932868.975765108] [v4l2_camera]:   VYUY - VYUY 4:2:2
-    [INFO] [1690932868.975846824] [v4l2_camera]:   UYVY - UYVY 4:2:2
-    [INFO] [1690932868.975937446] [v4l2_camera]:   NV12 - Y/CbCr 4:2:0
-    [INFO] [1690932868.976006767] [v4l2_camera]:   BGR3 - 24-bit BGR 8-8-8
-    [INFO] [1690932868.976085306] [v4l2_camera]:   YV12 - Planar YVU 4:2:0
-    [INFO] [1690932868.976159731] [v4l2_camera]:   NV21 - Y/CrCb 4:2:0
-    [INFO] [1690932868.976227958] [v4l2_camera]:   RX24 - 32-bit XBGR 8-8-8-8
-    [INFO] [1690932868.976298164] [v4l2_camera]: Available controls: 
-    [INFO] [1690932868.976417692] [v4l2_camera]:   Brightness (1) = 50
-    [INFO] [1690932868.976505658] [v4l2_camera]:   Contrast (1) = 0
-    [INFO] [1690932868.976600498] [v4l2_camera]:   Saturation (1) = 0
-    [INFO] [1690932868.976686121] [v4l2_camera]:   Red Balance (1) = 1000
-    [INFO] [1690932868.977006892] [v4l2_camera]:   Blue Balance (1) = 1000
-    [INFO] [1690932868.977110743] [v4l2_camera]:   Horizontal Flip (2) = 0
-    [INFO] [1690932868.977196469] [v4l2_camera]:   Vertical Flip (2) = 0
-    [INFO] [1690932868.977279540] [v4l2_camera]:   Power Line Frequency (3) = 1
-    [INFO] [1690932868.977362610] [v4l2_camera]:   Sharpness (1) = 0
-    [INFO] [1690932868.977454118] [v4l2_camera]:   Color Effects (3) = 0
-    [INFO] [1690932868.977536719] [v4l2_camera]:   Rotate (1) = 0
-    [INFO] [1690932868.977618592] [v4l2_camera]:   Color Effects, CbCr (1) = 32896
-    [ERROR] [1690932868.977764108] [v4l2_camera]: Failed getting value for control 10027009: Permission denied (13); returning 0!
-    [INFO] [1690932868.978126076] [v4l2_camera]:   Codec Controls (6) = 0
-    [INFO] [1690932868.978245864] [v4l2_camera]:   Video Bitrate Mode (3) = 0
-    [INFO] [1690932868.978334923] [v4l2_camera]:   Video Bitrate (1) = 10000000
-    [INFO] [1690932868.978429504] [v4l2_camera]:   Repeat Sequence Header (2) = 0
-    [ERROR] [1690932868.978520855] [v4l2_camera]: Failed getting value for control 10029541: Permission denied (13); returning 0!
-    [INFO] [1690932868.978646320] [v4l2_camera]:   Force Key Frame (4) = 0
-    [INFO] [1690932868.978732203] [v4l2_camera]:   H264 Minimum QP Value (1) = 0
-    [INFO] [1690932868.978815585] [v4l2_camera]:   H264 Maximum QP Value (1) = 0
-    [INFO] [1690932868.978905062] [v4l2_camera]:   H264 I-Frame Period (1) = 60
-    [INFO] [1690932868.978989486] [v4l2_camera]:   H264 Level (3) = 11
-    [INFO] [1690932868.979071515] [v4l2_camera]:   H264 Profile (3) = 4
-    [ERROR] [1690932868.979155887] [v4l2_camera]: Failed getting value for control 10092545: Permission denied (13); returning 0!
-    [INFO] [1690932868.979263123] [v4l2_camera]:   Camera Controls (6) = 0
-    [INFO] [1690932868.979350308] [v4l2_camera]:   Auto Exposure (3) = 0
-    [INFO] [1690932868.979441139] [v4l2_camera]:   Exposure Time, Absolute (1) = 1000
-    [INFO] [1690932868.979524938] [v4l2_camera]:   Exposure, Dynamic Framerate (2) = 0
-    [INFO] [1690932868.979607800] [v4l2_camera]:   Auto Exposure, Bias (9) = 12
-    [INFO] [1690932868.979690662] [v4l2_camera]:   White Balance, Auto & Preset (3) = 1
-    [INFO] [1690932868.979773160] [v4l2_camera]:   Image Stabilization (2) = 0
-    [INFO] [1690932868.979856386] [v4l2_camera]:   ISO Sensitivity (9) = 0
-    [INFO] [1690932868.979946019] [v4l2_camera]:   ISO Sensitivity, Auto (3) = 1
-    [INFO] [1690932868.980028308] [v4l2_camera]:   Exposure, Metering Mode (3) = 0
-    [INFO] [1690932868.980110701] [v4l2_camera]:   Scene Mode (3) = 0
-    [ERROR] [1690932868.980264134] [v4l2_camera]: Failed getting value for control 10289153: Permission denied (13); returning 0!
-    [INFO] [1690932868.980448243] [v4l2_camera]:   JPEG Compression Controls (6) = 0
-    [INFO] [1690932868.980540583] [v4l2_camera]:   Compression Quality (1) = 30
-    [INFO] [1690932868.984375515] [v4l2_camera]: Requesting format: 1024x768 YUYV
-    [INFO] [1690932868.989716286] [v4l2_camera]: Success
-    [INFO] [1690932868.990578498] [v4l2_camera]: Requesting format: 640x480 YUYV
-    [INFO] [1690932868.991413472] [v4l2_camera]: Success
-    [WARN] [1690932868.993148522] [v4l2_camera]: Control type not currently supported: 6, for control: Codec Controls
-    [WARN] [1690932868.993662256] [v4l2_camera]: Control type not currently supported: 4, for control: Force Key Frame
-    [WARN] [1690932868.994705036] [v4l2_camera]: Control type not currently supported: 6, for control: Camera Controls
-    [WARN] [1690932868.995408034] [v4l2_camera]: Control type not currently supported: 9, for control: Auto Exposure, Bias
-    [WARN] [1690932868.995902446] [v4l2_camera]: Control type not currently supported: 9, for control: ISO Sensitivity
-    [WARN] [1690932868.996506125] [v4l2_camera]: Control type not currently supported: 6, for control: JPEG Compression Controls
-    [INFO] [1690932868.996804657] [v4l2_camera]: Starting camera
-    [WARN] [1690932869.777105331] [v4l2_camera]: Image encoding not the same as requested output, performing possibly slow conversion: yuv422_yuy2 => rgb8
-    [INFO] [1690932869.817848274] [v4l2_camera]: using default calibration URL
-    [INFO] [1690932869.818274458] [v4l2_camera]: camera calibration URL: file:///home/pi/.ros/camera_info/mmal_service_16.1.yaml
-    [ERROR] [1690932869.818839493] [camera_calibration_parsers]: Unable to open camera calibration file [/home/pi/.ros/camera_info/mmal_service_16.1.yaml]
-    [WARN] [1690932869.819140525] [v4l2_camera]: Camera calibration file /home/pi/.ros/camera_info/mmal_service_16.1.yaml not found
-
-|
-
-トピックを確認します。
-
-/image/rawがカメラからのデータです。
-
-.. code-block:: console
-
-    pi@zumo00:~$ ros2 topic list
-    /camera_info
-    /image_raw
-    /parameter_events
-    /rosout
-
-|
-
-次に、PCからカメラのデータが受信できるか確認します。
-
-.. code-block:: console
-
-    ubuntu@mbc084:~$ ros2 topic list
-    /camera_info
-    /image_raw
-    /parameter_events
-    /rosout
-
-|
-
-rqt_image_viewで表示しましょう。
-
-.. code-block:: console
-
-    ubuntu@mbc084:~$ ros2 run rqt_image_view rqt_image_view
-
-|
-
-.. image:: ./img/picam_img_01.png
-   :align: center
+    pi@zumo00:~$ v4l2-ctl -P
+    Streaming Parameters Video Capture:
+        Capabilities     : timeperframe
+        Frames per second: 5.000 (5000/1000)
+        Read buffers     : 1
 
 |
 
@@ -794,92 +697,9 @@ cv_testパッケージのgray_publisherノードの実行
 
 |
 
-（２）cam_face_detect.pyを実行するlaunchファイルを 作ってください。
+（２）cam_face_detect.pyを実行するlaunchファイルを作ってください。
 -------------------------------------------------------------------
 
 ファイル名はcam_face_detect_launch_pyとします。
 
 PCからRaspberry Piのカメラを起動できる？
-
-|
-
-フレームレートを確認・変更する方法
-============================================================
-
-ユーティリティのインストール。
-
-.. code-block:: console
-
-    pi@zumo00:~$ sudo apt install v4l-utils
-
-|
-
-カメラのフォーマットを確認。
-
-.. code-block:: console
-
-    pi@zumo00:~$ v4l2-ctl --list-formats-ext
-    ioctl: VIDIOC_ENUM_FMT
-        Type: Video Capture
-
-        [0]: 'YU12' (Planar YUV 4:2:0)
-            Size: Stepwise 32x32 - 3280x2464 with step 2/2
-        [1]: 'YUYV' (YUYV 4:2:2)
-            Size: Stepwise 32x32 - 3280x2464 with step 2/2
-        [2]: 'RGB3' (24-bit RGB 8-8-8)
-            Size: Stepwise 32x32 - 3280x2464 with step 2/2
-        [3]: 'JPEG' (JFIF JPEG, compressed)
-            Size: Stepwise 32x32 - 3280x2464 with step 2/2
-        [4]: 'H264' (H.264, compressed)
-            Size: Stepwise 32x32 - 3280x2464 with step 2/2
-        [5]: 'MJPG' (Motion-JPEG, compressed)
-            Size: Stepwise 32x32 - 3280x2464 with step 2/2
-        [6]: 'YVYU' (YVYU 4:2:2)
-            Size: Stepwise 32x32 - 3280x2464 with step 2/2
-        [7]: 'VYUY' (VYUY 4:2:2)
-            Size: Stepwise 32x32 - 3280x2464 with step 2/2
-        [8]: 'UYVY' (UYVY 4:2:2)
-            Size: Stepwise 32x32 - 3280x2464 with step 2/2
-        [9]: 'NV12' (Y/CbCr 4:2:0)
-            Size: Stepwise 32x32 - 3280x2464 with step 2/2
-        [10]: 'BGR3' (24-bit BGR 8-8-8)
-            Size: Stepwise 32x32 - 3280x2464 with step 2/2
-        [11]: 'YV12' (Planar YVU 4:2:0)
-            Size: Stepwise 32x32 - 3280x2464 with step 2/2
-        [12]: 'NV21' (Y/CrCb 4:2:0)
-            Size: Stepwise 32x32 - 3280x2464 with step 2/2
-        [13]: 'RX24' (32-bit XBGR 8-8-8-8)
-            Size: Stepwise 32x32 - 3280x2464 with step 2/2
-
-|
-
-カメラのフレームレートを確認。
-
-.. code-block:: console
-
-    pi@zumo00:~$ v4l2-ctl -P
-    Streaming Parameters Video Capture:
-        Capabilities     : timeperframe
-        Frames per second: 30.000 (30000/1000)
-        Read buffers     : 1
-
-|
-
-カメラのフレームレートを変更。
-
-.. code-block:: console
-
-    pi@zumo00:~$ v4l2-ctl -p 5
-    Frame rate set to 5.000 fps
-
-|
-
-変更したカメラのフレームレートを確認。
-
-.. code-block:: console
-
-    pi@zumo00:~$ v4l2-ctl -P
-    Streaming Parameters Video Capture:
-        Capabilities     : timeperframe
-        Frames per second: 5.000 (5000/1000)
-        Read buffers     : 1

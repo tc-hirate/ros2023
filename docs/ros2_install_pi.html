@@ -265,9 +265,12 @@
 </div>
 <p>ROS2のインストール。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
-<span class="gp">pi@zumo00:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
 <span class="gp">pi@zumo00:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-iron-ros-base
 </pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>upgradeすると「Unable to locate package ros-iron-ros-base」というエラーが出る。</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -276,8 +279,13 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>インストールの途中で次のようなウィンドウが出てきたら、インストールを中断して再起動してください。</p>
+<p>インストールの途中で次のようなウィンドウが出てきたら、</p>
 <img alt="_images/ros_install_pi_img_01.png" class="align-center" src="_images/ros_install_pi_img_01.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>［OK］を選択。</p>
+<img alt="_images/ros_install_pi_img_02.png" class="align-center" src="_images/ros_install_pi_img_02.png" />
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -286,7 +294,7 @@
 <h2>サンプルプログラムの実行<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>インストールが正しく行われたか確認するために、サンプルプログラムを実行します。</p>
 <p>はじめに、setup fileを実行するコマンドをshellのstartup scriptに書いておきます。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;source /opt/ros/galactic/setup.bash&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;source /opt/ros/iron/setup.bash&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
 </pre></div>
 </div>
 <div class="line-block">
@@ -294,7 +302,7 @@
 </div>
 <p>続いて、IDを設定するコマンドもshellのstartup scriptに書いておきます。</p>
 <p>IDはZumoの番号と同じにし、Zumo-00を使っている場合は0となります。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export ROS_DOMAIN_ID=8&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export ROS_DOMAIN_ID=0&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
 </pre></div>
 </div>
 <div class="line-block">
