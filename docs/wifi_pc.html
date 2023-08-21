@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -201,7 +201,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -209,7 +209,68 @@
         <article role="main">
           <section id="wifi-pc">
 <h1>WiFi子機の使い方（PC）<a class="headerlink" href="#wifi-pc" title="Permalink to this heading">#</a></h1>
-<p>T.B.A.</p>
+<section id="wifi">
+<h2>WiFiの速度を測定<a class="headerlink" href="#wifi" title="Permalink to this heading">#</a></h2>
+<p>ツールをインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>speedtest-cli
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>速度を測定。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>speedtest<span class="w"> </span>--simple
+<span class="go">Ping: 24.013 ms</span>
+<span class="go">Download: 67.76 Mbit/s</span>
+<span class="go">Upload: 39.07 Mbit/s</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="id1">
+<h2>WiFi子機のドライバをインストール<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>ツールのインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="gp">ubuntu@mbc084:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>linux-headers-generic<span class="w"> </span>dkms
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ダウンロードとインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>wget<span class="w"> </span>https://github.com/RinCat/RTL88x2BU-Linux-Driver/archive/master.zip
+<span class="gp">ubuntu@mbc084:~$ </span>unzip<span class="w"> </span>master.zip
+<span class="gp">ubuntu@mbc084:~$ </span><span class="nb">cd</span><span class="w"> </span>RTL88x2BU-Linux-Driver-master
+<span class="gp">ubuntu@mbc084:~/RTL88x2BU-Linux-Driver-master$ </span>sudo<span class="w"> </span>make<span class="w"> </span>uninstall
+<span class="gp">ubuntu@mbc084:~/RTL88x2BU-Linux-Driver-master$ </span>make<span class="w"> </span>clean
+<span class="gp">ubuntu@mbc084:~/RTL88x2BU-Linux-Driver-master$ </span>make
+<span class="gp">ubuntu@mbc084:~/RTL88x2BU-Linux-Driver-master$ </span>sudo<span class="w"> </span>make<span class="w"> </span>install
+<span class="gp">ubuntu@mbc084:~/RTL88x2BU-Linux-Driver-master$ </span>sudo<span class="w"> </span>modprobe<span class="w"> </span>88x2bu
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>再起動。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/RTL88x2BU-Linux-Driver-master$ </span>sudo<span class="w"> </span>shutdown<span class="w"> </span>-r<span class="w"> </span>now
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="id2">
+<h2>もう一度、WiFiの速度を測定<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>速度を測定。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>speedtest<span class="w"> </span>--simple
+<span class="go">Ping: 24.187 ms</span>
+<span class="go">Download: 197.15 Mbit/s</span>
+<span class="go">Upload: 173.64 Mbit/s</span>
+</pre></div>
+</div>
+</section>
 </section>
 
         </article>
@@ -255,8 +316,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">WiFi子機の使い方（PC）</a><ul>
+<li><a class="reference internal" href="#wifi">WiFiの速度を測定</a></li>
+<li><a class="reference internal" href="#id1">WiFi子機のドライバをインストール</a></li>
+<li><a class="reference internal" href="#id2">もう一度、WiFiの速度を測定</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

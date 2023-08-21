@@ -251,7 +251,7 @@ ERRORやWARNが出るが気にしない。
 
 |
 
-トピックの確認。/image/rawがカメラからのデータ。
+トピックの確認。/image_rawがカメラからのデータ。
 
 .. code-block:: console
 

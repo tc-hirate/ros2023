@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -201,7 +201,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -209,7 +209,127 @@
         <article role="main">
           <section id="wifi-raspberry-pi">
 <h1>WiFi子機の使い方（Raspberry Pi）<a class="headerlink" href="#wifi-raspberry-pi" title="Permalink to this heading">#</a></h1>
-<p>T.B.A.</p>
+<section id="wifi">
+<h2>WiFiの速度を測定<a class="headerlink" href="#wifi" title="Permalink to this heading">#</a></h2>
+<p>ツールをインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>speedtest-cli
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>速度を測定。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>speedtest<span class="w"> </span>--simple
+<span class="go">Ping: 56.993 ms</span>
+<span class="go">Download: 40.93 Mbit/s</span>
+<span class="go">Upload: 33.86 Mbit/s</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="id1">
+<h2>WiFi子機のドライバをインストール<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>ツールのインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="gp">pi@zumo00:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>dkms<span class="w"> </span>build-essential<span class="w"> </span>linux-headers-generic
+<span class="gp">pi@zumo00:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ダウンロードとインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/aircrack-ng/rtl8812au.git
+<span class="gp">pi@zumo00:~$ </span><span class="nb">cd</span><span class="w"> </span>rtl8812au
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Makefileの編集</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/rtl8812au$ </span>nano<span class="w"> </span>Makefile
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="c1">##################### Platform Related #######################</span>
+<span class="go">CONFIG_PLATFORM_I386_PC = n</span>
+<span class="go">・・・・・</span>
+<span class="go">CONFIG_PLATFORM_ARM64_RPI = y</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>シャットダウン。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/rtl8812au$ </span>sudo<span class="w"> </span>shutdown<span class="w"> </span>-h<span class="w"> </span>now
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>WiFi子機を接続して、電源ON。</p>
+<p>起動後、IPアドレスを確認すると、「4: wlx30de4bcfff61」が追加されている。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>ip<span class="w"> </span>a
+<span class="go">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span>
+<span class="go">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span>
+<span class="go">    inet 127.0.0.1/8 scope host lo</span>
+<span class="go">    valid_lft forever preferred_lft forever</span>
+<span class="go">    inet6 ::1/128 scope host</span>
+<span class="go">    valid_lft forever preferred_lft forever</span>
+<span class="go">2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000</span>
+<span class="go">    link/ether b8:27:eb:71:91:bf brd ff:ff:ff:ff:ff:ff</span>
+<span class="go">    inet 192.168.1.32/24 metric 100 brd 192.168.1.255 scope global dynamic eth0</span>
+<span class="go">    valid_lft 259035sec preferred_lft 259035sec</span>
+<span class="go">    inet6 fe80::ba27:ebff:fe71:91bf/64 scope link</span>
+<span class="go">    valid_lft forever preferred_lft forever</span>
+<span class="go">3: wlan0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000</span>
+<span class="go">    link/ether b8:27:eb:24:c4:ea brd ff:ff:ff:ff:ff:ff</span>
+<span class="go">    inet 192.168.1.250/24 brd 192.168.1.255 scope global wlan0</span>
+<span class="go">    valid_lft forever preferred_lft forever</span>
+<span class="go">    inet6 fe80::ba27:ebff:fe24:c4ea/64 scope link</span>
+<span class="go">    valid_lft forever preferred_lft forever</span>
+<span class="go">4: wlx30de4bcfff61: &lt;BROADCAST,MULTICAST&gt; mtu 2312 qdisc noop state DOWN group default qlen 1000</span>
+<span class="go">    link/ether 30:de:4b:cf:ff:61 brd ff:ff:ff:ff:ff:ff</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ネットワークの設定を変更する。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/netplan/99_config.yaml
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">    wifis:</span>
+<span class="gp">#       </span>wlan0:
+<span class="go">        wlx30de4bcfff61:</span>
+</pre></div>
+</div>
+<p>設定を反映させる。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo<span class="w"> </span>netplan<span class="w"> </span>apply
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>再起動。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo<span class="w"> </span>shutdown<span class="w"> </span>-r<span class="w"> </span>now
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="id2">
+<h2>もう一度、WiFiの速度を測定<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>速度を測定。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>speedtest<span class="w"> </span>--simple
+<span class="go">Ping: 22.697 ms</span>
+<span class="go">Download: 175.04 Mbit/s</span>
+<span class="go">Upload: 150.72 Mbit/s</span>
+</pre></div>
+</div>
+</section>
 </section>
 
         </article>
@@ -247,8 +367,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">WiFi子機の使い方（Raspberry Pi）</a><ul>
+<li><a class="reference internal" href="#wifi">WiFiの速度を測定</a></li>
+<li><a class="reference internal" href="#id1">WiFi子機のドライバをインストール</a></li>
+<li><a class="reference internal" href="#id2">もう一度、WiFiの速度を測定</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
