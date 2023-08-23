@@ -240,22 +240,29 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>ダウンロードとインストール。</p>
+<p>ダウンロード。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/aircrack-ng/rtl8812au.git
-<span class="gp">pi@zumo00:~$ </span><span class="nb">cd</span><span class="w"> </span>rtl8812au
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>Makefileの編集</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~/rtl8812au$ </span>nano<span class="w"> </span>Makefile
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span><span class="nb">cd</span><span class="w"> </span>rtl8812au
+<span class="gp">pi@zumo00:~/rtl8812au$ </span>nano<span class="w"> </span>Makefile
 </pre></div>
 </div>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="c1">##################### Platform Related #######################</span>
 <span class="go">CONFIG_PLATFORM_I386_PC = n</span>
 <span class="go">・・・・・</span>
 <span class="go">CONFIG_PLATFORM_ARM64_RPI = y</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>インストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo<span class="w"> </span>make<span class="w"> </span>dkms_install
 </pre></div>
 </div>
 <div class="line-block">

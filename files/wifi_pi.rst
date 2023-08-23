@@ -38,12 +38,11 @@ WiFi子機のドライバをインストール
 
 |
 
-ダウンロードとインストール。
+ダウンロード。
 
 .. code-block:: console
 
     pi@zumo00:~$ git clone https://github.com/aircrack-ng/rtl8812au.git
-    pi@zumo00:~$ cd rtl8812au
 
 |
 
@@ -51,6 +50,7 @@ Makefileの編集
 
 .. code-block:: console
 
+    pi@zumo00:~$ cd rtl8812au
     pi@zumo00:~/rtl8812au$ nano Makefile 
 
 .. code-block:: console
@@ -59,6 +59,14 @@ Makefileの編集
     CONFIG_PLATFORM_I386_PC = n
     ・・・・・
     CONFIG_PLATFORM_ARM64_RPI = y
+
+|
+
+インストール。
+
+.. code-block:: console
+
+    pi@zumo00:~$ sudo make dkms_install
 
 |
 
