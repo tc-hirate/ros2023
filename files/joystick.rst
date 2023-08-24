@@ -1,10 +1,10 @@
-.. role:: dir
-
 ============================================================
 ジョイスティックの使い方
 ============================================================
 
 PCでジョイスティックが使えるように設定します。
+
+|
 
 必要なパッケージのインストール
 ============================================================
@@ -210,14 +210,16 @@ joy-nodeとteleop-nodeを使ってturtlesimを動かすためのlaunchファイ�
 
 |
 
-turtle_teleop_joy_launch.pyの編集。
+turtle_teleop_joy_launch.pyを開く。
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws/src/joy_test$ cd launch/
     ubuntu@mbc084:~/ros2_ws/src/joy_test/launch$ nano turtle_teleop_joy_launch.py
 
-:dir:`~/ros2_ws/src/joy_test/launch/turtle_teleop_joy_launch.py`
+|
+
+編集。
 
 .. code-block:: python
 
@@ -248,14 +250,16 @@ turtle_teleop_joy_launch.pyの編集。
 
 |
 
-setup.pyの編集。
+setup.pyを開く。
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws/src/joy_test/launch$ cd ..
     ubuntu@mbc084:~/ros2_ws/src/joy_test$ nano setup.py
 
-:dir:`~/ros2_ws/src/joy_test/setup.py`
+|
+
+編集。
 
 .. code-block:: python
     :emphasize-lines: 1, 2, 16
@@ -361,13 +365,15 @@ rqt_graphでノードの確認。
 
 |
 
-turtle_joy.pyの編集。
+turtle_joy.pyを開く。
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws$ nano src/joy_test/joy_test/turtle_joy.py
 
-:dir:`~/ros2_ws/src/joy_test/joy_test/turtle_joy.py`
+|
+
+編集。
 
 .. code-block:: python
 
@@ -423,16 +429,18 @@ turtle_joy.pyの編集。
 
 |
 
-package.xmlの編集。
+package.xmlを開く。
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws$ nano src/joy_test/package.xml
 
-:dir:`~/ros2_ws/src/joy_test/package.xml`
+|
+
+編集。
 
 .. code-block:: none
-    :emphasize-lines: 12, 13
+    :emphasize-lines: 10-13
 
     <?xml version="1.0"?>
     <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematyp>
@@ -460,13 +468,15 @@ package.xmlの編集。
 
 |
 
-setup.pyの編集。
+setup.pyを開く。
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws$ nano src/joy_test/setup.py
 
-:dir:`~/ros2_ws/src/joy_test/setup.py`
+|
+
+編集。
 
 .. code-block:: python
     :emphasize-lines: 27
@@ -553,13 +563,15 @@ joy_testパッケージのjoy_twistノードの実行。
 
 |
 
-turtle_joy_launch.pyの編集。
+turtle_joy_launch.pyを開く。
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws$ nano src/joy_test/launch/turtle_joy_launch.py
 
-:dir:`~/ros2_ws/src/joy_test/launch/turtle_joy_launch.py`
+|
+
+編集。
 
 .. code-block:: python
 
@@ -569,21 +581,21 @@ turtle_joy_launch.pyの編集。
     def generate_launch_description():
         return LaunchDescription([
             Node(
+                name='sim',
                 package='turtlesim',
                 executable='turtlesim_node',
-                name='sim'
             ),
             Node(
+                name='joy',
                 package='joy',
                 executable='joy_node',
-                name='joy'
-                ),
+            ),
             Node(
+                name='test',
                 package='joy_test',
                 executable='joy_twist',
-                name='test'
-               ),
-        ])
+            ),
+    ])
 
 |
 
@@ -607,6 +619,6 @@ launchファイルの実行。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 launch joy_test turtle_teleop_joy_launch.py
+    ubuntu@mbc084:~/ros2_ws$ ros2 launch joy_test turtle_joy_launch.py
 
 |

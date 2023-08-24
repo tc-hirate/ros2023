@@ -210,6 +210,9 @@
           <section id="id1">
 <h1>ジョイスティックの使い方<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <p>PCでジョイスティックが使えるように設定します。</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <section id="id2">
 <h2>必要なパッケージのインストール<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>ジョイスティックを使うために必要なパッケージをインストールします。</p>
@@ -394,12 +397,15 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>turtle_teleop_joy_launch.pyの編集。</p>
+<p>turtle_teleop_joy_launch.pyを開く。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test$ </span><span class="nb">cd</span><span class="w"> </span>launch/
 <span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test/launch$ </span>nano<span class="w"> </span>turtle_teleop_joy_launch.py
 </pre></div>
 </div>
-<p><span class="dir">~/ros2_ws/src/joy_test/launch/turtle_teleop_joy_launch.py</span></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">launch</span> <span class="kn">import</span> <span class="n">LaunchDescription</span>
 <span class="kn">from</span> <span class="nn">launch_ros.actions</span> <span class="kn">import</span> <span class="n">Node</span>
 
@@ -429,12 +435,15 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>setup.pyの編集。</p>
+<p>setup.pyを開く。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test/launch$ </span><span class="nb">cd</span><span class="w"> </span>..
 <span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test$ </span>nano<span class="w"> </span>setup.py
 </pre></div>
 </div>
-<p><span class="dir">~/ros2_ws/src/joy_test/setup.py</span></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="kn">import</span> <span class="nn">os</span>
 </span><span class="hll"><span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
 </span>
@@ -530,11 +539,14 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>turtle_joy.pyの編集。</p>
+<p>turtle_joy.pyを開く。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano<span class="w"> </span>src/joy_test/joy_test/turtle_joy.py
 </pre></div>
 </div>
-<p><span class="dir">~/ros2_ws/src/joy_test/joy_test/turtle_joy.py</span></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
 <span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
 
@@ -589,11 +601,14 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>package.xmlの編集。</p>
+<p>package.xmlを開く。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano<span class="w"> </span>src/joy_test/package.xml
 </pre></div>
 </div>
-<p><span class="dir">~/ros2_ws/src/joy_test/package.xml</span></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;?xml-model href=&quot;http://download.ros.org/schema/package_format3.xsd&quot; schematyp&gt;
 &lt;package format=&quot;3&quot;&gt;
@@ -603,9 +618,9 @@
   &lt;maintainer email=&quot;ubuntu@todo.todo&quot;&gt;ubuntu&lt;/maintainer&gt;
   &lt;license&gt;TODO: License declaration&lt;/license&gt;
 
-  &lt;exec_depend&gt;rclpy&lt;/exec_depend&gt;
-  &lt;exec_depend&gt;std_msgs&lt;/exec_depend&gt;
-<span class="hll">  &lt;exec_depend&gt;geometry_msgs&lt;/exec_depend&gt;
+<span class="hll">  &lt;exec_depend&gt;rclpy&lt;/exec_depend&gt;
+</span><span class="hll">  &lt;exec_depend&gt;std_msgs&lt;/exec_depend&gt;
+</span><span class="hll">  &lt;exec_depend&gt;geometry_msgs&lt;/exec_depend&gt;
 </span><span class="hll">  &lt;exec_depend&gt;sensor_msgs&lt;/exec_depend&gt;
 </span>
   &lt;test_depend&gt;ament_copyright&lt;/test_depend&gt;
@@ -622,11 +637,14 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>setup.pyの編集。</p>
+<p>setup.pyを開く。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano<span class="w"> </span>src/joy_test/setup.py
 </pre></div>
 </div>
-<p><span class="dir">~/ros2_ws/src/joy_test/setup.py</span></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
 
@@ -705,32 +723,35 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>turtle_joy_launch.pyの編集。</p>
+<p>turtle_joy_launch.pyを開く。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano<span class="w"> </span>src/joy_test/launch/turtle_joy_launch.py
 </pre></div>
 </div>
-<p><span class="dir">~/ros2_ws/src/joy_test/launch/turtle_joy_launch.py</span></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">launch</span> <span class="kn">import</span> <span class="n">LaunchDescription</span>
 <span class="kn">from</span> <span class="nn">launch_ros.actions</span> <span class="kn">import</span> <span class="n">Node</span>
 
 <span class="k">def</span> <span class="nf">generate_launch_description</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">LaunchDescription</span><span class="p">([</span>
         <span class="n">Node</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sim&#39;</span><span class="p">,</span>
             <span class="n">package</span><span class="o">=</span><span class="s1">&#39;turtlesim&#39;</span><span class="p">,</span>
             <span class="n">executable</span><span class="o">=</span><span class="s1">&#39;turtlesim_node&#39;</span><span class="p">,</span>
-            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sim&#39;</span>
         <span class="p">),</span>
         <span class="n">Node</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;joy&#39;</span><span class="p">,</span>
             <span class="n">package</span><span class="o">=</span><span class="s1">&#39;joy&#39;</span><span class="p">,</span>
             <span class="n">executable</span><span class="o">=</span><span class="s1">&#39;joy_node&#39;</span><span class="p">,</span>
-            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;joy&#39;</span>
-            <span class="p">),</span>
+        <span class="p">),</span>
         <span class="n">Node</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span>
             <span class="n">package</span><span class="o">=</span><span class="s1">&#39;joy_test&#39;</span><span class="p">,</span>
             <span class="n">executable</span><span class="o">=</span><span class="s1">&#39;joy_twist&#39;</span><span class="p">,</span>
-            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;test&#39;</span>
-           <span class="p">),</span>
-    <span class="p">])</span>
+        <span class="p">),</span>
+<span class="p">])</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -751,7 +772,7 @@
 <div class="line"><br /></div>
 </div>
 <p>launchファイルの実行。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2<span class="w"> </span>launch<span class="w"> </span>joy_test<span class="w"> </span>turtle_teleop_joy_launch.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2<span class="w"> </span>launch<span class="w"> </span>joy_test<span class="w"> </span>turtle_joy_launch.py
 </pre></div>
 </div>
 <div class="line-block">
