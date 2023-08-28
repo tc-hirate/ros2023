@@ -38,7 +38,6 @@ Zumo Shieldにはモータやセンサが搭載されていて、 これらを�
 8月31日(木)
 
 - ROS2 Tutorial（つづき）
-- VSCodeの使い方
 
 |
 
