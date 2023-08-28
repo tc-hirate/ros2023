@@ -131,30 +131,6 @@ OK。
 
 |
 
-config.txtの編集。
-
-.. code-block:: console
-
-    pi@zumo00:~$ sudo nano /boot/firmware/config.txt
-
-|
-
-最後に1行追加する。
-
-.. code-block:: console
-
-    gpu_mem_1024=256
-
-|
-
-再起動。
-
-.. code-block:: console
-
-    pi@zumo00:~$ sudo shutdown -r now
-
-|
-
 カメラパッケージのインストール。
 
 .. code-block:: console
@@ -290,14 +266,6 @@ rqt_image_viewで表示。
 
 フレームレートを確認・変更する方法
 ============================================================
-
-ユーティリティのインストール。
-
-.. code-block:: console
-
-    pi@zumo00:~$ sudo apt install v4l-utils
-
-|
 
 カメラのフォーマットを確認。
 

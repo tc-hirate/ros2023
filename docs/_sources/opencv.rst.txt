@@ -275,7 +275,7 @@ gray.pyを開く。
 編集。
 
 .. code-block:: python
-    :emphasize-lines: 17, 18
+    :emphasize-lines: 18, 19
 
     import rclpy
     from rclpy.node import Node
@@ -293,6 +293,7 @@ gray.pyを開く。
             self.bridge = CvBridge()
 
         def timer_callback(self):
+            cv_image = cv2.imread('./src/cv_test/cv_test/lena.png')
             cv_gray_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY)
             ros_image = self.bridge.cv2_to_imgmsg(cv_gray_image, 'mono8')
             self.publisher_.publish(ros_image)
@@ -551,7 +552,7 @@ OpenCVライブラリを使って線分（cv2.line()）、長方形（cv2.rectan
 
 .. code-block:: python
 
-    cv_circle_image = cv2.rectangle(cv_circle_image, (300, 50), (450, 150), (0, 0, 255), thickness=4
+    cv_circle_image = cv2.rectangle(cv_circle_image, (300, 50), (450, 150), (0, 0, 255), thickness=4)
 
 .. code-block:: python
 
@@ -1090,7 +1091,7 @@ eye_detect.pyを開く。
 編集
 
 .. code-block:: python
-    :emphasize-lines: 19, 29
+    :emphasize-lines: 17, 19, 29
 
     import rclpy
     from rclpy.node import Node

@@ -152,14 +152,14 @@ Arduinoとは次のように接続されています。
     }
 
     void setup() {
-    pinMode(13, OUTPUT);
+      pinMode(13, OUTPUT);
     }
 
     void loop() {
-    digitalWrite(13, HIGH);
-    delay(1000);
-    digitalWrite(13, LOW);
-    delay(1000);
+      digitalWrite(13, HIGH);
+      delay(1000);
+      digitalWrite(13, LOW);
+      delay(1000);
     }
 
 |
@@ -653,28 +653,28 @@ Pythonのプログラムを保存するために、ホームディレクトリ�
     import serial
 
     def main():
-        print("Open Port")
+      print("Open Port")
 
-        ser = serial.Serial()
-        ser.port = "/dev/ttyACM0"
-        ser.baudrate = 9600
-        ser.open()
+      ser = serial.Serial()
+      ser.port = "/dev/ttyACM0"
+      ser.baudrate = 9600
+      ser.open()
 
-        while True:
-            try:
-                cmd = input("type 0 or 1: ")
-                if cmd == "1":
-                    ser.write(b"1")
-                else:
-                    ser.write(b"0")
-            except KeyboardInterrupt:
-                break
+      while True:
+        try:
+          cmd = input("type 0 or 1: ")
+          if cmd == "1":
+            ser.write(b"1")
+          else:
+            ser.write(b"0")
+        except KeyboardInterrupt:
+          break
 
-        print("Close Port")
-        ser.close()
+      print("Close Port")
+      ser.close()
 
     if __name__ == '__main__':
-        main()
+      main()
 
 |
 
@@ -744,7 +744,7 @@ Pythonのプログラムを保存するために、ホームディレクトリ�
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli compile --fqbn arduino:avr:uno Arduino/SerialTest/SerialTest.ino 
+    pi@zumo00:~$ arduino-cli compile --fqbn arduino:avr:uno Arduino/SerialTest/
     Sketch uses 1754 bytes (5%) of program storage space. Maximum is 32256 bytes.
     Global variables use 184 bytes (8%) of dynamic memory, leaving 1864 bytes for local variables. Maximum is 2048 bytes.
 
@@ -757,7 +757,7 @@ Pythonのプログラムを保存するために、ホームディレクトリ�
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/SerialTest/SerialTest.ino 
+    pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/SerialTest/
 
 |
 
@@ -855,7 +855,7 @@ serial_led.pyの作成。
     from rclpy.node import Node
 
     from std_msgs.msg import String
-    from geometry_msgs.msg import Twistpa
+    from geometry_msgs.msg import Twist
     from sensor_msgs.msg import Joy
 
     import serial
@@ -930,10 +930,10 @@ package.xmlを開く。
     <maintainer email="ubuntu@todo.todo">ubuntu</maintainer>
     <license>TODO: License declaration</license>
 
-      <exec_depend>rclpy</exec_depend>
-      <exec_depend>std_msgs</exec_depend>
-      <exec_depend>geometry_msgs</exec_depend>
-      <exec_depend>sensor_msgs</exec_depend>
+    <exec_depend>rclpy</exec_depend>
+    <exec_depend>std_msgs</exec_depend>
+    <exec_depend>geometry_msgs</exec_depend>
+    <exec_depend>sensor_msgs</exec_depend>
 
     <test_depend>ament_copyright</test_depend>
     <test_depend>ament_flake8</test_depend>
@@ -1050,7 +1050,7 @@ Pythonのプログラムは、zm_testパッケージの「serial_motor.py」と�
 
 .. code-block:: console
 
-    pi@zumo00:~$ cd
+    pi@zumo00:~/ros2_ws$ cd
     pi@zumo00:~$ arduino-cli sketch new Arduino/SerialMotor
     Sketch created in: /home/pi/Arduino/SerialMotor
 
@@ -1131,7 +1131,7 @@ Pythonのプログラムは、zm_testパッケージの「serial_motor.py」と�
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli compile --fqbn arduino:avr:uno Arduino/SerialMotor/SerialMotor.ino
+    pi@zumo00:~$ arduino-cli compile --fqbn arduino:avr:uno Arduino/SerialMotor/
     Sketch uses 2094 bytes (6%) of program storage space. Maximum is 32256 bytes.
     Global variables use 184 bytes (8%) of dynamic memory, leaving 1864 bytes for local variables. Maximum is 2048 bytes.
 
@@ -1144,7 +1144,7 @@ Pythonのプログラムは、zm_testパッケージの「serial_motor.py」と�
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/SerialMotor/SerialMotor.ino
+    pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/SerialMotor/
 
 |
 
@@ -1152,6 +1152,7 @@ serial_motor.pyの作成
 
 .. code-block:: console
 
+    pi@zumo00:~$ cd ros2_ws/
     pi@zumo00:~/ros2_ws$ nano src/zm_test/zm_test/serial_motor.py
 
 |
@@ -1332,6 +1333,7 @@ Pythonのプログラムは、zm_testパッケージの「analog_motor.py」と�
 
 .. code-block:: console
 
+    pi@zumo00:~/ros2_ws$ cd
     pi@zumo00:~$ arduino-cli sketch new Arduino/AnalogMotor
     Sketch created in: /home/pi/Arduino/AnalogMotor
 
