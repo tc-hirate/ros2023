@@ -146,12 +146,6 @@ Arduinoとは次のように接続されています。
 .. code-block:: c
 
     void setup() {
-    }
-
-    void loop() {
-    }
-
-    void setup() {
       pinMode(13, OUTPUT);
     }
 
