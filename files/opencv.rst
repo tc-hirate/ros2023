@@ -556,7 +556,7 @@ OpenCVライブラリを使って線分（cv2.line()）、長方形（cv2.rectan
 
 .. code-block:: python
 
-    cv_corcle_image = cv2.putText(cv_circle_image, 'Hirate', (100, 400), cv2.FONT_HERSHEY_COMPLEX, 1.0, (255, 255, 255), thickness=2)
+    cv_circle_image = cv2.putText(cv_circle_image, 'Hirate', (100, 400), cv2.FONT_HERSHEY_COMPLEX, 1.0, (255, 255, 255), thickness=2)
 
 |
 
