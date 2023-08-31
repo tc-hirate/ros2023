@@ -19,7 +19,7 @@ Raspberry Pi Imagerのインストール
 
 .. code-block:: console
 
-    $ sudo apt install rpi-imager
+    ubuntu@mbc084:~$ sudo apt install rpi-imager
 
 |
 
