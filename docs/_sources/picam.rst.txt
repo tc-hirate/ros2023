@@ -539,7 +539,7 @@ cam_gray.pyを開く。
 
         def __init__(self):
             super().__init__('image_publisher')
-            self.publisher_ = self.create_publisher(Image, 'face_detect',>
+            self.publisher_ = self.create_publisher(Image, 'face_detect', 10)
             self.subscription = self.create_subscription(
                 Image,
                 'image_raw',
@@ -552,7 +552,7 @@ cam_gray.pyを開く。
             cv_image = self.bridge.imgmsg_to_cv2(data)
             cv_rotate_image = cv2.rotate(cv_image, cv2.ROTATE_180)
 
-            filename = '/usr/share/opencv4/haarcascades/haarcascade_front>
+            filename = '/usr/share/opencv4/haarcascades/haarcascade_frontalface_default.xml'
             cascade = cv2.CascadeClassifier(filename)
             face = cascade.detectMultiScale(cv_rotate_image)
 
@@ -560,7 +560,7 @@ cam_gray.pyを開く。
                 for r in face:
                     x, y = r[0:2]
                     width, height = r[0:2] + r[2:4]
-                    cv2.rectangle(cv_rotate_image, (x, y), (width, height>
+                    cv2.rectangle(cv_rotate_image, (x, y), (width, height), (255, 255, 255), thickness=2)
             else:
                 self.get_logger().info('not detect face')
 
