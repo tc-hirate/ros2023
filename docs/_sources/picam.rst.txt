@@ -508,7 +508,7 @@ cv_testパッケージのcam_publisherノードの実行
 
 ファイル名は「cam_face_detect.py」とします。
 
-gray.pyをコピーしてcam_gray.pyを作ってください。
+face_detect.pyをコピーしてcam_face_detect.pyを作ってください。
 
 .. code-block:: console
 
